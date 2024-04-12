@@ -1,4 +1,4 @@
-const { Doctor } = require('../database-mysql/index');
+const { Doctor } = require('../database-mysql/index.prisma');
 
 const getAllDoctors = async (req, res) => {
     try {

@@ -1,4 +1,4 @@
-const { User } = require('../database-mysql/index');
+const { User } = require('../database-mysql/index.prisma');
 
 const getAllUsers = async (req, res) => {
   try {

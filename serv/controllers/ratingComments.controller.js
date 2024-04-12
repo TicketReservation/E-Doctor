@@ -1,5 +1,5 @@
 
-const {RatingsComments} = require('../database-mysql/index');
+const {RatingsComments} = require('../database-mysql/index.prisma');
 
 // Get all reviews with user ID
 const getReviewsByUserId = async (req, res) => {

@@ -3,7 +3,7 @@ const express = require("express");
 const cors = require("cors");
 const axios = require("axios");
 // UNCOMMENT THE DATABASE YOU'D LIKE TO USE
-const db = require('./database-mysql');
+const db = require('./database-mysql/index.prisma');
 const doctorRouter = require('./routes/doctor.router');
 const AppointmentRouter = require('./routes/Appointment.router');
 const RatingCommentsRouter = require('./routes/ratingComments.router');
