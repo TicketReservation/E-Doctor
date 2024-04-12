@@ -1,9 +1,8 @@
-const { Comment } = require('../database-mysql/index');
-
+const { Comment } = require('../database-mysql/index.prisma');
 const getAllComments = async (req, res) => {
     try {
-        const Comments = await Comment.findAll();
-        res.status(200).json(Comments);
+        const comments = await prisma.comment.findMany();
+        res.status(200).json(comments);
     } catch (error) {
         console.error('Error fetching Comments:', error);
         res.status(500).json({ error: 'Failed to fetch Comments' });
@@ -13,7 +12,7 @@ const getAllComments = async (req, res) => {
 const getcommentById = async (req, res) => {
     try {
         const { id } = req.params;
-        const comment = await Comment.findOne({ where: { id } });
+        const comment = await prisma.comment.findUnique({ where: { id: parseInt(id) } });
         if (comment) {
             res.status(200).json(comment);
         } else {
@@ -28,7 +27,7 @@ const getcommentById = async (req, res) => {
 const createcomment = async (req, res) => {
     try {
         const body = req.body;
-        const comment = await Comment.create(body);
+        const comment = await prisma.comment.create({ data: body });
         res.status(201).json(comment);
     } catch (error) {
         console.error('Error creating comment:', error);
@@ -39,9 +38,9 @@ const updatecomment = async (req, res) => {
     try {
         const { id } = req.params;
         const body = req.body;
-        const comment = await Comment.findOne({ where: { id } });
+        const comment = await prisma.comment.findUnique({ where: { id: parseInt(id) } });
         if (comment) {
-            await comment.update(body);
+            await prisma.comment.update({ where: { id: parseInt(id) }, data: body });
             res.status(200).json(comment);
         } else {
             res.status(404).json({ error: 'comment not found' });
@@ -55,9 +54,9 @@ const updatecomment = async (req, res) => {
 const deletecomment = async (req, res) => {
     try {
         const { id } = req.params;
-        const comment = await Comment.findOne({ where: { id } });
+        const comment = await prisma.comment.findUnique({ where: { id: parseInt(id) } });
         if (comment) {
-            await comment.destroy();
+            await prisma.comment.delete({ where: { id: parseInt(id) } });
             res.status(200).json({ message: 'comment deleted successfully' });
         } else {
             res.status(404).json({ error: 'comment not found' });
@@ -74,5 +73,4 @@ module.exports = {
     getcommentById,
     updatecomment,
     deletecomment
-
 }
