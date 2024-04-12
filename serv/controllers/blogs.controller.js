@@ -1,4 +1,4 @@
-const { Blog } = require('../database-mysql/index.prisma');
+const { Blog } = require('../database-mysql/index');
 
 const getAllBlogs = async (req, res) => {
     try {
