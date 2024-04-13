@@ -9,7 +9,6 @@ const axios = require("axios");
 // const RatingCommentsRouter = require('./routes/ratingComments.router');
 // const messagesRouter = require('./routes/messages.router')
 // const payment =require ('./controllers/Payment')
-
 // const userRouter = require('./routes/userrouters');
 // const Authentication = require('./routes/loginrouters');
 // const nodeMailer = require('./controllers/nodeMailer');
