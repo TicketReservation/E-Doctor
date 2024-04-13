@@ -1,4 +1,4 @@
-const { Message } = require('../database-mysql/index');
+const { Message } = require('../database-mysql/index.prisma');
 
 const getMessages = async (req, res) => {
     try {

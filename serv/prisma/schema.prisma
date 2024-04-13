@@ -1,0 +1,109 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+
+model User {
+  id          Int      @id @default(autoincrement()) 
+  FirstName   String
+  LastName    String
+  Username    String   @unique
+  Email       String   @unique
+  Password    String
+  UserType    String
+  Speciality  String
+  PhoneNumber String
+  ImageUrl    String
+}
+
+
+model Doctor {
+  id          Int      @id @default(autoincrement())
+  FirstName   String
+  LastName    String
+  Username    String   @unique
+  Email       String   @unique
+  Password    String
+  PhoneNumber String?
+  ImageUrl    String   @default("")
+  Speciality  String
+}
+
+model Message {
+  id      Int     @id @default(autoincrement())
+  content String
+}
+model Appointment {
+  id                   Int      @id @default(autoincrement())
+  AppointmentTime      DateTime
+  // Status               AppointmentStatus @default(Pending)
+  // PaymentStatus        PaymentStatus    @default(Unpaid)
+  AppointmentDepartment String?
+  doctor               Int
+}
+
+
+model RatingsComments {
+  id       Int      @id @default(autoincrement())
+  rating   Int
+  review   String?
+  imageSrc String?
+  name     String?
+}
+
+model Admin {
+  id       Int      @id @default(autoincrement())
+  Username String   @unique
+  Email    String   @unique
+  Password String
+}
+
+model Payments {
+  id          Int      @id @default(autoincrement())
+  Amount      Decimal
+  PaymentDate DateTime
+}
+
+
+model Blog {
+  id       Int      @id @default(autoincrement())
+  Title    String
+  Text     String
+  ImageUrl String?
+  comments Comment[]
+}
+
+model Comment {
+  id        Int      @id @default(autoincrement())
+  author    String
+  comment   String
+  timestamp DateTime
+  blog      Blog     @relation(fields: [blogId], references: [id])
+  blogId    Int
+  // user      User     @relation(fields: [userId], references: [id])
+  userId    Int
+}
+
+model Product {
+  id       Int      @id @default(autoincrement())
+  name     String
+  price    Decimal
+  ImageUrl String?
+  Category String
+}
+
+
+
+
+
+
