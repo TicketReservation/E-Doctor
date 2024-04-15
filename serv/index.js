@@ -8,21 +8,21 @@ const axios = require("axios");
 // const AppointmentRouter = require('./routes/Appointment.router');
 // const RatingCommentsRouter = require('./routes/ratingComments.router');
 // const messagesRouter = require('./routes/messages.router')
-// const payment =require ('./controllers/Payment')
+const payment =require ('./controllers/Payment')
 // const userRouter = require('./routes/userrouters');
-// const Authentication = require('./routes/loginrouters');
-// const nodeMailer = require('./controllers/nodeMailer');
-// const cloudinary = require('cloudinary');
+const Authentication = require('./routes/loginrouters');
+const nodeMailer = require('./controllers/nodeMailer');
+const cloudinary = require('cloudinary');
 // const BlogRouter = require('./routes/Blog.routes');
 // const ProductRouter = require('./routes/product.router');
 // const CommentRouter = require('./routes/blogComments.router');
-// const fileUpload = require('express-fileupload');
-// const http = require('http');
-// const { Server } = require('socket.io');
+const fileUpload = require('express-fileupload');
+const http = require('http');
+const { Server } = require('socket.io');
 const app = express();
 
 
-// const server = http.createServer(app);
+const server = http.createServer(app);
 // const io = new Server(server, {
 //   cors: {
 //     origin: "*", 
