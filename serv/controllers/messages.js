@@ -1,5 +1,5 @@
-const { Message } = require('../database-mysql/index.prisma');
-
+const { PrismaClient } = require('@prisma/client');
+const prisma = new PrismaClient();
 const getMessages = async (req, res) => {
     try {
         const messages = await Message.findAll();
