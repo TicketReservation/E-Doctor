@@ -3,16 +3,16 @@ import axios from 'axios'
 
 
 
-export interface Doctor{
-    FirstName:string
-    LastName:string
-    Username:string
-    Email:string
-    Password:string
-    PhoneNumber:number
-    ImageUrl:string
-    Speciality:string
-}
+    export interface Doctor{
+        FirstName:string
+        LastName:string
+        Username:string
+        Email:string
+        Password:string
+        PhoneNumber:number
+        ImageUrl:string
+        Speciality:string
+    }
 
 const initialState={
     doctor:{},
