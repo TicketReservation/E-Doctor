@@ -6,6 +6,7 @@ import axios from 'axios'
 export interface User{
 email:string,
 password:string
+UserType:string
 }
 
 const initialState={

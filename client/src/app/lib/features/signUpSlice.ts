@@ -39,9 +39,7 @@ export const signUpAsync = createAsyncThunk(
 export const signUpSlice = createSlice({
   name: "signUp",
   initialState,
-  reducers: {
-
-  },
+  reducers: {},
   extraReducers: (builder) => {
     builder
       .addCase(signUpAsync.pending, (state) => {
