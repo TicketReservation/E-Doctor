@@ -1,11 +1,14 @@
-// generator client {
-//   provider = "prisma-client-js"
-// }
 
 datasource db {
   provider = "mysql"
   url      = "mysql://root:root@localhost:3306/doctor"
 }
+
+
+generator client {
+  provider = "prisma-client-js"
+}
+
 
 model admin {
   id       Int    @id @default(autoincrement())
@@ -14,7 +17,7 @@ model admin {
   Password String
 }
 
-model Appointment {
+model appointment {
   id                    Int      @id @default(autoincrement())
   AppointmentTime       DateTime
   AppointmentDepartment String?
