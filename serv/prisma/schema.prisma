@@ -41,8 +41,7 @@ model Message {
 model Appointment {
   id                   Int      @id @default(autoincrement())
   AppointmentTime      DateTime
-  // Status               AppointmentStatus @default(Pending)
-  // PaymentStatus        PaymentStatus    @default(Unpaid)
+  // Status                AppointmentStatus @default(Pending)
   AppointmentDepartment String?
   doctor               Int
 }
