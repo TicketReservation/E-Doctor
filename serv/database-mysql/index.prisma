@@ -2,7 +2,9 @@ datasource db {
   provider = "mysql"
   url      = env("DATABASE_URL")
 }
-
+generator client {
+  provider = "prisma-client-js"
+}
 
 model User {
   id          Int      @id @default(autoincrement()) 
@@ -15,7 +17,8 @@ model User {
   Speciality  String
   PhoneNumber String
   ImageUrl    String
-},
+
+}
 
 
 model Doctor {
@@ -28,17 +31,17 @@ model Doctor {
   PhoneNumber String?
   ImageUrl    String   @default("")
   Speciality  String
-},
+}
 
 model Message {
   id      Int     @id @default(autoincrement())
   content String
-},
+}
 model Appointment {
   id                   Int      @id @default(autoincrement())
   AppointmentTime      DateTime
-  Status               AppointmentStatus @default(Pending)
-  PaymentStatus        PaymentStatus    @default(Unpaid)
+  // Status               AppointmentStatus @default(Pending)
+  // PaymentStatus        PaymentStatus    @default(Unpaid)
   AppointmentDepartment String?
   doctor               Int
 }
@@ -81,7 +84,7 @@ model Comment {
   timestamp DateTime
   blog      Blog     @relation(fields: [blogId], references: [id])
   blogId    Int
-  user      User     @relation(fields: [userId], references: [id])
+  // user      User     @relation(fields: [userId], references: [id])
   userId    Int
 }
 
@@ -95,32 +98,32 @@ model Product {
 
 
 
-User.hasMany(RatingsComments);
-User.hasMany(Appointment);
-User.hasMany(Blog);
-Blog.belongsTo(User);
-Blog.hasMany(Comment); 
-Comment.belongsTo(Blog);
+// User.hasMany(RatingsComments);
+// User.hasMany(Appointment);
+// User.hasMany(Blog);
+// Blog.belongsTo(User);
+// Blog.hasMany(Comment); 
+// Comment.belongsTo(Blog);
 
-module.exports = {
-  User,
-  Doctor,
-  Appointment,
-  RatingsComments,
-  Payments,
-  Message,
-  Blog,
-  Product,
-  Comment,
-};
-main()
-  .then(async () => {
-    await prisma.$disconnect()
-  })
-  .catch(async (e) => {
-    console.error(e)
-    await prisma.$disconnect()
-    process.exit(1)
-  })
+// module.exports = {
+//   User,
+//   Doctor,
+//   Appointment,
+//   RatingsComments,
+//   Payments,
+//   Message,
+//   Blog,
+//   Product,
+//   Comment,
+// };
+// main()
+//   .then(async () => {
+//     await prisma.$disconnect()
+//   })
+//   .catch(async (e) => {
+//     console.error(e)
+//     await prisma.$disconnect()
+//     process.exit(1)
+//   })
 
 
