@@ -5,12 +5,12 @@ const CommentsController = require('../controllers/blogCommentsController.js');
 
 router.get('/all', CommentsController.getAllComments);
 
-router.get('/:id', CommentsController.getcommentById);
+router.get('/:id', CommentsController.getCommentById);
 
-router.post('/', CommentsController.createcomment);
+router.post('/', CommentsController.createComment);
 
-router.put('/:id', CommentsController.updatecomment);
+router.put('/:id', CommentsController.updateComment);
 
-router.delete('/:id', CommentsController.deletecomment);
+router.delete('/:id', CommentsController.deleteComment);
 
 module.exports = router;

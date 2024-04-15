@@ -1,11 +1,9 @@
-// const { User } = require('../database-mysql/index.prisma');
-const  { PrismaClient } =require('@prisma/client') 
-
-const prisma = new PrismaClient()
+const { PrismaClient } = require('@prisma/client');
+const prisma = new PrismaClient();
 
 const getAllUsers = async (req, res) => {
   try {
-    const users = await User.findAll();
+    const users = await prisma.user.findMany();
     res.status(200).json(users);
   } catch (error) {
     console.error('Error fetching users:', error);
@@ -16,7 +14,7 @@ const getAllUsers = async (req, res) => {
 const getUserById = async (req, res) => {
   try {
     const { id } = req.params;
-    const user = await User.findByPk(id);
+    const user = await prisma.user.findUnique({ where: { id: parseInt(id) } });
     if (!user) {
       return res.status(404).json({ error: 'User not found' });
     }
@@ -31,14 +29,11 @@ const updateUser = async (req, res) => {
   try {
     const { id } = req.params;
     const { body } = req;
-    const [numberOfAffectedRows, affectedRows] = await User.update(body, {
-      where: { id },
-      returning: true,
+    const updatedUser = await prisma.user.update({
+      where: { id: parseInt(id) },
+      data: body,
     });
-    if (!numberOfAffectedRows) {
-      return res.status(404).json({ error: 'User not found or no changes made' });
-    }
-    res.status(200).json(affectedRows[0]);
+    res.status(200).json(updatedUser);
   } catch (error) {
     console.error('Error updating user:', error);
     res.status(500).json({ error: 'Failed to update user' });
@@ -47,20 +42,18 @@ const updateUser = async (req, res) => {
 
 const deleteUser = async (req, res) => {
   try {
-    const { Email } = req.body;
-    const deletedUser = await User.destroy({ where: { Email } });
-    if (!deletedUser) {
-      return res.status(404).json({ error: 'User not found' });
-    }
+    const { id } = req.params;
+    await prisma.user.delete({ where: { id: parseInt(id) } });
     res.status(200).json({ message: 'User deleted successfully' });
   } catch (error) {
     console.error('Error deleting user:', error);
     res.status(500).json({ error: 'Failed to delete user' });
   }
 };
+
 module.exports = {
   getAllUsers,
-  updateUser,
   getUserById,
+  updateUser,
   deleteUser
 };

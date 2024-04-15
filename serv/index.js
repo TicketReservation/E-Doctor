@@ -40,6 +40,7 @@ app.use(fileUpload());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static(__dirname + "/../client/dist"));
+app.use(cors())
 app.use('/api/messages', messagesRouter);
 // app.use('/api/payment', payment);
 
@@ -99,6 +100,7 @@ app.post('/api/upload', async (req, res) => {
     res.status(500).json({ error: 'Something went wrong' });
   }
 });
+
 app.post('/api/sendmail', nodeMailer.sendMail);
 io.on("connection", (socket) => {
   console.log("A user connected with id:", socket.id);

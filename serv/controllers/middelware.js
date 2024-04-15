@@ -1,7 +1,7 @@
 
 const jwt = require('jsonwebtoken');
-// const db=require('../model-mysql/index')
-
+const { PrismaClient } = require('@prisma/client');
+const prisma = new PrismaClient();
 const verifyToken= async (req, res, next)=>{
 const token = req.header('Authorization');
 if (!token) return res.status(401).json({ error: 'Access denied1' });

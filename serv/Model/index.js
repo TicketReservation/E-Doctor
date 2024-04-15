@@ -31,3 +31,8 @@ main()
   // npx prisma init
   // run npx prisma migrate dev
   // run npx prisma generate
+  // create .env file 
+  // pass this link DATABASE_URL="mysql://root:root@localhost:3306/Doctor"
+  // npx prisma init
+  // run npx prisma migrate dev
+  // run npx prisma generate
