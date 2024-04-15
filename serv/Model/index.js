@@ -1,17 +1,19 @@
-const  { PrismaClient } =require('@prisma/client') 
+const { PrismaClient } = require('@prisma/client');
+const prisma = new PrismaClient();
 
-const prisma = new PrismaClient()
+
+
 
 async function main() {
-  const user = await prisma.User.findMany()
-  const doctor = await prisma.Doctor.findMany()
-  const  messages= await prisma.Message.findMany()
-  const  appointment= await prisma.Appointment.findMany()
-  const ratingsComments = await prisma.RatingsComments.findMany()
-  const admin = await prisma.Admin.findMany()
-  const blog = await prisma.Blog.findMany()
-  const comment = await prisma.Comment.findMany()
-  const product = await prisma.Product.findMany()
+  const user = await prisma.user.findMany()
+  const doctor = await prisma.doctor.findMany()
+  const  messages= await prisma.message.findMany()
+  const  appointment= await prisma.appointment.findMany()
+  const ratingsComments = await prisma.ratingsComments.findMany()
+  const admin = await prisma.admin.findMany()
+  const blog = await prisma.blog.findMany()
+  const comment = await prisma.comment.findMany()
+  const product = await prisma.product.findMany()
 }
 
 main()
