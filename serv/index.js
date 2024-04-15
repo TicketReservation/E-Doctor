@@ -1,5 +1,4 @@
 const express = require("express");
-// const itemRoutes = require('./routes/item.routes')
 const cors = require("cors");
 const axios = require("axios");
 // UNCOMMENT THE DATABASE YOU'D LIKE TO USE

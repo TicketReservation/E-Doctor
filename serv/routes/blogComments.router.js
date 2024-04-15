@@ -1,7 +1,7 @@
 
 const express = require('express');
 const router = express.Router();
-const CommentsController = require('../controllers/blogCommentsController.prisma');
+const CommentsController = require('../controllers/blogCommentsController.js');
 
 router.get('/all', CommentsController.getAllComments);
 

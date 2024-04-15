@@ -1,4 +1,7 @@
-const { Product } = require('../database-mysql/index.prisma');
+// const { Product } = require('../database-mysql/index.prisma');
+const  { PrismaClient } =require('@prisma/client') 
+
+const prisma = new PrismaClient()
 const getAllproducts = async (req, res) => {
     try {
         const products = await prisma.product.findMany();

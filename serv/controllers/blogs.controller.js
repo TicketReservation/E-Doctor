@@ -1,4 +1,7 @@
-const { Blog } = require('../database-mysql/index');
+// const { Blog } = require('../Model/index.js');
+const  { PrismaClient } =require('@prisma/client') 
+
+const prisma = new PrismaClient()
 
 const getAllBlogs = async (req, res) => {
     try {

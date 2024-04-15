@@ -1,4 +1,4 @@
-const { Appointment } = require('../database-mysql/index.prisma');
+const { Appointment } = require('../Model/index.js');
 const getAllAppointment = async (req, res) => {
     try {
         const appointments = await prisma.appointment.findMany();

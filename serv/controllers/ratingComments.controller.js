@@ -1,5 +1,8 @@
 
-const {RatingsComments} = require('../database-mysql/index.prisma');
+// const {RatingsComments} = require('../database-mysql/index.prisma');
+const  { PrismaClient } =require('@prisma/client') 
+
+const prisma = new PrismaClient()
 
 // Get all reviews with user ID
 const getReviewsByUserId = async (req, res) => {
