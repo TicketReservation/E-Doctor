@@ -1,22 +1,14 @@
-<<<<<<< HEAD
-=======
-// generator client {
-//   provider = "prisma-client-js"
-// }
-
->>>>>>> 754f668de8f572c9efc42578feecf43030d66385
 datasource db {
   provider = "mysql"
   url      = "mysql://root:root@localhost:3306/doctor"
 }
 
-<<<<<<< HEAD
 generator client {
   provider = "prisma-client-js"
 }
 
 
-model User {
+model user {
   id          Int      @id @default(autoincrement()) 
   FirstName   String
   LastName    String
@@ -30,7 +22,7 @@ model User {
 }
 
 
-model Doctor {
+model doctor {
   id          Int      @id @default(autoincrement())
   FirstName   String
   LastName    String
@@ -42,11 +34,11 @@ model Doctor {
   Speciality  String
 }
 
-model Message {
+model message {
   id      Int     @id @default(autoincrement())
   content String
 }
-model Appointment {
+model appointment {
   id                   Int      @id @default(autoincrement())
   AppointmentTime      DateTime
   // Status                AppointmentStatus @default(Pending)
@@ -55,7 +47,7 @@ model Appointment {
 }
 
 
-model RatingsComments {
+model ratingsComments {
   id       Int      @id @default(autoincrement())
   rating   Int
   review   String?
@@ -63,24 +55,11 @@ model RatingsComments {
   name     String?
 }
 
-model Admin {
+model admin {
   id       Int      @id @default(autoincrement())
   Username String   @unique
   Email    String   @unique
-=======
-model admin {
-  id       Int    @id @default(autoincrement())
-  Username String @unique(map: "Admin_Username_key")
-  Email    String @unique(map: "Admin_Email_key")
->>>>>>> 754f668de8f572c9efc42578feecf43030d66385
   Password String
-}
-
-model Appointment {
-  id                    Int      @id @default(autoincrement())
-  AppointmentTime       DateTime
-  AppointmentDepartment String?
-  doctor                Int
 }
 
 model blog {
@@ -103,22 +82,7 @@ model comment {
   @@index([blogId], map: "Comment_blogId_fkey")
 }
 
-model doctor {
-  id          Int     @id @default(autoincrement())
-  FirstName   String
-  LastName    String
-  Username    String  @unique(map: "Doctor_Username_key")
-  Email       String  @unique(map: "Doctor_Email_key")
-  Password    String
-  PhoneNumber String?
-  ImageUrl    String  @default("")
-  Speciality  String
-}
 
-model message {
-  id      Int    @id @default(autoincrement())
-  content String
-}
 
 model payments {
   id          Int      @id @default(autoincrement())
@@ -132,40 +96,4 @@ model product {
   price    Decimal
   ImageUrl String?
   Category String
-<<<<<<< HEAD
 }
-=======
-}
-
-model ratingscomments {
-  id       Int     @id @default(autoincrement())
-  rating   Int
-  review   String?
-  imageSrc String?
-  name     String?
-}
-
-model user {
-  id          Int    @id @default(autoincrement())
-  FirstName   String
-  LastName    String
-  Username    String @unique(map: "User_Username_key")
-  Email       String @unique(map: "User_Email_key")
-  Password    String
-  UserType    String
-  Speciality  String
-  PhoneNumber String
-  ImageUrl    String
-}
-// module.exports = {
-//   User,
-//   Doctor,
-//   Appointment,
-//   RatingsComments,
-//   Payments,
-//   Message,
-//   Blog,
-//   Product,
-//   Comment,
-// };
->>>>>>> 754f668de8f572c9efc42578feecf43030d66385

@@ -93,21 +93,21 @@ function OneBlog() {
           </div>
           <div>
             <div className='LastBlogsDiv'>
-              <img className='LastBlogs1' src='https://doctris-landing-next.vercel.app/_next/image?url=%2Fimages%2Fblog%2F07.jpg&w=1920&q=75' />
+              <image className='LastBlogs1' src='https://doctris-landing-next.vercel.app/_next/image?url=%2Fimages%2Fblog%2F07.jpg&w=1920&q=75' />
               <p className='LastBlogsP'>Consultant Business</p>
             </div>
             <div className='LastBlogsDiv'>
-              <img className='LastBlogs2' src='https://doctris-landing-next.vercel.app/_next/image?url=%2Fimages%2Fblog%2F08.jpg&w=1920&q=75' />
+              <image className='LastBlogs2' src='https://doctris-landing-next.vercel.app/_next/image?url=%2Fimages%2Fblog%2F08.jpg&w=1920&q=75' />
               <p className='LastBlogsP'>Look On The Glorious Balance</p>
             </div>
             <div className='LastBlogsDiv'>
-              <img className='LastBlogs3' src='https://doctris-landing-next.vercel.app/_next/image?url=%2Fimages%2Fblog%2F01.jpg&w=1920&q=75' />
+              <image className='LastBlogs3' src='https://doctris-landing-next.vercel.app/_next/image?url=%2Fimages%2Fblog%2F01.jpg&w=1920&q=75' />
               <p className='LastBlogsP'>Research Financial.</p>
             </div>
           </div>
         </Box>
       </div>
-      <img className='imgBlogDetail' src='https://doctris-landing-next.vercel.app/_next/image?url=%2Fimages%2Fblog%2F07.jpg&w=1920&q=75' />
+      <image className='imgBlogDetail' src='https://doctris-landing-next.vercel.app/_next/image?url=%2Fimages%2Fblog%2F07.jpg&w=1920&q=75' />
 
       <div >
         <p className='textDownBlogd'>This is required when, for example, the final text is not yet available. Dummy text is also known as fill text.<br /> It is said that song composers of the past used dummy texts as lyrics when writing melodies in order<br />
