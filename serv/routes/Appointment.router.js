@@ -1,7 +1,7 @@
 
 const express = require('express');
 const router = express.Router();
-const AppointmentController = require('../controllers/Appointment.controller.prisma');
+const AppointmentController = require('../controllers/Appointment.controller.js');
 
 router.get('/', AppointmentController.getAllAppointment);
 

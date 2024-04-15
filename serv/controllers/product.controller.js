@@ -1,5 +1,7 @@
-const { Product } = require('../database-mysql/index.prisma');
-const getAllproducts = async (req, res) => {
+const { PrismaClient } = require('@prisma/client');
+const prisma = new PrismaClient();
+
+const getAllProducts = async (req, res) => {
     try {
         const products = await prisma.product.findMany();
         res.status(200).json(products);
@@ -9,14 +11,14 @@ const getAllproducts = async (req, res) => {
     }
 }
 
-const getproductById = async (req, res) => {
+const getProductById = async (req, res) => {
     try {
         const { id } = req.params;
         const product = await prisma.product.findUnique({ where: { id: parseInt(id) } });
         if (product) {
             res.status(200).json(product);
         } else {
-            res.status(404).json({ error: 'product not found' });
+            res.status(404).json({ error: 'Product not found' });
         }
     } catch (error) {
         console.error('Error fetching product:', error);
@@ -24,7 +26,7 @@ const getproductById = async (req, res) => {
     }
 }
 
-const createproduct = async (req, res) => {
+const createProduct = async (req, res) => {
     try {
         const body = req.body;
         const product = await prisma.product.create({ data: body });
@@ -35,7 +37,7 @@ const createproduct = async (req, res) => {
     }
 }
 
-const updateproduct = async (req, res) => {
+const updateProduct = async (req, res) => {
     try {
         const { id } = req.params;
         const body = req.body;
@@ -44,7 +46,7 @@ const updateproduct = async (req, res) => {
             await prisma.product.update({ where: { id: parseInt(id) }, data: body });
             res.status(200).json(product);
         } else {
-            res.status(404).json({ error: 'product not found' });
+            res.status(404).json({ error: 'Product not found' });
         }
     } catch (error) {
         console.error('Error updating product:', error);
@@ -52,26 +54,26 @@ const updateproduct = async (req, res) => {
     }
 }
 
-const deleteproduct = async (req, res) => {
+const deleteProduct = async (req, res) => {
     try {
         const { id } = req.params;
         const product = await prisma.product.findUnique({ where: { id: parseInt(id) } });
         if (product) {
             await prisma.product.delete({ where: { id: parseInt(id) } });
-            res.status(200).json({ message: 'product deleted successfully' });
+            res.status(200).json({ message: 'Product deleted successfully' });
         } else {
-            res.status(404).json({ error: 'product not found' });
+            res.status(404).json({ error: 'Product not found' });
         }
     } catch (error) {
         console.error('Error deleting product:', error);
         res.status(500).json({ error: 'Failed to delete product' });
     }
 }
-module.exports = {
-    getAllproducts,
-    createproduct,
-    getproductById,
-    updateproduct,
-    deleteproduct
 
+module.exports = {
+    getAllProducts,
+    createProduct,
+    getProductById,
+    updateProduct,
+    deleteProduct
 }

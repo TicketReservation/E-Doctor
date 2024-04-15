@@ -1,5 +1,5 @@
-const { Doctor } = require('../database-mysql/index.prisma');
-
+const { PrismaClient } = require('@prisma/client');
+const prisma = new PrismaClient();
 const getAllDoctors = async (req, res) => {
     try {
         const doctors = await Doctor.findAll();
