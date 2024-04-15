@@ -1,6 +1,6 @@
 # node etc
 ### node etc ###
-
+package-lock.json
 # Logs
 logs
 *.log
