@@ -1,0 +1,157 @@
+.immg{
+  width: 450px;  
+  height: 500px;
+  margin-right: 250px;
+  margin-top: 100px;
+}
+.healthcare{
+    color: #007E85;
+}
+.brigther{
+    color: #6EAB36;
+}
+.centence{
+    margin-top: 200px;
+    margin-left: 200px;
+}
+.subCentence{
+    font-size: 17px;
+}
+.apointBtn{
+    margin-top: 3rem;
+    width: 250px;
+    height: 50px;
+    border: none;
+    background-color: #007E85;
+    border-radius: 5px;
+    color: white;
+    font-size: 20px;
+    cursor: pointer;
+}
+
+.vidPlayer{
+    border-radius: 50%;
+    background-color: #007E85;
+    width: 50px;
+    height: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 48px;
+    margin-left: 50px;
+    cursor: pointer;
+}
+.tri{
+    width: 0;
+    height: 0;
+    border-left: 10px solid transparent; 
+    border-right: 10px solid transparent; 
+    border-bottom: 20px solid white;
+    rotate: 90deg;
+    margin-left: 5px;
+}
+.buTons{
+    display: flex;
+}
+.watchVid{
+    margin-left: 7px;
+    margin-top: 63px;
+}
+
+.switch {
+    position: relative;
+    display: inline-block;
+    width: 60px;
+    height: 34px;
+  }
+  
+.switch {
+    position: relative;
+    display: inline-block;
+    width: 60px;
+    height: 34px;
+  }
+  
+  .switch input { 
+    opacity: 0;
+    width: 0;
+    height: 0;
+  }
+  
+  .slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: white;
+    transition: .4s;
+    border: 1px solid #007E85; 
+  }
+  
+  .slider:before {
+    position: absolute;
+    content: "";
+    height: 26px;
+    width: 26px;
+    left: 4px;
+    bottom: 4px;
+    background-color: #007E85;
+    transition: .4s;
+  }
+  
+  input:checked + .slider {
+    background-color: white;
+  }
+  
+  input:focus + .slider {
+    box-shadow: 0 0 1px white;
+  }
+  
+  input:checked + .slider:before {
+    transform: translateX(26px);
+  }
+  
+  .slider.round {
+    border-radius: 34px;
+  }
+  
+  .slider.round:before {
+    border-radius: 50%;
+  }
+  .input {
+    width: 200px;
+    height: 5px;
+    border-radius: 5px;
+    border: 2px solid #007E85;
+    padding: 20px 10px 20px 10px;
+    outline: none;
+}
+.input:focus {
+    border-color: #007E85;
+}
+
+
+.filter{
+    display: flex;
+    align-items: center;
+}
+.available{
+    margin-right: 20px;
+    margin-left: 100px;
+}
+.aligne{
+    display: flex;
+    align-items: center;
+}
+.searchBtn{
+    margin-left: 100px;
+    width: 150px;
+    height: 50px;
+    border: none;
+    border-radius: 5px;
+    background-color: #007E85;
+    color: white;
+    cursor: pointer;
+}
