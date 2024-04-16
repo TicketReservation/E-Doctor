@@ -5,11 +5,17 @@ datasource db {
 
 }
 
+<<<<<<< HEAD
+
+=======
+>>>>>>> 63c17aecbb8bfdb13e85a89effce087a0eaa5948
 generator client {
   provider = "prisma-client-js"
 }
 
 
+<<<<<<< HEAD
+=======
 
 model user {
 
@@ -66,6 +72,7 @@ model ratingsComments {
 }
 
 
+>>>>>>> 63c17aecbb8bfdb13e85a89effce087a0eaa5948
 model admin {
 
   id       Int      @id @default(autoincrement())
@@ -74,11 +81,19 @@ model admin {
   Password String
 }
 
+<<<<<<< HEAD
+model appointment {
+  id                    Int      @id @default(autoincrement())
+  AppointmentTime       DateTime
+  AppointmentDepartment String?
+  doctor                Int
+=======
 
 model Payments {
   id          Int      @id @default(autoincrement())
   Amount      Decimal
   PaymentDate DateTime
+>>>>>>> 63c17aecbb8bfdb13e85a89effce087a0eaa5948
 }
 
 
