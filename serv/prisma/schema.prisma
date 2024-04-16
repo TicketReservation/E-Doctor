@@ -36,15 +36,16 @@ model doctor {
 }
 
 model message {
-  id      Int     @id @default(autoincrement())
+  id      Int    @id @default(autoincrement())
   content String
 }
+
 model appointment {
-  id                   Int      @id @default(autoincrement())
-  AppointmentTime      DateTime
+  id              Int      @id @default(autoincrement())
+  AppointmentTime DateTime
   // Status                AppointmentStatus @default(Pending)
   AppointmentDepartment String?
-  doctor               Int
+  doctor                Int
 }
 
 
@@ -82,8 +83,6 @@ model comment {
 
   @@index([blogId], map: "Comment_blogId_fkey")
 }
-
-
 
 model payments {
   id          Int      @id @default(autoincrement())
