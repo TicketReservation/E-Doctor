@@ -1,0 +1,116 @@
+.pictureContainerContactus {
+    width: 100%;
+}
+
+.pictureContainerContactus img {
+    width: 100%;
+    height: 80%;
+}
+
+.getParagraph {
+    font-size: 30px;
+    font-family: sans-serif;
+    opacity: 0.7;
+    color: #007E85;
+}
+.getHONE {
+    font-size: 40px;
+    font-family: sans-serif;
+    opacity: 0.7;
+    color: #007E85;
+}
+.getInUsContactuss {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.formContainer-contact-us {
+    display: flex;
+    flex-direction: column;
+    height: 40rem;
+    padding: 120px;
+    gap: 3rem;
+}
+
+.firsLastNameContact,
+.emailPhoneNumberContainer {
+    display: flex;
+    flex-direction: row;
+    gap: 3rem;
+    justify-content: flex-start;
+}
+
+.oneInput,
+.chooseContact {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.inputContainer {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.allInputContactus {
+    padding: 0.7rem;
+    border: 1.333px solid #007E85;
+    border-radius: 8px;
+    height: 50px;
+    width: 300px;
+
+}
+.inputmssg {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    height: 200px;
+    width: 400px;
+}
+.oneCheckbox {
+    border: none;
+    border-radius: 7px;
+}
+
+.submitButton {
+    border: none;
+    padding: 1rem;
+    width: 17rem;
+    background-color: #007E85;
+    color: white;
+    font-size: 1rem;
+    border-radius: 8px;
+    cursor: pointer;
+}
+.subscribeButton{
+    border: none;
+    padding: 1rem;
+    width: 7rem;
+    background-color: #007E85;
+    color: white;
+    font-size: 1rem;
+    border-radius: 8px;
+    cursor: pointer;
+  
+}
+
+.lastmailinput{
+    padding: 6px;
+    border: 1.333px solid #007E85;
+    border-radius: 8px;
+height: 30px;
+width: 300px;
+}
+.getInUslastmaill {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between ;
+    align-items: center;
+    margin-bottom: 10px;
+}
