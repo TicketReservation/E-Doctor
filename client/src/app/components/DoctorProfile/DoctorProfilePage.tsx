@@ -1,3 +1,5 @@
+"use client"
+
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import DoctorInfo from '../DoctorInfo/DoctorInfo';
@@ -6,6 +8,8 @@ import { Modal, Button, Form } from 'react-bootstrap';
 import profileImage from './image_16.png';
 import './DoctorProfile.css';
 import Reviews from '../Reviews';
+import Image from 'next/image'
+
 
 const DoctorProfilePage = () => {
   const [doctorData, setDoctorData] = useState({
@@ -55,9 +59,17 @@ const DoctorProfilePage = () => {
   const handleShowProfileModal = () => setShowProfileModal(true);
   const handleCloseProfileModal = () => setShowProfileModal(false);
 
+//   <Rating
+//   count={5}
+//   size={24}
+//   activeColor="#ffd700"
+//   value={4}
+//   onChange={newValue => console.log(newValue)}
+// />
+
   return (
     <div className="doctor-profile-container my-5">
-      <img src={profileImage} alt="Profile" className="doctor-profile-picture" />
+    <Image src={profileImage} alt="Profile" className="doctor-profile-picture" />
       <div className="row">
         <div className="col-md-3">
           <DoctorInfo
