@@ -23,7 +23,9 @@ export const ratings=createAsyncThunk(
     "rating/Ratings",
     async()=>{
         try {
+
             const response=await axios.get("http://localhost:4000/api/ratingComments/all")
+
             return response.data
         } catch (error:any) {
             return error.message

@@ -25,7 +25,9 @@ export const signInAsync=createAsyncThunk(
     "signIn/signInAsync",
     async (body,{rejectWithValue})=>{
         try {
+
             const response=await axios.post("http://localhost:4000/api/auth/login",body)
+
             return response.data
         } catch (error:any) {
             return rejectWithValue(error.response.data)
