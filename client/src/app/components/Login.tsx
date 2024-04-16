@@ -1,9 +1,6 @@
 import React, { useState } from 'react';
 import { connect } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-// import { login } from './redux/actions/authactions';
-// import '../css/login.css';
-// import Navbar from './Navbar';
 
 interface Props {
   login: (email: string, password: string) => void;
@@ -26,8 +23,9 @@ const Login: React.FC<Props> = ({ login, error }) => {
       if (localStorage.getItem("userType") === 'Patient') { navigate('/'); }
     }
   }
+
   return (
- <div>
+    <div>
       <div className='frmm'>
         <form onSubmit={handleSubmit}>
           <h2 style={{ color: '#007e85', marginLeft: '110px' }}>Login</h2>
@@ -61,8 +59,12 @@ const mapStateToProps = (state: { auth: { error: string | null } }) => {
 
 const mapDispatchToProps = (dispatch: (arg0: any) => void) => {
   return {
-    login: (email: string, password: string) => dispatch(login(email, password)),
+    // login: (email: string, password: string) => dispatch(login(email, password)),
   };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(Login);
+// Exporting the connected component directly
+// export default connect(mapStateToProps, mapDispatchToProps)(Login);
+
+// Marking the component as a Client Component
+export { Login };
