@@ -4,7 +4,7 @@ package-lock.json
 # Logs
 logs
 *.log
-
+prisma/migrations
 # Runtime data
 pids
 *.pid
