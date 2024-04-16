@@ -3,7 +3,6 @@ const cors = require("cors");
 const axios = require("axios");
 // UNCOMMENT THE DATABASE YOU'D LIKE TO USE
  require('./Model/index.js');
-
 const doctorRouter = require('./routes/doctor.router');
 const AppointmentRouter = require('./routes/Appointment.router');
 const RatingCommentsRouter = require('./routes/ratingComments.router');
@@ -106,18 +105,17 @@ app.post('/api/sendmail', nodeMailer.sendMail);
 io.on("connection", (socket) => {
   console.log("A user connected with id:", socket.id);
 
-
   
-//   socket.on("send_message", (data) => {
+  socket.on("send_message", (data) => {
       
-//       console.log(data);
+      console.log(data);
       
-//       io.emit("new_message", data); 
-//   });
+      io.emit("new_message", data); 
+  });
 
-//   socket.on("disconnect", () => {
-//       console.log("User disconnected", socket.id);
-//   });
+  socket.on("disconnect", () => {
+      console.log("User disconnected", socket.id);
+  });
 });
 app.listen(PORT, function () {
   console.log("Server is running on port", PORT);

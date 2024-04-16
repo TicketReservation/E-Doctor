@@ -10,7 +10,7 @@ import axios from 'axios'
         Email:string
         Password:string
         PhoneNumber:number
-        ImageUrl:string
+        imageUrl:string
         Speciality:string
     }
 
