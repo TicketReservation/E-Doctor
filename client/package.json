@@ -9,10 +9,13 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@babel/preset-env": "^7.24.4",
+    "@babel/preset-react": "^7.24.1",
     "@fontsource/inter": "^5.0.17",
     "@next/font": "^14.2.0",
     "@types/lodash": "^4.17.0",
     "@types/react-big-calendar": "^1.8.9",
+    "@types/react-star-rating-component": "^1.4.4",
     "@types/react-stars": "^2.2.4",
     "axios": "^1.6.8",
     "js-to-ts-converter": "^0.18.2",
