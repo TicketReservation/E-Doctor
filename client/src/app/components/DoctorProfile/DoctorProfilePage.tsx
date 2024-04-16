@@ -1,7 +1,14 @@
 "use client"
 
 import React, { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
+// import { useNavigate } from 'react-router-dom';
+import Link from 'next/link'
+
+
+//
+import { useRouter } from 'next/navigation'
+//
+
 import DoctorInfo from '../DoctorInfo/DoctorInfo';
 import Rating from 'react-rating-stars-component';
 import { Modal, Button, Form } from 'react-bootstrap';
@@ -48,8 +55,9 @@ const DoctorProfilePage = () => {
     }
   }, [searchQuery, showPasswordModal, showProfileModal, isReview])
 
-  const navigate = useNavigate();
-
+  // const navigate = useNavigate();
+      // const navigate = Link
+const navigate= useRouter()
   const handleSearchChange = (event) => {
     setSearchQuery(event.target.value);
   };
@@ -96,10 +104,10 @@ const DoctorProfilePage = () => {
               <Button variant="primary" onClick={() => setIsReview(false)}>Appointments</Button>
             </li>
             <li className="nav-item">
-              <Button variant="primary" onClick={() => navigate('/postblog')} className="me-2">Post Blog</Button>
+              <Button variant="primary" onClick={() => navigate.push('/pages/postblog')} className="me-2">Post Blog</Button>
             </li>
             <li className="nav-item">
-              <Button variant="primary" onClick={() => navigate('/notifications')} className="me-2">Notifications</Button>
+              <Button variant="primary" onClick={() => navigate.push('/notifications', { scroll: false })} className="me-2">Notifications</Button>
             </li>
             <li className="nav-item">
               <Button variant="primary" onClick={() => setIsReview(true)}>Reviews</Button>

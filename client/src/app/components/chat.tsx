@@ -3,7 +3,7 @@ import { io } from 'socket.io-client';
 import axios from 'axios'; 
 import '../css/UserList.css'; 
 import Footer from './footer/Footer';
-import Navbar from './Navbar';
+import Navbar from './Navbar/Navbar';
 import DefaultSidebar from './SideBarr';
 const ENDPOINT = 'http://localhost:3000';
 
