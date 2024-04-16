@@ -1,8 +1,6 @@
-
 datasource db {
   provider = "mysql"
   url      = "mysql://root:root@localhost:3306/doctor"
-
 }
 
 generator client {
@@ -10,36 +8,32 @@ generator client {
 }
 
 
-
 model user {
-
   id          Int      @id @default(autoincrement()) 
   FirstName   String
   LastName    String
-  Username    String   @unique
-  Email       String   @unique
+  Username    String   
+  Email       String  
   Password    String
   UserType    String
   Speciality  String
   PhoneNumber String
-  ImageUrl    String
-}
+  imageUrl  String @db.VarChar(255)
 
+}
 
 
 model doctor {
-
   id          Int      @id @default(autoincrement())
   FirstName   String
   LastName    String
-  Username    String   @unique
-  Email       String   @unique
+  Username    String   
+  Email       String  
   Password    String
-  PhoneNumber String?
-  ImageUrl    String   @default("")
+  PhoneNumber String
+  imageUrl    String   
   Speciality  String
 }
-
 
 model message {
   id      Int     @id @default(autoincrement())
@@ -49,15 +43,12 @@ model appointment {
   id                   Int      @id @default(autoincrement())
   AppointmentTime      DateTime
   // Status                AppointmentStatus @default(Pending)
-
   AppointmentDepartment String?
   doctor               Int
 }
 
 
-
 model ratingsComments {
-
   id       Int      @id @default(autoincrement())
   rating   Int
   review   String?
@@ -65,44 +56,32 @@ model ratingsComments {
   name     String?
 }
 
-
 model admin {
-
   id       Int      @id @default(autoincrement())
   Username String   @unique
   Email    String   @unique
   Password String
 }
 
-
-model Payments {
-  id          Int      @id @default(autoincrement())
-  Amount      Decimal
-  PaymentDate DateTime
-}
-
-
-model Blog {
-  id       Int      @id @default(autoincrement())
+model blog {
+  id       Int       @id @default(autoincrement())
   Title    String
   Text     String
-  ImageUrl String?
-  comments Comment[]
+  imageUrl String?
+  comment  comment[]
 }
 
-model Comment {
+model comment {
   id        Int      @id @default(autoincrement())
   author    String
   comment   String
   timestamp DateTime
-
   blogId    Int
   userId    Int
-  blog      Blog     @relation(fields: [blogId], references: [id], map: "Comment_blogId_fkey")
+  blog      blog     @relation(fields: [blogId], references: [id], map: "Comment_blogId_fkey")
 
   @@index([blogId], map: "Comment_blogId_fkey")
 }
-
 
 
 
@@ -114,11 +93,8 @@ model payments {
 
 model product {
   id       Int     @id @default(autoincrement())
-
   name     String
   price    Decimal
-  ImageUrl String?
+  imageUrl String?
   Category String
-
 }
-
