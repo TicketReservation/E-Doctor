@@ -1,15 +1,13 @@
 const express = require("express");
-// const itemRoutes = require('./routes/item.routes')
 const cors = require("cors");
 const axios = require("axios");
 // UNCOMMENT THE DATABASE YOU'D LIKE TO USE
-const db = require('./database-mysql/index.prisma');
+ require('./Model/index.js');
 const doctorRouter = require('./routes/doctor.router');
 const AppointmentRouter = require('./routes/Appointment.router');
 const RatingCommentsRouter = require('./routes/ratingComments.router');
 const messagesRouter = require('./routes/messages.router')
 const payment =require ('./controllers/Payment')
-
 const userRouter = require('./routes/userrouters');
 const Authentication = require('./routes/loginrouters');
 const nodeMailer = require('./controllers/nodeMailer');
@@ -30,7 +28,7 @@ const io = new Server(server, {
     methods: ["GET", "POST"]
   }
 });
-const PORT = 3000
+const PORT = 4000
 cloudinary.v2.config({
   cloud_name: 'duekcetwe',
   api_key: '313496654712626',
@@ -102,6 +100,7 @@ app.post('/api/upload', async (req, res) => {
     res.status(500).json({ error: 'Something went wrong' });
   }
 });
+
 app.post('/api/sendmail', nodeMailer.sendMail);
 io.on("connection", (socket) => {
   console.log("A user connected with id:", socket.id);

@@ -1,10 +1,14 @@
 datasource db {
   provider = "mysql"
-  url      = env("DATABASE_URL")
+  url      = "mysql://root:dhia2002@localhost:3306/doctor"
+}
+
+generator client {
+  provider = "prisma-client-js"
 }
 
 
-model User {
+model user {
   id          Int      @id @default(autoincrement()) 
   FirstName   String
   LastName    String
@@ -15,10 +19,10 @@ model User {
   Speciality  String
   PhoneNumber String
   ImageUrl    String
-},
+}
 
 
-model Doctor {
+model doctor {
   id          Int      @id @default(autoincrement())
   FirstName   String
   LastName    String
@@ -28,23 +32,22 @@ model Doctor {
   PhoneNumber String?
   ImageUrl    String   @default("")
   Speciality  String
-},
+}
 
-model Message {
+model message {
   id      Int     @id @default(autoincrement())
   content String
-},
-model Appointment {
+}
+model appointment {
   id                   Int      @id @default(autoincrement())
   AppointmentTime      DateTime
-  Status               AppointmentStatus @default(Pending)
-  PaymentStatus        PaymentStatus    @default(Unpaid)
+  // Status                AppointmentStatus @default(Pending)
   AppointmentDepartment String?
   doctor               Int
 }
 
 
-model RatingsComments {
+model ratingsComments {
   id       Int      @id @default(autoincrement())
   rating   Int
   review   String?
@@ -52,75 +55,45 @@ model RatingsComments {
   name     String?
 }
 
-model Admin {
+model admin {
   id       Int      @id @default(autoincrement())
   Username String   @unique
   Email    String   @unique
   Password String
 }
 
-model Payments {
+model blog {
+  id       Int       @id @default(autoincrement())
+  Title    String
+  Text     String
+  ImageUrl String?
+  comment  comment[]
+}
+
+model comment {
+  id        Int      @id @default(autoincrement())
+  author    String
+  comment   String
+  timestamp DateTime
+  blogId    Int
+  userId    Int
+  blog      blog     @relation(fields: [blogId], references: [id], map: "Comment_blogId_fkey")
+
+  @@index([blogId], map: "Comment_blogId_fkey")
+}
+
+
+
+model payments {
   id          Int      @id @default(autoincrement())
   Amount      Decimal
   PaymentDate DateTime
 }
 
-
-model Blog {
-  id       Int      @id @default(autoincrement())
-  Title    String
-  Text     String
-  ImageUrl String?
-  comments Comment[]
-}
-
-model Comment {
-  id        Int      @id @default(autoincrement())
-  author    String
-  comment   String
-  timestamp DateTime
-  blog      Blog     @relation(fields: [blogId], references: [id])
-  blogId    Int
-  user      User     @relation(fields: [userId], references: [id])
-  userId    Int
-}
-
-model Product {
-  id       Int      @id @default(autoincrement())
+model product {
+  id       Int     @id @default(autoincrement())
   name     String
   price    Decimal
   ImageUrl String?
   Category String
 }
-
-
-
-User.hasMany(RatingsComments);
-User.hasMany(Appointment);
-User.hasMany(Blog);
-Blog.belongsTo(User);
-Blog.hasMany(Comment); 
-Comment.belongsTo(Blog);
-
-module.exports = {
-  User,
-  Doctor,
-  Appointment,
-  RatingsComments,
-  Payments,
-  Message,
-  Blog,
-  Product,
-  Comment,
-};
-main()
-  .then(async () => {
-    await prisma.$disconnect()
-  })
-  .catch(async (e) => {
-    console.error(e)
-    await prisma.$disconnect()
-    process.exit(1)
-  })
-
-
