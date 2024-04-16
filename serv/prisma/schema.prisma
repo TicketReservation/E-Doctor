@@ -1,29 +1,18 @@
-
 datasource db {
   provider = "mysql"
   url      = "mysql://root:root@localhost:3306/doctor"
-
 }
 
-<<<<<<< HEAD
-
-=======
->>>>>>> 63c17aecbb8bfdb13e85a89effce087a0eaa5948
 generator client {
   provider = "prisma-client-js"
 }
 
-
-<<<<<<< HEAD
-=======
-
 model user {
-
-  id          Int      @id @default(autoincrement()) 
+  id          Int    @id @default(autoincrement())
   FirstName   String
   LastName    String
-  Username    String   @unique
-  Email       String   @unique
+  Username    String @unique
+  Email       String @unique
   Password    String
   UserType    String
   Speciality  String
@@ -31,40 +20,34 @@ model user {
   ImageUrl    String
 }
 
-
-
 model doctor {
-
-  id          Int      @id @default(autoincrement())
+  id          Int     @id @default(autoincrement())
   FirstName   String
   LastName    String
-  Username    String   @unique
-  Email       String   @unique
+  Username    String  @unique
+  Email       String  @unique
   Password    String
   PhoneNumber String?
-  ImageUrl    String   @default("")
+  ImageUrl    String  @default("")
   Speciality  String
 }
 
-
 model message {
-  id      Int     @id @default(autoincrement())
+  id      Int    @id @default(autoincrement())
   content String
 }
+
 model appointment {
-  id                   Int      @id @default(autoincrement())
-  AppointmentTime      DateTime
+  id              Int      @id @default(autoincrement())
+  AppointmentTime DateTime
   // Status                AppointmentStatus @default(Pending)
 
   AppointmentDepartment String?
-  doctor               Int
+  doctor                Int
 }
 
-
-
 model ratingsComments {
-
-  id       Int      @id @default(autoincrement())
+  id       Int     @id @default(autoincrement())
   rating   Int
   review   String?
   imageSrc String?
@@ -72,54 +55,41 @@ model ratingsComments {
 }
 
 
->>>>>>> 63c17aecbb8bfdb13e85a89effce087a0eaa5948
 model admin {
-
-  id       Int      @id @default(autoincrement())
-  Username String   @unique
-  Email    String   @unique
+  id       Int    @id @default(autoincrement())
+  Username String @unique
+  Email    String @unique
   Password String
 }
 
-<<<<<<< HEAD
-model appointment {
-  id                    Int      @id @default(autoincrement())
-  AppointmentTime       DateTime
-  AppointmentDepartment String?
-  doctor                Int
-=======
 
 model Payments {
   id          Int      @id @default(autoincrement())
   Amount      Decimal
   PaymentDate DateTime
->>>>>>> 63c17aecbb8bfdb13e85a89effce087a0eaa5948
+
 }
 
-
 model Blog {
-  id       Int      @id @default(autoincrement())
+  id       Int       @id @default(autoincrement())
   Title    String
   Text     String
   ImageUrl String?
-  comments Comment[]
+  // comments Comment[]
 }
 
 model Comment {
-
   id        Int      @id @default(autoincrement())
   author    String
   comment   String
   timestamp DateTime
 
-  blogId    Int
-  userId    Int
-  blog      blog     @relation(fields: [blogId], references: [id], map: "Comment_blogId_fkey")
+  blogId Int  // blog   blog @relation(fields: [blogId], references: [id], map: "Comment_blogId_fkey")
+
+  userId Int
 
   @@index([blogId], map: "Comment_blogId_fkey")
 }
-
-
 
 model payments {
   id          Int      @id @default(autoincrement())
@@ -128,12 +98,10 @@ model payments {
 }
 
 model product {
-  id       Int     @id @default(autoincrement())
+  id Int @id @default(autoincrement())
 
   name     String
   price    Decimal
   ImageUrl String?
   Category String
-
 }
-
