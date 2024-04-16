@@ -3,6 +3,7 @@ const  { PrismaClient } =require('@prisma/client')
 const prisma = new PrismaClient()
 
 async function main() {
+
   const user = await prisma.user.findMany()
   const doctor = await prisma.doctor.findMany()
   const  messages= await prisma.message.findMany()
@@ -13,6 +14,7 @@ async function main() {
   const blog = await prisma.blog.findMany()
   const comment = await prisma.comment.findMany()
   const product = await prisma.product.findMany()
+
 }
 
 main()
@@ -36,3 +38,4 @@ main()
   // npx prisma init
   // run npx prisma migrate dev
   // run npx prisma generate
+
