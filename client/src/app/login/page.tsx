@@ -2,7 +2,7 @@
 import React, { useState } from 'react';
 import { connect } from 'react-redux';
 
-import { login } from '../components/redux/actions/authactions';
+// import { login } from '../components/redux/actions/authactions';
 import Link from 'next/link';
 
 // import { signInAsync } from '../lib/features/signInSlice'; 
@@ -63,11 +63,11 @@ const Login = ({ login, error }) => {
 //   };
 // };
 
-const mapDispatchToProps = (dispatch) => {
-    return {
-      login: (email, password) => dispatch(login(email, password)),
-    };
-  };
+// const mapDispatchToProps = (dispatch) => {
+//     return {
+//       login: (email, password) => dispatch(login(email, password)),
+//     };
+//   };
   
   export default connect(null, mapDispatchToProps)(Login);
   
