@@ -1,9 +1,8 @@
-const { PrismaClient } = require('@prisma/client');
-const prisma = new PrismaClient();
+const user = require('../Model/index')
 
 const getAllUsers = async (req, res) => {
   try {
-    const users = await prisma.user.findMany();
+    const users = await user.findMany();
     res.status(200).json(users);
   } catch (error) {
     console.error('Error fetching users:', error);
@@ -14,7 +13,7 @@ const getAllUsers = async (req, res) => {
 const getUserById = async (req, res) => {
   try {
     const { id } = req.params;
-    const user = await prisma.user.findUnique({ where: { id: parseInt(id) } });
+    const user = await user.findUnique({ where: { id: parseInt(id) } });
     if (!user) {
       return res.status(404).json({ error: 'User not found' });
     }
@@ -29,7 +28,7 @@ const updateUser = async (req, res) => {
   try {
     const { id } = req.params;
     const { body } = req;
-    const updatedUser = await prisma.user.update({
+    const updatedUser = await user.update({
       where: { id: parseInt(id) },
       data: body,
     });
@@ -43,7 +42,7 @@ const updateUser = async (req, res) => {
 const deleteUser = async (req, res) => {
   try {
     const { id } = req.params;
-    await prisma.user.delete({ where: { id: parseInt(id) } });
+    await user.delete({ where: { id: parseInt(id) } });
     res.status(200).json({ message: 'User deleted successfully' });
   } catch (error) {
     console.error('Error deleting user:', error);

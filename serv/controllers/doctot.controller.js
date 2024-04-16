@@ -1,8 +1,7 @@
-const { PrismaClient } = require('@prisma/client');
-const prisma = new PrismaClient();
+const doctor = require('../Model/index')
 const getAllDoctors = async (req, res) => {
     try {
-        const doctors = await Doctor.findAll();
+        const doctors = await doctor.findMany();
         res.status(200).json(doctors);
     } catch (error) {
         console.error('Error fetching doctors:', error);
@@ -13,7 +12,7 @@ const getAllDoctors = async (req, res) => {
 const getDoctorById = async (req, res) => {
     try {
         const { id } = req.params;
-        const doctor = await Doctor.findOne({ where: { id } });
+        const doctor = await prisma.Doctor.findOne({ where: { id } });
         if (doctor) {
             res.status(200).json(doctor);
         } else {
@@ -29,7 +28,7 @@ const getDoctorById = async (req, res) => {
 const createDoctor = async (req, res) => {
     try {
         const body = req.body;
-        const doctor = await Doctor.create(body);
+        const doctor = await octor.create(body);
         res.status(201).json(doctor);
     } catch (error) {
         console.error('Error creating doctor:', error);
@@ -40,7 +39,7 @@ const updateDoctor = async (req, res) => {
     try {
         const { id } = req.params;
         const body = req.body;
-        const doctor = await Doctor.findOne({ where: { id } });
+        const doctor = await octor.findOne({ where: { id } });
         if (doctor) {
             await doctor.update(body);
             res.status(200).json(doctor);
@@ -56,7 +55,7 @@ const updateDoctor = async (req, res) => {
 const deleteDoctor = async (req, res) => {
     try {
         const { id } = req.params;
-        const doctor = await Doctor.findOne({ where: { id } });
+        const doctor = await octor.findOne({ where: { id } });
         if (doctor) {
             await doctor.destroy();
             res.status(200).json({ message: 'Doctor deleted successfully' });
