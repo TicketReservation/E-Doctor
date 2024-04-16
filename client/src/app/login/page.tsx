@@ -68,6 +68,5 @@ const Login = ({ login, error }) => {
 //       login: (email, password) => dispatch(login(email, password)),
 //     };
 //   };
-  
-  export default connect(null, mapDispatchToProps)(Login);
+
   
