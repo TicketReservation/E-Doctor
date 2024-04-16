@@ -10,7 +10,7 @@ import axios from 'axios'
         Email:string
         Password:string
         PhoneNumber:number
-        ImageUrl:string
+        imageUrl:string
         Speciality:string
     }
 
@@ -30,7 +30,9 @@ export const getdoctors=createAsyncThunk(
     "doctor/getdoctors",
     async()=>{
         try {
+
             const response=await axios.get("http://localhost:4000/api/doctors/all")
+
             return response.data
         } catch (error:any) {
             return error.message
