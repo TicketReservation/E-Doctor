@@ -54,6 +54,7 @@ model ratingsComments {
   name     String?
 }
 
+
 model admin {
   id       Int    @id @default(autoincrement())
   Username String @unique
@@ -61,10 +62,12 @@ model admin {
   Password String
 }
 
+
 model Payments {
   id          Int      @id @default(autoincrement())
   Amount      Decimal
   PaymentDate DateTime
+
 }
 
 model Blog {
