@@ -118,7 +118,7 @@ io.on("connection", (socket) => {
 //   socket.on("disconnect", () => {
 //       console.log("User disconnected", socket.id);
 //   });
-// });
+});
 app.listen(PORT, function () {
   console.log("Server is running on port", PORT);
-});
+})

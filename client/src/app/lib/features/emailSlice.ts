@@ -23,7 +23,7 @@ export const emails=createAsyncThunk(
     "email/emails",
     async(body,{rejectWithValue})=>{
         try {
-            const response = await axios.post("/",body)
+            const response = await axios.post("http://localhost:4000/api/",body)
             return response.data
           } catch (error: any) {
             return rejectWithValue(error.response.data)
