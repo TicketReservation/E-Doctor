@@ -1,6 +1,8 @@
 import React from "react";
-import "./stye.css";
-// import logo from "https://i.ibb.co/xG8xQmD/image-16.png"
+ @ts-nocheck
+ @use-client
+
+
 import { useNavigate } from "react-router-dom";
 const Footer = () => {
   const navigate = useNavigate();

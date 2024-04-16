@@ -91,7 +91,6 @@ model Blog {
 }
 
 model Comment {
-
   id        Int      @id @default(autoincrement())
   author    String
   comment   String
@@ -99,10 +98,11 @@ model Comment {
 
   blogId    Int
   userId    Int
-  blog      blog     @relation(fields: [blogId], references: [id], map: "Comment_blogId_fkey")
+  blog      Blog     @relation(fields: [blogId], references: [id], map: "Comment_blogId_fkey")
 
   @@index([blogId], map: "Comment_blogId_fkey")
 }
+
 
 
 
