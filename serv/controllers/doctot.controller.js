@@ -28,8 +28,8 @@ const getDoctorById = async (req, res) => {
 const createDoctor = async (req, res) => {
     try {
         const body = req.body;
-        const doctor = await octor.create(body);
-        res.status(201).json(doctor);
+        const doctors = await doctor.create(body);
+        res.status(201).json(doctors);
     } catch (error) {
         console.error('Error creating doctor:', error);
         res.status(500).json({ error: 'Failed to create doctor' });
@@ -39,7 +39,7 @@ const updateDoctor = async (req, res) => {
     try {
         const { id } = req.params;
         const body = req.body;
-        const doctor = await octor.findOne({ where: { id } });
+        const doctor = await doctor.findOne({ where: { id } });
         if (doctor) {
             await doctor.update(body);
             res.status(200).json(doctor);
@@ -55,7 +55,7 @@ const updateDoctor = async (req, res) => {
 const deleteDoctor = async (req, res) => {
     try {
         const { id } = req.params;
-        const doctor = await octor.findOne({ where: { id } });
+        const doctor = await doctor.findOne({ where: { id } });
         if (doctor) {
             await doctor.destroy();
             res.status(200).json({ message: 'Doctor deleted successfully' });
