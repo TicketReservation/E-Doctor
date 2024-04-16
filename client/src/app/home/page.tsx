@@ -1,6 +1,6 @@
 import Image from "next/image"
 import image from "./img1.png"
-import Filter from "../components/Filter"
+// import Filter from "../components/Filter"
 import styles from "./home.module.css"
 const Home = () => {
   return (
@@ -26,7 +26,7 @@ const Home = () => {
       alt=""
       />
     </div>
-    <Filter/>
+    {/* <Filter/> */}
     </>
   )
 }
