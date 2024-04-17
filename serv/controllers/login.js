@@ -38,12 +38,13 @@ exports.register = async (req, res) => {
 exports.login = async (req, res) => {
     try {
         const { Email, Password } = req.body;
-        const user = await prisma.user.findUnique({ where: { Email: Email } });
+        const user = await prisma.user.findUnique({ where: { Email:Email } });
+        
         if (!user) {
             return res.status(401).json({ error: 'Invalid credentials' });
         }
-        if (!Password || !user.Password) {
-            console.log('password', Password);
+
+        if (!Password) {
             return res.status(400).json({ error: 'Password is required' });
         }
 
@@ -51,6 +52,7 @@ exports.login = async (req, res) => {
         if (!passwordMatch) {
             return res.status(401).json({ error: 'Invalid credentials' });
         }
+
         const token = jwt.sign({ userId: user.id }, 'your-secret-key', { expiresIn: '1h' });
         res.status(200).json({ user, token });
     } catch (error) {
