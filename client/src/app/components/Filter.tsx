@@ -7,7 +7,7 @@ const Filter = () => {
           <h1>Find a doctor</h1>
       <div className={styles.filter_div}>
         <span>
-        <input type="text" placeholder="Name" className={styles.filter_input} />
+        <input type="text" placeholder="Name" className={`${styles.filter_input} ${styles.filter_1stInput}`} />
         <input type="text" placeholder="Speciality" className={styles.filter_input} />
         </span>
         <span className={styles.filter_span}>
