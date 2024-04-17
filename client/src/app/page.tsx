@@ -11,7 +11,7 @@ export default function Home() {
     <div>
       <Navbar/>
       <Reviews/>
-      <DoctorRates/>
+      {/* <DoctorRates/> */}
       {/* <ContactUs/> */}
       <Footer/>
        </div>

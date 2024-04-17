@@ -16,8 +16,8 @@ model user {
   id          Int      @id @default(autoincrement()) 
   FirstName   String
   LastName    String
-  Username    String   @unique
-  Email       String   @unique
+  Username    String   
+  Email       String  
   Password    String
   UserType    String
   Speciality  String
@@ -32,8 +32,8 @@ model doctor {
   id          Int      @id @default(autoincrement())
   FirstName   String
   LastName    String
-  Username    String   @unique
-  Email       String   @unique
+  Username    String   
+  Email       String   
   Password    String
   PhoneNumber String?
   imageUrl    String   @default("")
