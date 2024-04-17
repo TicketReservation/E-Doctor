@@ -53,10 +53,19 @@ exports.login = async (req, res) => {
             return res.status(401).json({ error: 'Invalid credentials' });
         }
 
-        const token = jwt.sign({ userId: user.id }, 'your-secret-key', { expiresIn: '1h' });
+        const token = jwt.sign({ userId: user.id,UserType:user.UserType }, 'your-secret-key', { expiresIn: '1h' });
         res.status(200).json({ user, token });
     } catch (error) {
         console.error(error);
         res.status(500).json({ error: 'Login failed' });
+    }
+};
+exports.getAllUsers = async (req, res) => {
+    try {
+        const users = await prisma.user.findMany();
+        res.status(200).json({ users });
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ error: 'Failed to fetch users' });
     }
 };
