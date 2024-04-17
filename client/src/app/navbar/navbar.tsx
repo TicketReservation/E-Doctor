@@ -80,7 +80,7 @@ const Navbar = () => {
           </div>
         ) : (
           <>
-            <Link href="/signup">
+            <Link href="/sign">
             <button className={styles.Log}>Sign UP</button>
             </Link>
             <Link href="/login">
