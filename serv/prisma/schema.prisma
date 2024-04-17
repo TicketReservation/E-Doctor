@@ -17,7 +17,7 @@ model user {
   FirstName   String
   LastName    String
   Username    String   
-  Email       String  
+  Email       String   @unique
   Password    String
   UserType    String
   Speciality  String
@@ -30,21 +30,18 @@ model user {
 model doctor {
 
   id          Int      @id @default(autoincrement())
-  FirstName   String
-  LastName    String
-  Username    String   
-  Email       String   
-  Password    String
-  PhoneNumber String?
-  imageUrl    String   @default("")
-  Speciality  String
+  // FirstName   String
+  // LastName    String
+  // Username    String   
+  // Email       String   @unique
+  // Password    String
+  // PhoneNumber String?
+  // imageUrl    String   @default("")
+  // Speciality  String
 }
 
 
-model message {
-  id      Int     @id @default(autoincrement())
-  content String
-}
+
 model appointment {
   id                   Int      @id @default(autoincrement())
   AppointmentTime      DateTime
@@ -55,6 +52,17 @@ model appointment {
 }
 
 
+model message {
+  id      Int     @id @default(autoincrement())
+  content String
+}
+model conversation {
+  id    Int     @id @default(autoincrement())
+}
+
+model room {
+  id    Int     @id @default(autoincrement())
+}
 
 model ratingsComments {
 

@@ -36,7 +36,7 @@ console.log('====================================');
   const handleRedirect = (userType) => {
     if (userType === 'Doctor') {
       window.location.href = "/doctor";
-    } else if (userType === 'Patient') {
+    } else if (userType !== 'Doctor') {
       window.location.href = "/";
     }
    
@@ -61,9 +61,7 @@ console.log('====================================');
     type="password" placeholder="Password" value={Password} onChange={(e) => setPassword(e.target.value)} required />
           </div>
           {error && <p  className={styles.ppp}>{error}</p>}
-          <button    className={styles.bbutton}   
-
->Login</button>
+          <button    className={styles.bbutton}  >Login</button>
 
 
 

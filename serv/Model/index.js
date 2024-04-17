@@ -4,8 +4,9 @@ const prisma = new PrismaClient()
 
 async function main() {
   const user = await prisma.user.findMany()
+  
   const doctor = await prisma.doctor.findMany()
-  const  messages= await prisma.message.findMany()
+  const  message= await prisma.message.findMany()
   const  appointment= await prisma.appointment.findMany()
   const ratingsComments = await prisma.ratingsComments.findMany()
   const admin = await prisma.admin.findMany()
