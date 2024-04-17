@@ -4,7 +4,7 @@ package-lock.json
 # Logs
 logs
 *.log
-
+prisma/migrations
 # Runtime data
 pids
 *.pid
@@ -35,3 +35,5 @@ bower_components/
 .floo
 .flooignore
 .flooignore
+.env
+package-lock.json

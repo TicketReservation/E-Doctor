@@ -4,7 +4,7 @@ import axios from 'axios'
 export interface Product {
     name:string
     price:number
-    imageUrl:string
+    ImageUrl:string
     Category:string
 }
 

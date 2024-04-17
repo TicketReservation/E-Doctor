@@ -1,12 +1,12 @@
-
+"use client"
 import Image from "next/image";
-import DoctorProfilePage from "./components/DoctorProfile/DoctorProfilePage";
-import DoctorPage from "./components/doctor";
+import DoctorProfilePage from "./DoctorProfile/DoctorProfilePage";
+import DoctorPage from "./Doctor/doctor";
 
 export default function Home() {
-  return (
+  return ( 
     // <DoctorProfilePage/>
     <DoctorPage/>
   )
-}
+  }
 

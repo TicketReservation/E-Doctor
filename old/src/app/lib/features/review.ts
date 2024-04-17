@@ -1,31 +1,30 @@
 import {createSlice,createAsyncThunk} from '@reduxjs/toolkit'
 import axios from 'axios'
 
-export interface Product {
-    name:string
-    price:number
-    imageUrl:string
-    Category:string
-}
 
+export interface Rating{
+    rating:number
+    review:string
+    imageSrc:string
+    name:string
+}
 const initialState={
-    product:{},
+    doctor:{},
     loading:false,
     error:""
 }
-
 interface state{
-    email:Product|{},
+    doctor:Rating|{},
     loading:boolean,
     error:string
 }
 
-export const products=createAsyncThunk(
-    "product/products",
+export const ratings=createAsyncThunk(
+    "rating/Ratings",
     async()=>{
         try {
 
-            const response=await axios.get("http://localhost:4000/api/products/all")
+            const response=await axios.get("http://localhost:4000/api/ratingComments/all")
 
             return response.data
         } catch (error:any) {
@@ -34,24 +33,24 @@ export const products=createAsyncThunk(
     }
 )
 
-export const doctorSlice=createSlice({
-    name:"products",
+export const ratingsSlice=createSlice({
+    name:"blogs",
     initialState,
     reducers:{},
     extraReducers:(builder)=>{
         builder
-        .addCase(products.pending,(state)=>{
+        .addCase(ratings.pending,(state)=>{
             state.loading=true
         })
-        .addCase(products.fulfilled,(state,action)=>{
+        .addCase(ratings.fulfilled,(state,action)=>{
             state.loading=false
-            state.product=action.payload
+            state.doctor=action.payload
         })
-        .addCase(products.rejected,(state,action)=>{
+        .addCase(ratings.rejected,(state,action)=>{
             state.loading=false
             state.error=action.error.message || "something wrong"
         })
     }
 })
 
-export default doctorSlice.reducer
+export default ratingsSlice.reducer

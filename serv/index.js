@@ -3,15 +3,14 @@ const cors = require("cors");
 const axios = require("axios");
 // UNCOMMENT THE DATABASE YOU'D LIKE TO USE
  require('./Model/index.js');
-
-const doctorRouter = require('./routes/doctor.router');
+const doctorRouter = require('./routes/doctor.router.js');
 const AppointmentRouter = require('./routes/Appointment.router');
 const RatingCommentsRouter = require('./routes/ratingComments.router');
 const messagesRouter = require('./routes/messages.router')
 const payment =require ('./controllers/Payment')
 const userRouter = require('./routes/userrouters');
 const Authentication = require('./routes/loginrouters');
-const nodeMailer = require('./controllers/nodeMailer');
+// const nodeMailer = require('./middelware/index.js');
 const cloudinary = require('cloudinary');
 const BlogRouter = require('./routes/Blog.routes');
 const ProductRouter = require('./routes/product.router');
@@ -102,22 +101,21 @@ app.post('/api/upload', async (req, res) => {
   }
 });
 
-app.post('/api/sendmail', nodeMailer.sendMail);
+// app.post('/api/sendmail', nodeMailer.sendMail);
 io.on("connection", (socket) => {
   console.log("A user connected with id:", socket.id);
 
-
   
-//   socket.on("send_message", (data) => {
+  socket.on("send_message", (data) => {
       
-//       console.log(data);
+      console.log(data);
       
-//       io.emit("new_message", data); 
-//   });
+      io.emit("new_message", data); 
+  });
 
-//   socket.on("disconnect", () => {
-//       console.log("User disconnected", socket.id);
-//   });
+  socket.on("disconnect", () => {
+      console.log("User disconnected", socket.id);
+  });
 });
 app.listen(PORT, function () {
   console.log("Server is running on port", PORT);
