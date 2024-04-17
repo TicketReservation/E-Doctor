@@ -87,7 +87,7 @@ model Blog {
   Title    String
   Text     String
   ImageUrl String?
-  // comments Comment[]
+//   comments Comment[]
 }
 
 model Comment {
@@ -99,7 +99,7 @@ model Comment {
 
   blogId    Int
   userId    Int
-  // blog      blog     @relation(fields: [blogId], references: [id], map: "Comment_blogId_fkey")
+//   blog      blog     @relation(fields: [blogId], references: [id], map: "Comment_blogId_fkey")
 
   @@index([blogId], map: "Comment_blogId_fkey")
 }
