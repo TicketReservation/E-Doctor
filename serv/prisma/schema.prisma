@@ -1,0 +1,124 @@
+
+datasource db {
+  provider = "mysql"
+  url      = "mysql://root:dhia2002@localhost:3306/doctor"
+
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+
+
+model user {
+
+  id          Int      @id @default(autoincrement()) 
+  FirstName   String
+  LastName    String
+  Username    String   @unique
+  Email       String   @unique
+  Password    String
+  UserType    String
+  Speciality  String
+  PhoneNumber String
+  ImageUrl    String
+}
+
+
+
+model doctor {
+
+  id          Int      @id @default(autoincrement())
+  FirstName   String
+  LastName    String
+  Username    String   @unique
+  Email       String   @unique
+  Password    String
+  PhoneNumber String?
+  ImageUrl    String   @default("")
+  Speciality  String
+}
+
+
+model message {
+  id      Int     @id @default(autoincrement())
+  content String
+}
+model appointment {
+  id                   Int      @id @default(autoincrement())
+  AppointmentTime      DateTime
+  // Status                AppointmentStatus @default(Pending)
+
+  AppointmentDepartment String?
+  doctor               Int
+}
+
+
+
+model ratingsComments {
+
+  id       Int      @id @default(autoincrement())
+  rating   Int
+  review   String?
+  imageSrc String?
+  name     String?
+}
+
+
+model admin {
+
+  id       Int      @id @default(autoincrement())
+  Username String   @unique
+  Email    String   @unique
+  Password String
+}
+
+
+model Payments {
+  id          Int      @id @default(autoincrement())
+  Amount      Decimal
+  PaymentDate DateTime
+}
+
+
+model Blog {
+  id       Int      @id @default(autoincrement())
+  Title    String
+  Text     String
+  ImageUrl String?
+  // comments Comment[]
+}
+
+model Comment {
+
+  id        Int      @id @default(autoincrement())
+  author    String
+  comment   String
+  timestamp DateTime
+
+  blogId    Int
+  userId    Int
+  // blog      blog     @relation(fields: [blogId], references: [id], map: "Comment_blogId_fkey")
+
+  @@index([blogId], map: "Comment_blogId_fkey")
+}
+
+
+
+model payments {
+  id          Int      @id @default(autoincrement())
+  Amount      Decimal
+  PaymentDate DateTime
+}
+
+model product {
+  id       Int     @id @default(autoincrement())
+
+  name     String
+  price    Decimal
+  ImageUrl String?
+  Category String
+
+}
+
