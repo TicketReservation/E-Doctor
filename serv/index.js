@@ -3,7 +3,7 @@ const cors = require("cors");
 const axios = require("axios");
 // UNCOMMENT THE DATABASE YOU'D LIKE TO USE
  require('./Model/index.js');
-const doctorRouter = require('./routes/');
+const doctorRouter = require('./routes/doctor.router.js');
 const AppointmentRouter = require('./routes/Appointment.router.js');
 const RatingCommentsRouter = require('./routes/ratingComments.router');
 const messagesRouter = require('./routes/messages.router')

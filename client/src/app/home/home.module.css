@@ -1,23 +1,23 @@
-.immg{
+.home_immg{
   width: 450px;  
   height: 500px;
   margin-right: 250px;
   margin-top: 100px;
 }
-.healthcare{
-    color: #007E85;
+.home_conatiner1{
+  margin-top: 500px;
 }
-.brigther{
+.home_brigther{
     color: #6EAB36;
 }
-.centence{
+.home_centence{
     margin-top: 200px;
     margin-left: 200px;
 }
-.subCentence{
+.home_subCentence{
     font-size: 17px;
 }
-.apointBtn{
+.home_apointBtn{
     margin-top: 3rem;
     width: 250px;
     height: 50px;
@@ -29,7 +29,7 @@
     cursor: pointer;
 }
 
-.vidPlayer{
+.home_vidPlayer{
     border-radius: 50%;
     background-color: #007E85;
     width: 50px;
@@ -41,7 +41,7 @@
     margin-left: 50px;
     cursor: pointer;
 }
-.tri{
+.home_tri{
     width: 0;
     height: 0;
     border-left: 10px solid transparent; 
@@ -50,35 +50,35 @@
     rotate: 90deg;
     margin-left: 5px;
 }
-.buTons{
+.home_buTons{
     display: flex;
 }
-.watchVid{
+.home_watchVid{
     margin-left: 7px;
     margin-top: 63px;
 }
 
-.switch {
+.home_switch {
     position: relative;
     display: inline-block;
     width: 60px;
     height: 34px;
   }
   
-.switch {
+.home_switch {
     position: relative;
     display: inline-block;
     width: 60px;
     height: 34px;
   }
   
-  .switch input { 
+  .home_switch input { 
     opacity: 0;
     width: 0;
     height: 0;
   }
   
-  .slider {
+  .home_slider {
     position: absolute;
     cursor: pointer;
     top: 0;
@@ -90,7 +90,7 @@
     border: 1px solid #007E85; 
   }
   
-  .slider:before {
+  .home_slider:before {
     position: absolute;
     content: "";
     height: 26px;
@@ -101,17 +101,6 @@
     transition: .4s;
   }
   
-  input:checked + .slider {
-    background-color: white;
-  }
-  
-  input:focus + .slider {
-    box-shadow: 0 0 1px white;
-  }
-  
-  input:checked + .slider:before {
-    transform: translateX(26px);
-  }
   
   .slider.round {
     border-radius: 34px;
@@ -133,25 +122,20 @@
 }
 
 
-.filter{
+.home_filter{
     display: flex;
     align-items: center;
 }
-.available{
+.home_available{
     margin-right: 20px;
     margin-left: 100px;
 }
-.aligne{
+.home_aligne{
     display: flex;
     align-items: center;
 }
-.searchBtn{
-    margin-left: 100px;
-    width: 150px;
-    height: 50px;
-    border: none;
-    border-radius: 5px;
-    background-color: #007E85;
-    color: white;
-    cursor: pointer;
+
+.home_container{
+  display: flex;
+  flex-direction: column;
 }

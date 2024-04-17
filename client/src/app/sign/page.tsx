@@ -1,11 +1,11 @@
 "use client"
 import React, { useState } from "react";
+import { useRouter } from "next/router"
 import  Link from "next/link"
 import axios from "axios";
 // import "../css/signup.css";
-// import Navbar from "./Navbar";
+import Navbar from "../navbar/navbar";
 import Dropzone from 'react-dropzone';
-// import { signInAsync } from "../lib/features/signInSlice";
 import {useAppDispatch ,  useAppSelector} from '../lib/hooks';
 
 
@@ -44,10 +44,7 @@ const Signup = () => {
       );
       console.log(response.data);
       setError("");
-      
-   
-
-    
+      window.location.href = "/doctor";
     } catch (err) {
       setError(err.response.data.error);
       console.log(err.response.data.error);
@@ -75,7 +72,7 @@ const Signup = () => {
   };
   return (
     <div>
-      {/* <Navbar /> */}
+      <Navbar />
       <div className="form doctor-form" style={{ width: "50%", display: "flex", flexDirection: "column", alignItems: "center", marginLeft:'340px',backgroundColor:'white'}}>
               <form onSubmit={HandleSubmit}>
             <h2 style={{ color: "#007E85", marginBottom:'20px',marginLeft:'120px',marginTop:'33px'}}> Sign Up</h2>
