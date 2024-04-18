@@ -5,10 +5,10 @@ datasource db {
 
 }
 
+
 generator client {
   provider = "prisma-client-js"
 }
-
 
 
 model user {
@@ -24,7 +24,6 @@ model user {
   PhoneNumber String
   ImageUrl    String
 }
-
 
 
 model doctor {
@@ -45,15 +44,17 @@ model message {
   id      Int     @id @default(autoincrement())
   content String
 }
+
+
 model appointment {
   id                   Int      @id @default(autoincrement())
   AppointmentTime      DateTime
+
   // Status                AppointmentStatus @default(Pending)
 
   AppointmentDepartment String?
   doctor               Int
 }
-
 
 
 model ratingsComments {
@@ -75,13 +76,6 @@ model admin {
 }
 
 
-model Payments {
-  id          Int      @id @default(autoincrement())
-  Amount      Decimal
-  PaymentDate DateTime
-}
-
-
 model Blog {
   id       Int      @id @default(autoincrement())
   Title    String
@@ -89,6 +83,7 @@ model Blog {
   ImageUrl String?
 //   comments Comment[]
 }
+
 
 model Comment {
 
@@ -99,11 +94,11 @@ model Comment {
 
   blogId    Int
   userId    Int
-//   blog      blog     @relation(fields: [blogId], references: [id], map: "Comment_blogId_fkey")
+  // blog      blog     @relation(fields: [blogId], references: [id], map: "Comment_blogId_fkey")
+
 
   @@index([blogId], map: "Comment_blogId_fkey")
 }
-
 
 
 model payments {
@@ -111,6 +106,7 @@ model payments {
   Amount      Decimal
   PaymentDate DateTime
 }
+
 
 model product {
   id       Int     @id @default(autoincrement())
@@ -121,4 +117,3 @@ model product {
   Category String
 
 }
-

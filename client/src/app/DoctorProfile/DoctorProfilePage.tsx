@@ -14,7 +14,7 @@ import Rating from 'react-rating-stars-component';
 import { Modal, Button, Form } from 'react-bootstrap';
 import profileImage from './image_16.png';
 import './DoctorProfile.css';
-import Reviews from '../Reviews';
+import Reviews from '../reviews/reviews';
 import Image from 'next/image'
 
 

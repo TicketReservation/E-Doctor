@@ -464,7 +464,7 @@ function Doctor() {
             <div
               style={{
                 display: "inline",
-                // flexDirection: 'column',
+                flexDirection: 'column',
                 alignItems: "center",
                 justifyContent: "center",
               }}
@@ -646,7 +646,7 @@ function Doctor() {
             justifyContent: "space-between",
             width: "1200px", // Increase the width to make the card bigger
             padding: "20px",
-            // border: '1px solid #ccc',
+            border: '1px solid #ccc',
             borderRadius: "10px",
             margin: "auto",
           }}
