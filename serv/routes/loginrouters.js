@@ -5,4 +5,5 @@ const verifyToken=require('./../middelware/index')
 router.post('/register', register);
 router.post('/login', login);
 
+
 module.exports = router;

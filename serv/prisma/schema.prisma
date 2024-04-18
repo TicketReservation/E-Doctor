@@ -10,6 +10,24 @@ generator client {
 }
 
 
+// model User {
+//   id          Int   @unique     @id @default(autoincrement())
+//   firstName   String
+//   lastName    String
+//   email       String      @unique
+//   password    String
+//   phoneNumber String
+//   imageUrl    String
+//   appointments Appointment[]
+//   ratingsComments RatingsComment[]
+//   role  Role @default(user)
+//   blogs       Blog[]
+//   doctor      Doctor  @relation(fields: [doctorId], references: [id])
+//   doctorId    Int        @unique
+//   specialityId   Int   
+
+//   speciality Speciality @relation(fields: [specialityId], references: [id])
+// }
 
 model user {
 
@@ -20,25 +38,34 @@ model user {
   Email       String   @unique
   Password    String
   UserType    String
-  Speciality  String
   PhoneNumber String
   imageUrl    String
+  doctorId   Int
+   doctor Doctor @relation(fields: [doctorId], references: [id])
+  specialityId   Int   
+
+  speciality Speciality @relation(fields: [specialityId], references: [id])
 }
 
-
-
-model doctor {
-
-  id          Int      @id @default(autoincrement())
-  FirstName   String
-  LastName    String
-  Username    String   @unique
-  Email       String   @unique
-  Password    String
-  PhoneNumber String?
-  imageUrl    String   @default("")
-  Speciality  String
+model Speciality {
+  id          Int     @id @default(autoincrement())
+  name        String
+  doctors user[]
 }
+// enum speciality{
+//   Cardiologist
+//   Pediatrician
+//   Surgeon
+//   Radiologist
+//   general
+//   dentiste
+// }
+model Doctor {
+  id           Int        @id @default(autoincrement())
+ doctors user[]
+
+}
+
 
 
 model message {
