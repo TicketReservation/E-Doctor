@@ -67,15 +67,45 @@ exports.login = async (req, res) => {
 }
 exports.finAllDoc=async(req,res)=>{
   try {
-    const doc=await prisma.user.findMany({where:{UserType:"doctor"},
+    const docs=await prisma.user.findMany({where:{UserType:"doctor"},
     include:{
       speciality:true,
       doctor:true
     }
   })
-  res.json(doc)
+  res.json(docs)
   } catch (error) {
     throw error
+  }
+}
+
+
+exports.findDocByName=async(req,res)=>{
+  try {
+    const doc=await prisma.user.findUnique({where:{Username:req.params.name},
+    include:{
+      speciality:true,
+      doctor:true
+    }})
+    res.json(doc)
+  } catch (error) {
+    throw error
+  }
+}
+exports.getBySpeciality=async(req,res)=>{
+  try {
+    const doc=await prisma.user.findMany({where: {
+        specialityId: parseInt(req.params.id),
+      },
+      include:{
+        speciality:true,
+        doctor:true
+      }
+    })
+    console.log(doc);
+    res.json(doc)
+  } catch (error) {
+    console.log(error);
   }
 }
 // exports.getAllUsers = async (req, res) => {
