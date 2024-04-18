@@ -11,6 +11,7 @@ generator client {
 
 
 
+
 model user {
 
   id          Int      @id @default(autoincrement()) 
@@ -20,26 +21,34 @@ model user {
   Email       String   @unique
   Password    String
   UserType    String
-  Speciality  String
   PhoneNumber String
   imageUrl    String
+  doctorId   Int
+   doctor Doctor @relation(fields: [doctorId], references: [id])
+  specialityId   Int   
+
+  speciality Speciality @relation(fields: [specialityId], references: [id])
+}
+
+model Speciality {
+  id          Int     @id @default(autoincrement())
+  name        String
+  doctors user[]
+}
+
+model Doctor {
+  id           Int        @id @default(autoincrement())
+ doctors user[]
+
+
 }
 
 
 
-model doctor {
-
-  id          Int      @id @default(autoincrement())
-  // FirstName   String
-  // LastName    String
-  // Username    String   
-  // Email       String   @unique
-  // Password    String
-  // PhoneNumber String?
-  // imageUrl    String   @default("")
-  // Speciality  String
+model message {
+  id      Int     @id @default(autoincrement())
+  content String
 }
-
 
 
 model appointment {
