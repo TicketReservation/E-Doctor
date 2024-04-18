@@ -7,7 +7,7 @@ import styles from "./chat.module.css"
 import Footer from '../footer/footer';
 import Navbar from '../navbar/navbar';
 
-const ENDPOINT = 'http://localhost:4000'; 
+const ENDPOINT = 'http://localhost:3001'; 
 
 function Chat() {
   const [messages, setMessages] = useState([]);
@@ -30,7 +30,14 @@ function Chat() {
       console.error('Socket connection error:', error);
     });
 
-    socket.on('new_message', receiveMessage);
+    // socket.on('send_message', receiveMessage);
+    
+    socket.on('receive_message', (s) => {
+      console.log('====================================');
+      console.log("data",s);
+      console.log('====================================');
+      setMessages(prevMessages => [...prevMessages, s]);
+    });
 
     return () => {
       if (socket) {

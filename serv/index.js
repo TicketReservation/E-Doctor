@@ -1,7 +1,6 @@
 const express = require("express");
 const cors = require("cors");
-const axios = require("axios");
-const { Server } = require('socket.io');
+
 require('./Model/index.js');
 
 const doctorRouter = require('./routes/doctor.router.js');
@@ -20,8 +19,7 @@ const CommentRouter = require('./routes/blogComments.router');
 const fileUpload = require('express-fileupload');
 const app = express();
 const PORT = 4000
-const http = require('http');
-const server = http.createServer(app);
+
 
 
 
@@ -50,30 +48,6 @@ app.use('/api/products', ProductRouter);
 app.post('/api/sendmail', nodeMailer.sendMail);
 
 
-const io = new Server(server, {
-  cors: {
-    origin: "http://localhost:4000",
-    methods: ["GET", "POST"],
-  },
-});
-
-
-io.on("connection", (socket) => {
-  console.log(`User Connected: ${socket.id}`);
-
-  socket.on("join_room", (data) => {
-    socket.join(data);
-    console.log(`User with ID: ${socket.id} joined room: ${data}`);
-  });
-
-  socket.on("send_message", (data) => {
-    socket.to(data.room).emit("receive_message", data);
-  });
-
-  socket.on("disconnect", () => {
-    console.log("User Disconnected", socket.id);
-  });
-});
 
 
 
