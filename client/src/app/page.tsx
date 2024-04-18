@@ -1,13 +1,20 @@
 "use client"
 import Image from "next/image";
-import DoctorProfilePage from "./DoctorProfile/DoctorProfilePage";
-import DoctorPage from "./Doctor/doctor";
-import DoctorDashboard from "./DoctorDashboard/doctordashboard";
+import DoctorRates from "./doctorrates/doctorrates";
+import Navbar from "./navbar/navbar";
+import ContactUs from "./contact/page";
+import Footer from "./footer/footer";
+import Reviews from "./reviews/reviews";
+import doctordashboard from "./DoctorDashboard/doctordashboard";
 export default function Home() {
   return ( 
-    // <DoctorProfilePage/>
-    // <DoctorPage/>
-    <DoctorDashboard/>
-  )
+    <div>
+      {/* <Navbar/> */}
+      {/* <Reviews/> */}
+      {/* <DoctorRates/> */}
+      {/* <ContactUs/> */}
+      {/* <Footer/> */}
+      <doctordashboard/>
+       </div>
+ )
   }
-

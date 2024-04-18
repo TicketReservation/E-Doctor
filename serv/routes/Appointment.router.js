@@ -1,7 +1,7 @@
 
 const express = require('express');
 const router = express.Router();
-const AppointmentController = require('../controllers/Appointment.controller.js');
+const AppointmentController = require('../controllers/Appointment.controller');
 
 router.get('/', AppointmentController.getAllAppointment);
 
