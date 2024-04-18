@@ -16,6 +16,7 @@ const nodeMailer = require('./controllers/nodeMailer');
 const BlogRouter = require('./routes/Blog.routes');
 const ProductRouter = require('./routes/product.router');
 const CommentRouter = require('./routes/blogComments.router');
+const specialityRouter=require("./routes/specialityRouter.js")
 const fileUpload = require('express-fileupload');
 const http = require('http');
 const app = express();
@@ -38,6 +39,7 @@ app.use('/api/doctors', doctorRouter);
 app.use("/api/Appointment", AppointmentRouter);
 app.use("/api/ratingComments", RatingCommentsRouter);
 app.use("/api/users", userRouter);
+app.use('/api/doctor',specialityRouter)
 app.use('/api/blogs', BlogRouter);
 app.use('/api/comments', CommentRouter);
 app.use('/api/products', ProductRouter);

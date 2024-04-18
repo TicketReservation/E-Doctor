@@ -1,7 +1,8 @@
 import { configureStore } from '@reduxjs/toolkit'
 import signUpSlice from "./features/signUpSlice"
 import signInSlice from './features/signInSlice'
-import {getBlogsReducer, postBlogsReducer} from './features/blogSlice' 
+import {getBlogsReducer, postBlogsReducer} from './features/blogSlice'
+import specialitySlice from "./features/specialitySlice"
 import produtSlice from "./features/productSlice"
 
 export const makeStore = () => {
@@ -11,7 +12,8 @@ export const makeStore = () => {
         userSignIn:signInSlice,
         getBlogs:getBlogsReducer,
         postBlogs:postBlogsReducer,
-        products:produtSlice
+        products:produtSlice,
+        speciality:specialitySlice
     },
   })
 }

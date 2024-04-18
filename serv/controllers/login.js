@@ -1,5 +1,3 @@
-// authController.js
-
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const { PrismaClient } = require('@prisma/client');
@@ -7,39 +5,46 @@ const prisma = new PrismaClient();
 
 
 exports.register = async (req, res) => {
-    try {
-        const { UserType, Username, Email, Password, PhoneNumber, FirstName, LastName, Speciality, imageUrl } = req.body;
+  const {Username,UserType, Email,Password, PhoneNumber, FirstName, LastName, specialityId, imageUrl } = req.body;
+  try {
+        if (UserType==='doctor'){
+  console.log("hello")
         if (!Password) {
-            return res.status(400).json({ error: 'Password is required' });
+          return res.status(400).json({ error: 'Password is required' });
         }
+  
+        const hashedPassword = await bcrypt.hash(Password, 10);
+        const doctor = await prisma.doctor.create({
+        });
+        const user = await prisma.user.create({
+          data: {doctorId:doctor.id, Email, Password: hashedPassword, PhoneNumber, FirstName, LastName, imageUrl,UserType:"doctor" ,specialityId,Username},
+        });
+  
+      return  res.status(201).json(user );
+      }else{
 
+        if (!Password) {
+          return res.status(400).json({ error: 'Password is required' });
+        }
         const hashedPassword = await bcrypt.hash(Password, 10);
         const user = await prisma.user.create({
-            data: {
-                UserType,
-                Username,
-                Email,
-                Password: hashedPassword,
-                PhoneNumber,
-                FirstName,
-                LastName,
-                Speciality,
-                imageUrl
-            }
+          data: {UserType, Email, Password: hashedPassword, PhoneNumber, FirstName, LastName, imageUrl ,Username},
         });
-        res.status(201).json({ user });
-    } catch (error) {
-        console.error(error);
-        res.status(500).json({ error: 'Registration failed' });
+  
+      return  res.status(201).json( user );
+        }
+      }
+  
+    catch (error) {
+      console.error(error);
+      res.status(500).json({ error: 'Registration failed' });
     }
-};
-
-
+  };
 exports.login = async (req, res) => {
     try {
         const { Email, Password } = req.body;
         const user = await prisma.user.findUnique({ where: { Email:Email } });
-        
+
         if (!user) {
             return res.status(401).json({ error: 'Invalid credentials' });
         }
@@ -59,6 +64,76 @@ exports.login = async (req, res) => {
         console.error(error);
         res.status(500).json({ error: 'Login failed' });
     }
+
+}
+exports.finAllDoc=async(req,res)=>{
+  try {
+    const docs=await prisma.user.findMany({where:{UserType:"doctor"},
+    include:{
+      speciality:true,
+      doctor:true
+    }
+  })
+  res.json(docs)
+  } catch (error) {
+    throw error
+  }
+}
+
+<<<<<<< HEAD
+
+exports.findDocByName=async(req,res)=>{
+  try {
+    const doc=await prisma.user.findUnique({where:{Username:req.params.name},
+    include:{
+      speciality:true,
+      doctor:true
+    }})
+    res.json(doc)
+  } catch (error) {
+    throw error
+  }
+}
+exports.getBySpeciality=async(req,res)=>{
+  try {
+    const doc=await prisma.user.findMany({where: {
+        specialityId: parseInt(req.params.id),
+      },
+      include:{
+        speciality:true,
+        doctor:true
+      }
+    })
+    console.log(doc);
+    res.json(doc)
+  } catch (error) {
+    console.log(error);
+  }
+}
+// exports.getAllUsers = async (req, res) => {
+//     try {
+//         const users = await prisma.user.findMany();
+//         res.status(200).json({ users });
+//     } catch (error) {
+//         console.error(error);
+//         res.status(500).json({ error: 'Failed to fetch users' });
+//     }
+// };
+// exports.getOne = async (req, res) => {
+//     try {
+//         const name = req.params.name;
+//         const user = await prisma.user.findUnique({ where: { FirstName: name } });
+//         if (user) {
+//             res.status(200).json({ user });
+//         } else {
+//             res.status(404).json({ message: 'User not found' });
+//         }
+//     } catch (error) {
+//         console.error('Error:', error);
+//         res.status(500).json({ error: 'Internal Server Error' });
+//     }
+// };
+=======
 };
 exports.getAllUsers = async (req, res) => {
     try {
@@ -69,3 +144,5 @@ exports.getAllUsers = async (req, res) => {
         res.status(500).json({ error: 'Failed to fetch users' });
     }
 };
+
+>>>>>>> 2c7278e10356c8a130e685a42b40bb05c58aeb78

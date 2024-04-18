@@ -1,5 +1,9 @@
 import { createSlice, createAsyncThunk, isRejectedWithValue } from "@reduxjs/toolkit"
 import axios from "axios"
+import {User,Doctor,AppointmentStatus} from "../../types/types"
+
+
+
 interface Appointment {
     id: number;
     appointmentTime: Date;
@@ -11,13 +15,16 @@ interface Appointment {
   
     doctor: Doctor;
   
-  
-    enum AppointmentStatus: {
-        Pending,
-        Confirmed,
-        Cancelled
-    }
 }
+    // enum AppointmentStatus: {
+    //     Pending,
+    //     Confirmed,
+    //     Cancelled
+    // }
+
+
+
+
 
 
 const initialState = {
