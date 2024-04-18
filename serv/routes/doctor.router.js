@@ -9,6 +9,7 @@ router.get('/:id', doctorController.getDoctorById);
 
 router.post("/speciality",doctorController.speciality)
 
+
 router.post('/', doctorController.createDoctor);
 
 router.put('/:id', doctorController.updateDoctor);

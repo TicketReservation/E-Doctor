@@ -17,8 +17,14 @@
     margin-left: 30px;
     border-radius: 5px;
     border: 1px solid #007E85;
+    cursor: pointer;
   }
-  .filter_dropdown:focus{}
+  .filter_dropdown:focus{
+    border-color: #007E85;
+    outline: none;
+    cursor: pointer;
+  }
+  
   .filter_alignSpan{
     display: flex;
   }

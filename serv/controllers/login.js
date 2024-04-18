@@ -64,7 +64,20 @@ exports.login = async (req, res) => {
         console.error(error);
         res.status(500).json({ error: 'Login failed' });
     }
-};
+}
+exports.finAllDoc=async(req,res)=>{
+  try {
+    const doc=await prisma.user.findMany({where:{UserType:"doctor"},
+    include:{
+      speciality:true,
+      doctor:true
+    }
+  })
+  res.json(doc)
+  } catch (error) {
+    throw error
+  }
+}
 // exports.getAllUsers = async (req, res) => {
 //     try {
 //         const users = await prisma.user.findMany();
