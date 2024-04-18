@@ -5,7 +5,7 @@ import Navbar from "./navbar/navbar";
 import ContactUs from "./contact/page";
 import Footer from "./footer/footer";
 import Reviews from "./reviews/reviews";
-import doctordashboard from "./DoctorDashboard/doctordashboard";
+import Doctordashboard from "./DoctorDashboard/doctordashboard";
 export default function Home() {
   return ( 
     <div>
@@ -14,7 +14,7 @@ export default function Home() {
       {/* <DoctorRates/> */}
       {/* <ContactUs/> */}
       {/* <Footer/> */}
-      <doctordashboard/>
+      <Doctordashboard/>
        </div>
  )
   }
