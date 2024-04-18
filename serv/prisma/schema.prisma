@@ -10,31 +10,14 @@ generator client {
 }
 
 
-// model User {
-//   id          Int   @unique     @id @default(autoincrement())
-//   firstName   String
-//   lastName    String
-//   email       String      @unique
-//   password    String
-//   phoneNumber String
-//   imageUrl    String
-//   appointments Appointment[]
-//   ratingsComments RatingsComment[]
-//   role  Role @default(user)
-//   blogs       Blog[]
-//   doctor      Doctor  @relation(fields: [doctorId], references: [id])
-//   doctorId    Int        @unique
-//   specialityId   Int   
 
-//   speciality Speciality @relation(fields: [specialityId], references: [id])
-// }
 
 model user {
 
   id          Int      @id @default(autoincrement()) 
   FirstName   String
   LastName    String
-  Username    String   @unique
+  Username    String   
   Email       String   @unique
   Password    String
   UserType    String
@@ -52,17 +35,11 @@ model Speciality {
   name        String
   doctors user[]
 }
-// enum speciality{
-//   Cardiologist
-//   Pediatrician
-//   Surgeon
-//   Radiologist
-//   general
-//   dentiste
-// }
+
 model Doctor {
   id           Int        @id @default(autoincrement())
  doctors user[]
+
 
 }
 
@@ -72,6 +49,8 @@ model message {
   id      Int     @id @default(autoincrement())
   content String
 }
+
+
 model appointment {
   id                   Int      @id @default(autoincrement())
   AppointmentTime      DateTime
@@ -82,6 +61,17 @@ model appointment {
 }
 
 
+model message {
+  id      Int     @id @default(autoincrement())
+  content String
+}
+model conversation {
+  id    Int     @id @default(autoincrement())
+}
+
+model room {
+  id    Int     @id @default(autoincrement())
+}
 
 model ratingsComments {
 
