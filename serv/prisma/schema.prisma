@@ -22,7 +22,7 @@ model user {
   UserType    String
   Speciality  String
   PhoneNumber String
-  ImageUrl    String
+  imageUrl    String
 }
 
 
@@ -36,7 +36,7 @@ model doctor {
   Email       String   @unique
   Password    String
   PhoneNumber String?
-  ImageUrl    String   @default("")
+  imageUrl    String   @default("")
   Speciality  String
 }
 
@@ -86,8 +86,8 @@ model Blog {
   id       Int      @id @default(autoincrement())
   Title    String
   Text     String
-  ImageUrl String?
-  // comments Comment[]
+  imageUrl String?
+//   comments Comment[]
 }
 
 model Comment {
@@ -99,7 +99,7 @@ model Comment {
 
   blogId    Int
   userId    Int
-  // blog      blog     @relation(fields: [blogId], references: [id], map: "Comment_blogId_fkey")
+//   blog      blog     @relation(fields: [blogId], references: [id], map: "Comment_blogId_fkey")
 
   @@index([blogId], map: "Comment_blogId_fkey")
 }
@@ -117,7 +117,7 @@ model product {
 
   name     String
   price    Decimal
-  ImageUrl String?
+  imageUrl String?
   Category String
 
 }

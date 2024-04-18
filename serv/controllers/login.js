@@ -5,6 +5,7 @@ const jwt = require('jsonwebtoken');
 const { PrismaClient } = require('@prisma/client');
 const prisma = new PrismaClient();
 
+
 exports.register = async (req, res) => {
     try {
         const { UserType, Username, Email, Password, PhoneNumber, FirstName, LastName, Speciality, imageUrl } = req.body;
@@ -32,6 +33,7 @@ exports.register = async (req, res) => {
         res.status(500).json({ error: 'Registration failed' });
     }
 };
+
 
 exports.login = async (req, res) => {
     try {

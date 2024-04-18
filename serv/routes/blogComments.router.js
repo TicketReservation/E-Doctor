@@ -1,7 +1,7 @@
 
 const express = require('express');
 const router = express.Router();
-const CommentsController = require('../controllers/blogCommentsController.js');
+const CommentsController = require('../controllers/blogCommentsController');
 
 router.get('/all', CommentsController.getAllComments);
 

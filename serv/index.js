@@ -3,16 +3,16 @@ const cors = require("cors");
 const axios = require("axios");
 // UNCOMMENT THE DATABASE YOU'D LIKE TO USE
  require('./Model/index.js');
-// const doctorRouter = require('./routes/doctor.router');
-// const AppointmentRouter = require('./routes/Appointment.router');
+const doctorRouter = require('./routes/doctor.router.js');
+const AppointmentRouter = require('./routes/Appointment.router');
 const RatingCommentsRouter = require('./routes/ratingComments.router');
-// const messagesRouter = require('./routes/messages.router')
-// const payment =require ('./controllers/Payment')
-// const userRouter = require('./routes/userrouters');
-// const Authentication = require('./routes/loginrouters');
-// const nodeMailer = require('./controllers/nodeMailer');
+const messagesRouter = require('./routes/messages.router')
+const payment =require ("./routes/payment.js");
+const userRouter = require('./routes/userrouters');
+const Authentication = require('./routes/loginrouters');
+const nodeMailer = require('./controllers/nodeMailer');
 const cloudinary = require('cloudinary');
-// const BlogRouter = require('./routes/Blog.routes');
+const BlogRouter = require('./routes/Blog.routes');
 const ProductRouter = require('./routes/product.router');
 const CommentRouter = require('./routes/blogComments.router');
 const fileUpload = require('express-fileupload');
@@ -42,7 +42,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.static(__dirname + "/../client/dist"));
 app.use(cors())
 // app.use('/api/messages', messagesRouter);
-// app.use('/api/payment', payment);
+app.use('/api/payment', payment);
 
 // app.post('/api/add', async (req, res) => {
 //   const url = "https://developers.flouci.com/api/generate_payment";
@@ -80,14 +80,14 @@ app.use(cors())
 //     res.status(500).send("Internal Server Error");
 //   }
 // });
-// app.use("/api/auth", Authentication);
-// app.use('/api/doctors', doctorRouter);
-// app.use("/api/Appointment", AppointmentRouter);
-// app.use("/api/ratingComments", RatingCommentsRouter);
-// app.use("/api/users", userRouter);
-// app.use('/api/blogs', BlogRouter);
-// app.use('/api/comments', CommentRouter);
-// app.use('/api/products', ProductRouter);
+app.use("/api/auth", Authentication);
+app.use('/api/doctors', doctorRouter);
+app.use("/api/Appointment", AppointmentRouter);
+app.use("/api/ratingComments", RatingCommentsRouter);
+app.use("/api/users", userRouter);
+app.use('/api/blogs', BlogRouter);
+app.use('/api/comments', CommentRouter);
+app.use('/api/products', ProductRouter);
 app.post('/api/upload', async (req, res) => {
   try {
     const fileStr = req.files.file.data.toString('base64'); 
