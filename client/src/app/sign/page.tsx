@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import { useRouter } from "next/router"
 import  Link from "next/link"
 import axios from "axios";
-// import "../css/signup.css";
+import styles from "./sign.module.css"
 import Navbar from "../navbar/navbar";
 import Dropzone from 'react-dropzone';
 import {useAppDispatch ,  useAppSelector} from '../lib/hooks';
@@ -44,7 +44,7 @@ const Signup = () => {
       );
       console.log(response.data);
       setError("");
-      window.location.href = "/doctor";
+      window.location.href = "/";
     } catch (err) {
       setError(err.response.data.error);
       console.log(err.response.data.error);
@@ -52,10 +52,10 @@ const Signup = () => {
   };
   const handleImageDrop = async (acceptedFiles) => {
     const formData = new FormData();
-    formData.append("file", acceptedFiles[0]); // Make sure the file is the first item in the acceptedFiles array
+    formData.append("file", acceptedFiles[0]); 
 
     try {
-      setIsLoading(true); // Set isLoading to true when image upload starts
+      setIsLoading(true); 
       const response = await axios.post("http://localhost:4000/api/upload", formData, {
         headers: {
           "Content-Type": "multipart/form-data", // Add this line
@@ -85,28 +85,28 @@ const Signup = () => {
               />
             </div>
             <div>
-            <input
+            <input className={styles.ppt}
               type="text"
               placeholder="Username"
               value={Username}
               onChange={(e) => setUsername(e.target.value)}
               required
             />
-            <input
+            <input className={styles.ppt}
               type="text"
               placeholder="First Name"
               value={FirstName}
               onChange={(e) => setFirstName(e.target.value)}
               required
             />
-            <input
+            <input className={styles.ppt}
               type="text"
               placeholder="Last Name"
               value={LastName}
               onChange={(e) => setLastName(e.target.value)}
               required
             />
-            <input
+            <input className={styles.ppt}
               type="text"
               placeholder="Phone Number"
               value={PhoneNumber}
@@ -114,8 +114,8 @@ const Signup = () => {
               required
             />
           </div>
-          <div>
-            <input
+          <div> 
+            <input className={styles.ppt}
               type="email"
               placeholder="Email"
               value={Email}
@@ -124,7 +124,7 @@ const Signup = () => {
             />
           </div>
           <div>
-            <input
+            <input className={styles.ppt}
               type="password"
               placeholder="Password"
               value={Password}
@@ -134,7 +134,7 @@ const Signup = () => {
 
             <div>
               {UserType === "Doctor" && (
-                <input
+                <input className={styles.ppt}
                   type="text"
                   placeholder="Specialization"
                   value={Specialization}
@@ -181,7 +181,7 @@ const Signup = () => {
           <p>
             Already have an account?
              <Link href="/login">Login</Link>
-             {/* <link>login</link> */}
+           
           </p>
           <button type="submit">Sign Up</button>
         </form>

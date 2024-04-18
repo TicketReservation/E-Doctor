@@ -64,6 +64,7 @@ exports.login = async (req, res) => {
         console.error(error);
         res.status(500).json({ error: 'Login failed' });
     }
+
 }
 exports.finAllDoc=async(req,res)=>{
   try {
@@ -79,6 +80,7 @@ exports.finAllDoc=async(req,res)=>{
   }
 }
 
+<<<<<<< HEAD
 
 exports.findDocByName=async(req,res)=>{
   try {
@@ -131,3 +133,16 @@ exports.getBySpeciality=async(req,res)=>{
 //         res.status(500).json({ error: 'Internal Server Error' });
 //     }
 // };
+=======
+};
+exports.getAllUsers = async (req, res) => {
+    try {
+        const users = await prisma.user.findMany();
+        res.status(200).json({ users });
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ error: 'Failed to fetch users' });
+    }
+};
+
+>>>>>>> 2c7278e10356c8a130e685a42b40bb05c58aeb78
