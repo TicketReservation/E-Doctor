@@ -27,10 +27,10 @@ model user {
    doctor Doctor @relation(fields: [doctorId], references: [id])
   specialityId   Int   
 
-  speciality Speciality @relation(fields: [specialityId], references: [id])
+  speciality speciality @relation(fields: [specialityId], references: [id])
 }
 
-model Speciality {
+model speciality {
   id          Int     @id @default(autoincrement())
   name        String
   doctors user[]
@@ -61,10 +61,7 @@ model appointment {
 }
 
 
-model message {
-  id      Int     @id @default(autoincrement())
-  content String
-}
+
 model conversation {
   id    Int     @id @default(autoincrement())
 }
@@ -138,4 +135,3 @@ model product {
   Category String
 
 }
-

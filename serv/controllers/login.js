@@ -80,7 +80,7 @@ exports.finAllDoc=async(req,res)=>{
   }
 }
 
-};
+
 exports.getAllUsers = async (req, res) => {
     try {
         const users = await prisma.user.findMany();
