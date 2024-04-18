@@ -5,41 +5,57 @@ const prisma = new PrismaClient();
 
 
 exports.register = async (req, res) => {
-  const {Username,UserType, Email,Password, PhoneNumber, FirstName, LastName, specialityId, imageUrl } = req.body;
+  const { Username, UserType, Email, Password, PhoneNumber, FirstName, LastName, specialityId, imageUrl } = req.body;
   try {
-        if (UserType==='doctor'){
-  console.log("hello")
-        if (!Password) {
-          return res.status(400).json({ error: 'Password is required' });
-        }
-  
-        const hashedPassword = await bcrypt.hash(Password, 10);
-        const doctor = await prisma.doctor.create({
-        });
-        const user = await prisma.user.create({
-          data: {doctorId:doctor.id, Email, Password: hashedPassword, PhoneNumber, FirstName, LastName, imageUrl,UserType:"doctor" ,specialityId,Username},
-        });
-  
-      return  res.status(201).json(user );
-      }else{
-
-        if (!Password) {
-          return res.status(400).json({ error: 'Password is required' });
-        }
-        const hashedPassword = await bcrypt.hash(Password, 10);
-        const user = await prisma.user.create({
-          data: {UserType, Email, Password: hashedPassword, PhoneNumber, FirstName, LastName, imageUrl ,Username},
-        });
-  
-      return  res.status(201).json( user );
-        }
+    if (UserType === 'doctor') {
+      if (!Password) {
+        return res.status(400).json({ error: 'Password is required' });
       }
-  
-    catch (error) {
-      console.error(error);
-      res.status(500).json({ error: 'Registration failed' });
+
+      const hashedPassword = await bcrypt.hash(Password, 10);
+      const doctor = await prisma.doctor.create({});
+
+      const user = await prisma.user.create({
+        data: {
+          doctorId: doctor.id,
+          Email,
+          Password: hashedPassword,
+          PhoneNumber,
+          FirstName,
+          LastName,
+          imageUrl,
+          UserType: "doctor",
+          specialityId,
+          Username,
+        },
+      });
+
+      return res.status(201).json(user);
+    } else if (UserType.toLowerCase() === 'patient') {
+      const hashedPassword = await bcrypt.hash(Password, 10);
+
+      const user = await prisma.user.create({
+        data: {
+          Email,
+          Password: hashedPassword,
+          PhoneNumber,
+          FirstName,
+          LastName,
+          imageUrl,
+          UserType: "patient",
+          Username,
+        },
+      });
+
+      return res.status(201).json(user);
+    } else {
+      return res.status(400).json({ error: 'Invalid user type' });
     }
-  };
+  } catch (error) {
+    console.error(error);
+    return res.status(500).json({ error: 'Registration failed' });
+  }
+}
 exports.login = async (req, res) => {
     try {
         const { Email, Password } = req.body;
@@ -80,7 +96,6 @@ exports.finAllDoc=async(req,res)=>{
   }
 }
 
-<<<<<<< HEAD
 
 exports.findDocByName=async(req,res)=>{
   try {
@@ -110,39 +125,4 @@ exports.getBySpeciality=async(req,res)=>{
     console.log(error);
   }
 }
-// exports.getAllUsers = async (req, res) => {
-//     try {
-//         const users = await prisma.user.findMany();
-//         res.status(200).json({ users });
-//     } catch (error) {
-//         console.error(error);
-//         res.status(500).json({ error: 'Failed to fetch users' });
-//     }
-// };
-// exports.getOne = async (req, res) => {
-//     try {
-//         const name = req.params.name;
-//         const user = await prisma.user.findUnique({ where: { FirstName: name } });
-//         if (user) {
-//             res.status(200).json({ user });
-//         } else {
-//             res.status(404).json({ message: 'User not found' });
-//         }
-//     } catch (error) {
-//         console.error('Error:', error);
-//         res.status(500).json({ error: 'Internal Server Error' });
-//     }
-// };
-=======
-};
-exports.getAllUsers = async (req, res) => {
-    try {
-        const users = await prisma.user.findMany();
-        res.status(200).json({ users });
-    } catch (error) {
-        console.error(error);
-        res.status(500).json({ error: 'Failed to fetch users' });
-    }
-};
 
->>>>>>> 2c7278e10356c8a130e685a42b40bb05c58aeb78
