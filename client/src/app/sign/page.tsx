@@ -58,6 +58,9 @@ const Signup = () => {
       setError("");
       window.location.href = "/";
     } catch (err) {
+      console.log('====================================');
+      console.log(err);
+      console.log('====================================');
       setError(err.response.data.error);
       console.log(err.response.data.error);
     }
@@ -145,7 +148,7 @@ const Signup = () => {
             />
 
             <div>
-              {UserType === "Doctor" && (
+              {UserType === "doctor" && (
                 
                 <select    onChange={(e) => {
                   console.log(e.target.value);
@@ -153,9 +156,9 @@ const Signup = () => {
                  
                 }}
                  name="Speciality" id="Speciality" className={styles.filter_dropdown}>
-                <option value="speciality">Speciality</option>
+                {/* <option value="speciality">Speciality</option> */}
                 {speciality.map((e:Speciality,i:number)=>{
-                  return <option key={i}>
+                  return <option value={e.id}  key={i}>
                     {e.name}
                     </option>
                 })}
@@ -176,7 +179,7 @@ const Signup = () => {
                   border: "1px solid #ccc",
                 }}
               >
-                <option value="Doctor">Doctor</option>
+                <option value="doctor">Doctor</option>
                 <option value="Patient">Patient</option>
               </select>
               {/* <Dropzone onDrop={handleImageDrop}>

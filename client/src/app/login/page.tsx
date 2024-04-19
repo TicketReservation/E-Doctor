@@ -32,7 +32,7 @@ const Login = ({ login, loginFailure, error }) => {
   
 
   const handleRedirect = (userType) => {
-    if (userType === 'Doctor') {
+    if (userType === 'doctor') {
       window.location.href = "/doctor";
     } else if (userType !== 'Doctor') {
       window.location.href = "/";

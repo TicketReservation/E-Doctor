@@ -24,7 +24,7 @@ exports.register = async (req, res) => {
           LastName,
           imageUrl,
           UserType: "doctor",
-          specialityId,
+          specialityId:parseInt(specialityId) ,
           Username,
         },
       });
