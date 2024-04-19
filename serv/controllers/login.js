@@ -57,21 +57,11 @@ exports.register = async (req, res) => {
   }
 }
 
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
+
   exports.login = async (req, res) => {
     try {
         const { Email, Password } = req.body;
-        const user = await prisma.user.findUnique({ where: { Email:Email } });
+        const user = await prisma.user.findUnique({ where: { email:Email } });
 
         if (!user) {
             return res.status(401).json({ error: 'Invalid credentials' });
@@ -137,4 +127,3 @@ exports.getBySpeciality=async(req,res)=>{
     console.log(error);
   }
 }
-﻿

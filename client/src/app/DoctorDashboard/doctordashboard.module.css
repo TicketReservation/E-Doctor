@@ -67,7 +67,7 @@
     font-weight: 400;
     font-size: 32.33px;
     line-height: 45.5px;
-    color : linear-gradient(#FE4575 100%,#5FAA03 100%)
+    color : linear-gradient(to left, #FE4575 100%,#5FAA03 100%)
 }
 
 .drstat {

@@ -1,20 +1,32 @@
-"use client"
-import Link from 'next/link'
-import Image from 'next/image'
-import styles from './doctordashboard.module.css'
-import imgdr from '../img/49b174422a00e03654190f9be2651ed6.png'
-import Calendar from 'react-calendar'
+import React, { useState, useEffect } from 'react';
+import Link from 'next/link';
+import Image from 'next/image';
+import Calendar from 'react-calendar';
 import 'react-calendar/dist/Calendar.css';
-import 'semantic-ui-css/semantic.min.css'
-import { FaSearch } from 'react-icons/fa'
-import {fetchAppointment} from '../lib/features/appointment'
+import 'semantic-ui-css/semantic.min.css';
+import { FaSearch } from 'react-icons/fa';
+import { fetchAppointments } from '../lib/features/appointment';
 import { useAppDispatch, useAppSelector } from '../lib/hooks';
-
+import styles from './doctordashboard.module.css';
+import imgdr from '../img/49b174422a00e03654190f9be2651ed6.png';
 
 const Doctordashboard = () => {
-  const dispatch=useAppDispatch()
-  const fetch=useAppSelector(state=>state.appointment.appointment)
-  console.log(fetch)
+  const dispatch = useAppDispatch();
+  const appointments = useAppSelector(state => state.appointment.appointment);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    dispatch(fetchAppointments())
+      .then(() => setLoading(false))
+      .catch(error => {
+        console.error('Error fetching appointments:', error);
+        setLoading(false);
+      });
+  }, [dispatch]);
+console.log(appointments)
+  
+
+
   return (
     <div className= {styles.doctordashboard_conainer} >
         <div className= {styles.rectangle_container}>
@@ -23,7 +35,7 @@ const Doctordashboard = () => {
       <input className={styles.dashborddrsearch} type="text" placeholder="Search" />
       <FaSearch className={styles.searchIcon} />
     </div>
-      <h1 className={styles.drsalutation}>Good Morning <span className={styles.drname}></span> !</h1>
+      <h1 className={styles.drsalutation}>Good Morning <span className={styles.drname}>Dr.</span> !</h1>
       
       <div className={styles.drstat}>
     <h3>Visits for today {}</h3>
