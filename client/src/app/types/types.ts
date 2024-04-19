@@ -24,3 +24,8 @@ export interface User{
         speciality: Speciality,
         doctor:Doctor
       }
+export interface AppointmentStatus {
+    Pending:any,
+    Confirmed:any,
+    Cancelled:any
+}
