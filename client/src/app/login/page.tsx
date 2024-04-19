@@ -24,17 +24,15 @@ const Login = ({ login, loginFailure, error }) => {
       localStorage.setItem("user", JSON.stringify(user)); // Store user object as a string
       login({ user, token });
       handleRedirect(user.UserType);
-      console.log('====================================');
-console.log(user.UserType);
-console.log('====================================');
       console.log(response.data);
     } catch (error) {
       loginFailure(error.response.data.error);
     }
   };
+  
 
   const handleRedirect = (userType) => {
-    if (userType === 'Doctor') {
+    if (userType === 'doctor') {
       window.location.href = "/doctor";
     } else if (userType !== 'Doctor') {
       window.location.href = "/";

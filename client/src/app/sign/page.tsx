@@ -4,7 +4,7 @@ import { useRouter } from "next/router"
 import  Link from "next/link"
 import axios from "axios";
 import styles from "./sign.module.css"
-import Navbar from "../navbar/navbar";
+import Navbar from "../navbar/page";
 import Dropzone from 'react-dropzone';
 import {useAppDispatch ,  useAppSelector} from '../lib/hooks';
 import {specialityAsync} from "../lib/features/specialitySlice" 
@@ -79,10 +79,10 @@ const Signup = () => {
       const imageUrl = response.data.imageUrl;
       console.log(imageUrl);
       setImage(imageUrl);
-      setIsLoading(false); // Set isLoading to false when image upload is complete
+      setIsLoading(false); 
     } catch (error) {
       console.error(error);
-      setIsLoading(false); // Set isLoading to false when image upload fails
+      setIsLoading(false); 
     }
   };
   return (
