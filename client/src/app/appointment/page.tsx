@@ -1,3 +1,4 @@
+"use client"
 import React, { useState,useEffect } from 'react';
 import styles from './appointment.module.css';
 import Calendar from 'react-calendar'; 

@@ -1,0 +1,92 @@
+.Container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+    background-color: #f5f5f5;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    background-color: #ff0000;
+}
+
+.Title {
+    font-size: 24px;
+    margin-bottom: 20px;
+    color: #007E85;
+}
+
+.SubTitle {
+    font-size: 20px;
+    margin-bottom: 10px;
+    color: #555;
+}
+
+.TableContainer {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.Table {
+    flex: 1;
+    margin-right: 20px;
+}
+
+.TableRow {
+    display: flex;
+    align-items: center;
+    margin-bottom: 5px;
+}
+
+.TableCell {
+    font-size: 16px;
+    margin-right: 10px;
+    font-weight: bold;
+    align-self: center;
+}
+
+.DoctorTable {
+    background-color: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.DoctorTableRow {
+    background-color: #f8f8f8;
+    padding: 10px;
+    border-radius: 8px;
+}
+
+.DoctorTableCell {
+    font-weight: bold;
+}
+
+.ActionCell {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+}
+
+.BanButton {
+    background-color: #ff0000;
+    color: #ffffff;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 4px;
+    cursor: pointer;
+    float: right;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+}
+
+.ChartContainer {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+}
+
+.ChartContainer { display: flex;
+    justify-content: space-between;
+    margin-top: 20px;   }
+   
