@@ -1,7 +1,8 @@
+"use client"
 import React from 'react';
-// import Navbar from './Navbar';
-// import Footer from './footer/Footer';
-// import Reviews from './Reviews';
+import Navbar from '../navbar/page';
+import Footer from '../footer/footer';
+import Reviews from '../reviews/reviews';
 import ReactStars from 'react-stars';
 import styles from "./doctorrates.module.css"
 
@@ -12,11 +13,11 @@ import styles from "./doctorrates.module.css"
 const DoctorRates = () => {
     return (
         <div>
-            {/* <Navbar /> */}
-
+            <Navbar />
+            <Reviews />
             <div className={styles.inputContainerdocrates}>
                 <h1 style={{ textAlign: 'center' }}>Doctor Rates</h1>
-                {/* <Reviews /> */}
+             
                 <h1 style={{ textAlign: 'center' }}>Write a Review</h1>
                 <form>
                     <div className="form-group">

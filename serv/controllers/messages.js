@@ -6,21 +6,29 @@ const getMessages = async (req, res) => {
         const messages = await prisma.message.findMany();
         res.status(200).json(messages);
     } catch (error) {
-        console.error('Error fetching messages:', error);
+        console.log('Error fetching messages:', error);
         res.status(500).json({ error: 'Failed to fetch messages' });
     }
 };
 
 const postMessage = async (req, res) => {
     try {
-        const body = req.body;
-        const message = await prisma.message.create({ data: body });
+        const { content } = req.body;
+
+        const message = await prisma.message.create({
+            data: {
+                content: content 
+            }
+        });
+
         res.status(201).json(message);
     } catch (error) {
         console.error('Error sending message:', error);
         res.status(500).json({ error: 'Failed to send message' });
     }
 };
+
+
 
 const deleteMessage = async (req, res) => {
     try {

@@ -1,7 +1,7 @@
 
 datasource db {
   provider = "mysql"
-  url      = "mysql://root:root@localhost:3306/doctor"
+  url      = "mysql://root:dhia2002@localhost:3306/doctor"
 
 }
 
@@ -44,10 +44,10 @@ model user {
    doctor Doctor @relation(fields: [doctorId], references: [id])
   specialityId   Int   
 
-  speciality Speciality @relation(fields: [specialityId], references: [id])
+  speciality speciality @relation(fields: [specialityId], references: [id])
 }
 
-model Speciality {
+model speciality {
   id          Int     @id @default(autoincrement())
   name        String
   doctors user[]
@@ -81,6 +81,14 @@ model appointment {
   doctor               Int
 }
 
+
+model conversation {
+  id    Int     @id @default(autoincrement())
+}
+
+model room {
+  id    Int     @id @default(autoincrement())
+}
 
 
 model ratingsComments {
@@ -148,4 +156,3 @@ model product {
   Category String
 
 }
-

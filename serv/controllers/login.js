@@ -3,7 +3,6 @@ const jwt = require('jsonwebtoken');
 const { PrismaClient } = require('@prisma/client');
 const prisma = new PrismaClient();
 
-
 exports.register = async (req, res) => {
   const { Username, UserType, Email, Password, PhoneNumber, FirstName, LastName, specialityId, imageUrl } = req.body;
   try {
@@ -25,7 +24,9 @@ exports.register = async (req, res) => {
           LastName,
           imageUrl,
           UserType: "doctor",
-          specialityId,
+
+          specialityId:parseInt(specialityId) ,
+
           Username,
         },
       });
@@ -49,6 +50,7 @@ exports.register = async (req, res) => {
 
       return res.status(201).json(user);
     } else {
+
       return res.status(400).json({ error: 'Invalid user type' });
     }
   } catch (error) {
@@ -56,7 +58,9 @@ exports.register = async (req, res) => {
     return res.status(500).json({ error: 'Registration failed' });
   }
 }
+
 exports.login = async (req, res) => {
+
     try {
         const { Email, Password } = req.body;
         const user = await prisma.user.findUnique({ where: { Email:Email } });
@@ -137,6 +141,7 @@ exports.findDocByNameAndSpeciality = async (req, res) => {
     throw error;
   }
 }
+
 exports.getCurrentUser=async(req,res)=>{
 try {
   const user = req.user
@@ -146,21 +151,4 @@ try {
   
 }
 }
-
-// exports.getBySpeciality=async(req,res)=>{
-//   try {
-//     const doc=await prisma.user.findMany({where: {
-//         specialityId: parseInt(req.params.id),
-//       },
-//       include:{
-//         speciality:true,
-//         doctor:true
-//       }
-//     })
-//     console.log(doc);
-//     res.json(doc)
-//   } catch (error) {
-//     console.log(error);
-//   }
-// }
 
