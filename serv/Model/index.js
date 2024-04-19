@@ -13,7 +13,6 @@ async function main() {
   const  appointment= await prisma.appointment.findMany()
   const ratingsComments = await prisma.ratingsComments.findMany()
   const admin = await prisma.admin.findMany()
-  // const payments = await prisma.payment.findMany()
   const blog = await prisma.blog.findMany()
   const comment = await prisma.comment.findMany()
   const product = await prisma.product.findMany()

@@ -1,0 +1,31 @@
+.ccontainer {
+    padding-left: 220px;
+    display: flex;
+    max-width: 1200px;
+    height: 80vh;
+    margin: auto;
+    box-shadow: 0px 0px 10px #ccc;
+    border-radius: 8px;
+    overflow: hidden;
+
+  }
+    
+  .sender {
+    font-weight: bold;
+  }
+  
+  .carea {
+    width: 70%;
+    display: flex;
+    flex-direction: column;
+  }
+  .minfo {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 5px;
+  }
+  .mhistory {
+    padding:40px;
+    overflow-y: auto;
+    flex-grow: 1;
+  }
