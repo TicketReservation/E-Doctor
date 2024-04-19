@@ -1,6 +1,6 @@
 "use client"
 
-import Navbar from "../navbar/navbar";
+import Navbar from "../navbar/page";
 // import DoctorComponent from "./doctorComponent";
 import Footer from "../footer/footer";
 import React, { useState, useEffect, useRef } from "react";

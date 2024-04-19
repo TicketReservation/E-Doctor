@@ -18,7 +18,7 @@ export const nameFilterAsync=createAsyncThunk(
     "nameFilter/nameFilterAsync",
     async({id,name}:{id:number,name:string})=>{
         try {
-            const response=await axios.get(`http://localhost:4000/api/auth/${id}/${name}`)
+            const response=await axios.get(`http://localhost:4000/api/auth/filter/${id}/${name}`)
             return response.data
         } catch (error:any) {
             console.log(error)

@@ -42,7 +42,7 @@ app.use("/api/auth", Authentication);
 app.use('/api/doctors', doctorRouter);
 app.use("/api/Appointment", AppointmentRouter);
 app.use("/api/ratingComments", RatingCommentsRouter);
-// app.use("/api/users", userRouter);
+app.use("/api/users", userRouter);
 app.use('/api/doctor',specialityRouter)
 app.use('/api/blogs', BlogRouter);
 app.use('/api/comments', CommentRouter);

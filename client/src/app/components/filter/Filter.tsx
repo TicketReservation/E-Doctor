@@ -4,7 +4,7 @@ import { useAppDispatch, useAppSelector } from "../../lib/hooks"
 import { specialityAsync } from "../../lib/features/specialitySlice" 
 import { nameFilterAsync } from "../../lib/features/nameFilterSlice"
 import { useEffect, useState } from "react";
-import { Speciality } from "../../types/types";
+import { Speciality,User } from "../../types/types";
 
 const Filter = () => {
   const [view, setView] = useState("1stview");
@@ -55,7 +55,7 @@ const Filter = () => {
               {specialities.map((speciality: Speciality, i: number) => (
                 <option key={i} value={speciality.id}>{speciality.name}</option>
               ))}
-                <option key="0" value={0}>other</option>
+                <option key="0" value={0}>Speciality</option>
 
             </select>
           </span>
@@ -64,19 +64,24 @@ const Filter = () => {
           </span>
         </div>
       </div>
-      
-      {/* {view === "2ndView" && (
-        <div className={styles.filter_NameCard}>
-          <h1>Doctor name</h1>
-          <p>{nameFilter.Username}</p>
-          <h1>Doctor email</h1>
-          <p>{nameFilter.Email}</p>
-          <h1>Doctor number</h1>
-          <p>{nameFilter.PhoneNumber}</p>
-          <h1>Doctor speciality</h1>
-          {nameFilter.speciality && <p>{nameFilter.speciality.name}</p>}
-        </div>
-      )} */}
+      {view === "2ndView" && (
+  <div>
+    {
+      nameFilter?.map((e:User,i:number)=>{
+        return(
+          <div className={styles.filter_NameCard}>
+            <h4 className={styles.filter_label}>Doctor name</h4>
+            <p className={styles.filter_p}>{e.Username}</p>
+            <h4 className={styles.filter_label}>Doctor email</h4>
+            <p className={styles.filter_p}>{e.Email}</p>
+            <h4 className={styles.filter_label}>Doctor number</h4>
+            <p className={styles.filter_p}>{e.PhoneNumber}</p>
+          </div>
+        )
+      }) || []
+    }
+  </div>
+)}
     </>
   );
 };

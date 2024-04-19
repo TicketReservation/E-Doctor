@@ -5,7 +5,7 @@ import image from "./img1.png"
 import Filter from "../components/filter/Filter"
 import styles from "./home.module.css"
 import { useAppDispatch } from "../lib/hooks";
-import { Token } from '../types/types';
+// import { Token } from '../types/types';
 
 import { currentAsync } from "../lib/features/getUserSlice"
 const Home = () => {
