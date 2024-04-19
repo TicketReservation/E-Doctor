@@ -1,4 +1,3 @@
-
 datasource db {
   provider = "mysql"
   url      = "mysql://root:dhia2002@localhost:3306/doctor"
@@ -12,12 +11,12 @@ generator client {
 
 
 
-model user {
+model User {
 
   id          Int      @id @default(autoincrement()) 
   FirstName   String
   LastName    String
-  Username    String   
+  Username    String
   Email       String   @unique
   Password    String
   UserType    String
@@ -25,7 +24,7 @@ model user {
   imageUrl    String
   doctorId   Int
    doctor Doctor @relation(fields: [doctorId], references: [id])
-  specialityId   Int   
+  specialityId   Int
 
   speciality speciality @relation(fields: [specialityId], references: [id])
 }
@@ -42,22 +41,30 @@ model Doctor {
 
 
 }
-
-
-
 model message {
   id      Int     @id @default(autoincrement())
   content String
 }
 
 
-model appointment {
-  id                   Int      @id @default(autoincrement())
-  AppointmentTime      DateTime
-  // Status                AppointmentStatus @default(Pending)
+model Appointment {
+  id                   Int              @id @default(autoincrement())
+  appointmentTime      DateTime
+  status               AppointmentStatus @default(Pending)
 
-  AppointmentDepartment String?
-  doctor               Int
+  appointmentDepartment String?
+
+  patient              User             @relation("PatientAppointments", fields: [patientID], references: [id])
+  patientID            Int
+
+  doctor               Doctor           @relation(fields: [doctorID], references: [id])
+  doctorID             Int
+}
+
+enum AppointmentStatus {
+  Pending
+  Confirmed
+  Cancelled
 }
 
 
@@ -94,8 +101,6 @@ model Payments {
   Amount      Decimal
   PaymentDate DateTime
 }
-
-
 model Blog {
   id       Int      @id @default(autoincrement())
   Title    String
