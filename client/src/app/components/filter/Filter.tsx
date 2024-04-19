@@ -65,17 +65,17 @@ const Filter = () => {
         </div>
       </div>
       {view === "2ndView" && (
-  <div className={styles.filter_NameCard}>
+  <div>
     {
       nameFilter?.map((e:User,i:number)=>{
         return(
           <div className={styles.filter_NameCard}>
-            <h1>Doctor name</h1>
-            <p>{e.Username}</p>
-            <h1>Doctor email</h1>
-            <p>{e.Email}</p>
-            <h1>Doctor number</h1>
-            <p>{e.PhoneNumber}</p>
+            <h4 className={styles.filter_label}>Doctor name</h4>
+            <p className={styles.filter_p}>{e.Username}</p>
+            <h4 className={styles.filter_label}>Doctor email</h4>
+            <p className={styles.filter_p}>{e.Email}</p>
+            <h4 className={styles.filter_label}>Doctor number</h4>
+            <p className={styles.filter_p}>{e.PhoneNumber}</p>
           </div>
         )
       }) || []
