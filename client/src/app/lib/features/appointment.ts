@@ -1,33 +1,19 @@
 import { createSlice, createAsyncThunk, isRejectedWithValue } from "@reduxjs/toolkit"
 import axios from "axios"
-import {User,Doctor,AppointmentStatus} from "../../types/types"
+import {User,Doctor,AppointmentStatus,Appointment} from "../../types/types"
 
 
 
-interface Appointment {
-    id: number;
-    appointmentTime: Date;
-    status: AppointmentStatus;
-  
-    appointmentDepartment: string;
-  
-    patient: User;
-  
-    doctor: Doctor;
-  
+
+
+interface statetypes {
+    appointment: Appointment[],
+    loading: boolean,
+    error: string,
 }
-    // enum AppointmentStatus: {
-    //     Pending,
-    //     Confirmed,
-    //     Cancelled
-    // }
 
 
-
-
-
-
-const initialState = {
+const initialState:statetypes= {
     appointment: [],
     loading: false,
     error: "",
@@ -42,8 +28,8 @@ export const fetchAppointment = createAsyncThunk(
                 body
     
             )
-            // return response.data
-            console.log(response.data)
+            return response.data
+            // console.log(response.data)
         } catch (error) {
             console.log(error)
         }

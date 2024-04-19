@@ -7,8 +7,14 @@ import Calendar from 'react-calendar'
 import 'react-calendar/dist/Calendar.css';
 import 'semantic-ui-css/semantic.min.css'
 import { FaSearch } from 'react-icons/fa'
+import {fetchAppointment} from '../lib/features/appointment'
+import { useAppDispatch, useAppSelector } from '../lib/hooks';
 
-const doctordashboard = () => {
+
+const Doctordashboard = () => {
+  const dispatch=useAppDispatch()
+  const fetch=useAppSelector(state=>state.appointment.appointment)
+  console.log(fetch)
   return (
     <div className= {styles.doctordashboard_conainer} >
         <div className= {styles.rectangle_container}>
@@ -23,10 +29,10 @@ const doctordashboard = () => {
     <h3>Visits for today {}</h3>
     <div className={styles.statdoctor}>
         <div className={styles.newpatient}>
-
+        <h3>  New Patients</h3>
         </div>
         <div className={styles.oldpatient}>
-
+      <h3>  Old Patients</h3>
         </div>
     </div>
     <div className={styles.drpicstat}>
@@ -54,4 +60,4 @@ const doctordashboard = () => {
     </div>
   )
 }
-export default doctordashboard
+export default Doctordashboard

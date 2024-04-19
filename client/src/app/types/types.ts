@@ -22,7 +22,23 @@ export interface User{
         doctor:Doctor
       }
 export interface AppointmentStatus {
-    Pending:any,
-    Confirmed:any,
-    Cancelled:any
+    Pending,
+    Confirmed,
+    Cancelled
 }
+
+
+export interface Appointment {
+    id: number;
+    appointmentTime: Date;
+    status: AppointmentStatus;
+  
+    appointmentDepartment: string;
+  
+    patient: User;
+  
+    doctor: Doctor;
+  
+}
+
+

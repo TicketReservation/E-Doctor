@@ -7,7 +7,7 @@ async function main() {
   
   const doctor = await prisma.doctor.findMany()
 
-  const speciality=await prisma.speciality.findMany()
+  // const speciality=await prisma.speciality.findMany()
   const  messages= await prisma.message.findMany()
 
   const  appointment= await prisma.appointment.findMany()
