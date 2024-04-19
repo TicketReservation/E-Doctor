@@ -5,6 +5,9 @@ export interface Speciality{
 export interface Doctor{
     id:number
 }
+export interface Token{
+    token:string
+}
 export interface User{
     
         id: number,

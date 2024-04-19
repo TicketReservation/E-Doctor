@@ -5,7 +5,7 @@ import {getBlogsReducer, postBlogsReducer} from './features/blogSlice'
 import specialitySlice from "./features/specialitySlice"
 import produtSlice from "./features/productSlice"
 import nameFilterSlice from './features/nameFilterSlice'
-
+import  currentSlice  from './features/getUserSlice'
 export const makeStore = () => {
   return configureStore({
     reducer: {
@@ -15,7 +15,8 @@ export const makeStore = () => {
         postBlogs:postBlogsReducer,
         products:produtSlice,
         speciality:specialitySlice,
-        nameFilter:nameFilterSlice
+        nameFilter:nameFilterSlice,
+        currentUser:currentSlice
     },
   })
 }

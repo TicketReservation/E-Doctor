@@ -97,32 +97,70 @@ exports.finAllDoc=async(req,res)=>{
 }
 
 
-exports.findDocByName=async(req,res)=>{
+exports.findDocByNameAndSpeciality = async (req, res) => {
   try {
-    const doc=await prisma.user.findUnique({where:{Username:req.params.name},
-    include:{
-      speciality:true,
-      doctor:true
-    }})
-    res.json(doc)
-  } catch (error) {
-    throw error
-  }
-}
-exports.getBySpeciality=async(req,res)=>{
-  try {
-    const doc=await prisma.user.findMany({where: {
-        specialityId: parseInt(req.params.id),
+    const id = parseInt(req.params.id) || 0;
+    const name = req.params.name || "";
+
+    console.log("ID:", id);
+    console.log("Name:", name);
+
+    let query = {};
+    if (id) {
+      query.specialityId = id;
+    }
+    if (name) {
+      query.OR = [
+        {
+          FirstName: {
+            contains: name,
+          },
+        },
+        {
+          LastName: {
+            contains: name,
+          },
+        },
+      ];
+    }
+
+    const docs = await prisma.user.findMany({
+      where: query,
+      include: {
+        speciality: true,
+        doctor: true,
       },
-      include:{
-        speciality:true,
-        doctor:true
-      }
-    })
-    console.log(doc);
-    res.json(doc)
+    });
+
+    res.send(docs);
   } catch (error) {
-    console.log(error);
+    throw error;
   }
 }
+exports.getCurrentUser=async(req,res)=>{
+try {
+  const user = req.user
+  console.log("curret",user);
+  res.json(user)
+} catch (error) {
+  
+}
+}
+
+// exports.getBySpeciality=async(req,res)=>{
+//   try {
+//     const doc=await prisma.user.findMany({where: {
+//         specialityId: parseInt(req.params.id),
+//       },
+//       include:{
+//         speciality:true,
+//         doctor:true
+//       }
+//     })
+//     console.log(doc);
+//     res.json(doc)
+//   } catch (error) {
+//     console.log(error);
+//   }
+// }
 

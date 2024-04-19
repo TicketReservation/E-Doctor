@@ -2,23 +2,23 @@ import { createSlice, createAsyncThunk } from "@reduxjs/toolkit"
 import axios from "axios"
 import {User} from "../../types/types"
 
-const initialState={
+const initialState:state={
     user:[],
     loading: false,
     error:""
 }
 
 interface state{
-    user:User|[]
+    user:User[] 
     loading:boolean
-    error:""
+    error:string
 }
 
 export const nameFilterAsync=createAsyncThunk(
     "nameFilter/nameFilterAsync",
-    async(name:string)=>{
+    async({id,name}:{id:number,name:string})=>{
         try {
-            const response=await axios.get(`http://localhost:4000/api/auth/${name}`)
+            const response=await axios.get(`http://localhost:4000/api/auth/${id}/${name}`)
             return response.data
         } catch (error:any) {
             console.log(error)

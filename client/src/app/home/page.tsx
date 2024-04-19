@@ -1,8 +1,19 @@
+"use client"
+import react,{useEffect} from "react";
 import Image from "next/image"
 import image from "./img1.png"
 import Filter from "../components/filter/Filter"
 import styles from "./home.module.css"
+import { useAppDispatch } from "../lib/hooks";
+import { Token } from '../types/types';
+
+import { currentAsync } from "../lib/features/getUserSlice"
 const Home = () => {
+  const dispatch=useAppDispatch()
+  useEffect(() =>{
+    const token=localStorage.getItem("token")|| ""
+    dispatch(currentAsync({token}));
+  },[])
   return (
     <div className={styles.home_container}>
     <div>
