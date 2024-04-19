@@ -1,73 +1,60 @@
 datasource db {
   provider = "mysql"
   url      = "mysql://root:dhia2002@localhost:3306/doctor"
-
 }
 
 generator client {
   provider = "prisma-client-js"
 }
 
-
-
-
-model User {
-
-  id          Int      @id @default(autoincrement()) 
-  FirstName   String
-  LastName    String
-  Username    String
-  Email       String   @unique
-  Password    String
-  UserType    String
-  PhoneNumber String
-  imageUrl    String
-  doctorId   Int
-   doctor Doctor @relation(fields: [doctorId], references: [id])
-  specialityId   Int
-
-  speciality speciality @relation(fields: [specialityId], references: [id])
+model user {
+  id           Int      @id @default(autoincrement()) 
+  firstname    String
+  lastname     String
+  username     String
+  email        String   @unique
+  password     String
+  usertype     String
+  phonenumber  String
+  imageurl     String
+  doctorid     Int
+  doctor       Doctor   @relation(fields: [doctorid], references: [id])
+  specialityid Int
+  speciality   speciality @relation(fields: [specialityid], references: [id])
 }
 
 model speciality {
-  id          Int     @id @default(autoincrement())
-  name        String
+  id      Int      @id @default(autoincrement())
+  name    String
   doctors user[]
 }
 
-model Doctor {
-  id           Int        @id @default(autoincrement())
- doctors user[]
-
-
+model doctor {
+  id      Int     @id @default(autoincrement())
+  doctors user[]
 }
+
 model message {
   id      Int     @id @default(autoincrement())
   content String
 }
 
-
-model Appointment {
+model appointment {
   id                   Int              @id @default(autoincrement())
-  appointmentTime      DateTime
-  status               AppointmentStatus @default(Pending)
-
-  appointmentDepartment String?
-
-  patient              User             @relation("PatientAppointments", fields: [patientID], references: [id])
-  patientID            Int
-
-  doctor               Doctor           @relation(fields: [doctorID], references: [id])
-  doctorID             Int
+  appointmenttime      DateTime
+  status               Appointmentstatus @default(Pending)
+  appointmentdepartment String?
+  patient              user             @relation("PatientAppointments", fields: [patientid], references: [id])
+  patientid            Int
+  doctor               doctor           @relation(fields: [doctorid], references: [id])
+  doctorid             Int
 }
 
-enum AppointmentStatus {
+enum appointmentstatus {
   Pending
   Confirmed
   Cancelled
 }
-
-
 
 model conversation {
   id    Int     @id @default(autoincrement())
@@ -77,66 +64,49 @@ model room {
   id    Int     @id @default(autoincrement())
 }
 
-model ratingsComments {
-
+model ratingscomments {
   id       Int      @id @default(autoincrement())
   rating   Int
   review   String?
-  imageSrc String?
+  imagesrc String?
   name     String?
 }
 
-
 model admin {
-
   id       Int      @id @default(autoincrement())
-  Username String   @unique
-  Email    String   @unique
-  Password String
+  username String   @unique
+  email    String   @unique
+  password String
 }
 
-
-model Payments {
+model payments {
   id          Int      @id @default(autoincrement())
-  Amount      Decimal
-  PaymentDate DateTime
+  amount      Decimal
+  paymentdate DateTime
 }
-model Blog {
+
+model blog {
   id       Int      @id @default(autoincrement())
-  Title    String
-  Text     String
-  imageUrl String?
-//   comments Comment[]
+  title    String
+  text     String
+  imageurl String?
+  comments comment[]
 }
 
-model Comment {
-
+model comment {
   id        Int      @id @default(autoincrement())
   author    String
   comment   String
   timestamp DateTime
-
-  blogId    Int
-  userId    Int
-//   blog      blog     @relation(fields: [blogId], references: [id], map: "Comment_blogId_fkey")
-
-  @@index([blogId], map: "Comment_blogId_fkey")
-}
-
-
-
-model payments {
-  id          Int      @id @default(autoincrement())
-  Amount      Decimal
-  PaymentDate DateTime
+  blogid    Int
+  userid    Int
+  @@index([blogid], map: "Comment_blogId_fkey")
 }
 
 model product {
   id       Int     @id @default(autoincrement())
-
   name     String
   price    Decimal
-  imageUrl String?
-  Category String
-
+  imageurl String?
+  category String
 }
