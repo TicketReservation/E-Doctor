@@ -88,6 +88,7 @@ model room {
   id    Int     @id @default(autoincrement())
 }
 
+
 model ratingsComments {
 
   id       Int      @id @default(autoincrement())

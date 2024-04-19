@@ -1,3 +1,4 @@
+"use client"
 import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
@@ -9,22 +10,31 @@ import { fetchAppointments } from '../lib/features/appointment';
 import { useAppDispatch, useAppSelector } from '../lib/hooks';
 import styles from './doctordashboard.module.css';
 import imgdr from '../img/49b174422a00e03654190f9be2651ed6.png';
+import { Token } from '../types/types';
+import { currentAsync } from "../lib/features/getUserSlice"
+
 
 const Doctordashboard = () => {
   const dispatch = useAppDispatch();
   const appointments = useAppSelector(state => state.appointment.appointment);
   const [loading, setLoading] = useState(true);
 
-  useEffect(() => {
-    dispatch(fetchAppointments())
-      .then(() => setLoading(false))
-      .catch(error => {
-        console.error('Error fetching appointments:', error);
-        setLoading(false);
-      });
-  }, [dispatch]);
-console.log(appointments)
+//   useEffect(() => {
+//     dispatch(fetchAppointments())
+//       .then(() => setLoading(false))
+//       .catch(error => {
+//         console.error('Error fetching appointments:', error);
+//         setLoading(false);
+//       });
+//   }, [dispatch]);
+// console.log(appointments)
   
+useEffect(() => {
+  const token = localStorage.getItem("token") || "";
+  dispatch(currentAsync({ token }));//////////
+  console.log(token)
+}, [dispatch]);
+
 
 
   return (

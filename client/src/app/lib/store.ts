@@ -4,6 +4,8 @@ import signInSlice from './features/signInSlice'
 import {getBlogsReducer, postBlogsReducer} from './features/blogSlice'
 import specialitySlice from "./features/specialitySlice"
 import produtSlice from "./features/productSlice"
+import nameFilterSlice from './features/nameFilterSlice'
+import  currentSlice  from './features/getUserSlice'
 import appointmentSlice  from "./features/appointment"
 export const makeStore = () => {
   return configureStore({
@@ -14,6 +16,8 @@ export const makeStore = () => {
         postBlogs:postBlogsReducer,
         products:produtSlice,
         speciality:specialitySlice,
+        nameFilter:nameFilterSlice,
+        currentUser:currentSlice,
         appointment:appointmentSlice,
     },
   })
