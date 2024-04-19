@@ -11,33 +11,68 @@ generator client {
 
 
 
-model user {
-
+model User {
   id          Int      @id @default(autoincrement()) 
-  FirstName   String
-  LastName    String
-  Username    String   @unique
-  Email       String   @unique
-  Password    String
-  UserType    String
-  Speciality  String
-  PhoneNumber String
+  firstName   String
+  lastName    String
+  username    String   
+  email       String   @unique
+  password    String
+  userType    String
+  speciality  String
+  phoneNumber String
   imageUrl    String
+
+  // Appointments where this user is the patient
+  patientAppointments Appointment[] @relation("PatientAppointments")
 }
 
 
 
-model doctor {
-
+model Doctor {
   id          Int      @id @default(autoincrement())
-  FirstName   String
-  LastName    String
-  Username    String   @unique
-  Email       String   @unique
-  Password    String
-  PhoneNumber String?
+  firstName   String
+  lastName    String
+  username    String   
+  email       String   @unique
+  password    String
+  phoneNumber String?
   imageUrl    String   @default("")
-  Speciality  String
+  speciality  String
+
+  // Appointments made by this doctor
+  appointments Appointment[]
+}
+
+
+
+// model appointment {
+//   id                   Int      @id @default(autoincrement())
+//   AppointmentTime      DateTime
+//   // Status                AppointmentStatus @default(Pending)
+
+//   AppointmentDepartment String?
+//   doctor               Int
+// }
+
+model Appointment {
+  id                   Int              @id @default(autoincrement())
+  appointmentTime      DateTime
+  status               AppointmentStatus @default(Pending)
+
+  appointmentDepartment String?
+
+  patient              User             @relation("PatientAppointments", fields: [patientID], references: [id])
+  patientID            Int
+
+  doctor               Doctor           @relation(fields: [doctorID], references: [id])
+  doctorID             Int
+}
+
+enum AppointmentStatus {
+  Pending
+  Confirmed
+  Cancelled
 }
 
 
@@ -45,16 +80,13 @@ model message {
   id      Int     @id @default(autoincrement())
   content String
 }
-model appointment {
-  id                   Int      @id @default(autoincrement())
-  AppointmentTime      DateTime
-  // Status                AppointmentStatus @default(Pending)
-
-  AppointmentDepartment String?
-  doctor               Int
+model conversation {
+  id    Int     @id @default(autoincrement())
 }
 
-
+model room {
+  id    Int     @id @default(autoincrement())
+}
 
 model ratingsComments {
 
@@ -87,23 +119,35 @@ model Blog {
   Title    String
   Text     String
   imageUrl String?
-//   comments Comment[]
+  comments Comment[]
 }
 
-model Comment {
+// model Comment {
 
+//   id        Int      @id @default(autoincrement())
+//   author    String
+//   comment   String
+//   timestamp DateTime
+
+//   blogId    Int
+//   userId    Int
+//   blog      blog     @relation(fields: [blogId], references: [id], map: "Comment_blogId_fkey")
+
+//   @@index([blogId], map: "Comment_blogId_fkey")
+// }
+
+model Comment {
   id        Int      @id @default(autoincrement())
   author    String
   comment   String
   timestamp DateTime
 
+  blog      Blog     @relation(fields: [blogId], references: [id], map: "Comment_blogId_fkey")
   blogId    Int
   userId    Int
-//   blog      blog     @relation(fields: [blogId], references: [id], map: "Comment_blogId_fkey")
 
   @@index([blogId], map: "Comment_blogId_fkey")
 }
-
 
 
 model payments {
@@ -121,4 +165,3 @@ model product {
   Category String
 
 }
-

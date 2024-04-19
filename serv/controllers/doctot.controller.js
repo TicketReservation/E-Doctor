@@ -1,19 +1,23 @@
+
 const { PrismaClient } = require('@prisma/client');
 const prisma = new PrismaClient();
-const getAllDoctors = async (req, res) => {
+
+
+
+const speciality = async (req,res)=>{
     try {
-        const doctors = await prisma.doctor.findMany();
-        res.status(200).json(doctors);
+        let body=req.body
+        const doctor=await prisma.speciality.create({data:body})
+        res.json(doctor)
     } catch (error) {
-        console.error('Error fetching doctors:', error);
-        res.status(500).json({ error: 'Failed to fetch doctors' });
+        throw error
     }
 }
 
 const getDoctorById = async (req, res) => {
     try {
-        const id = parseInt(req.params.id);
-        const doctor = await prisma.doctor.findUnique({ where:  {id}  });
+        const { id } = req.params;
+        const doctor = await prisma.doctor.findOne({ where: { id } });
         if (doctor) {
             res.status(200).json(doctor);
         } else {
@@ -26,17 +30,17 @@ const getDoctorById = async (req, res) => {
 }
 
 
-
 const createDoctor = async (req, res) => {
     try {
         const body = req.body;
-        const doctor = await prisma.doctor.create({data:body});
+        const doctor = await prisma.doctor.create({ data: body });
         res.status(201).json(doctor);
     } catch (error) {
         console.error('Error creating doctor:', error);
         res.status(500).json({ error: 'Failed to create doctor' });
     }
 }
+
 const updateDoctor = async (req, res) => {
     try {
         const { id } = req.params;
@@ -71,10 +75,9 @@ const deleteDoctor = async (req, res) => {
 }
 
 module.exports = {
-    getAllDoctors,
     createDoctor,
     getDoctorById,
     updateDoctor,
-    deleteDoctor
-
+    deleteDoctor,
+    speciality
 };

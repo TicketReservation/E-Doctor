@@ -3,11 +3,13 @@ import React, { useState } from "react";
 import { useRouter } from "next/router"
 import  Link from "next/link"
 import axios from "axios";
-// import "../css/signup.css";
-import Navbar from "../navbar/page";
+import styles from "./sign.module.css"
+import Navbar from "../navbar/navbar";
 import Dropzone from 'react-dropzone';
 import {useAppDispatch ,  useAppSelector} from '../lib/hooks';
-
+import {specialityAsync} from "../lib/features/specialitySlice" 
+import { useEffect } from "react";
+import { Speciality } from "../types/types";
 
 const Signup = () => {
   const [Username, setUsername] = useState("");
@@ -15,15 +17,25 @@ const Signup = () => {
   const [Password, setPassword] = useState("");
   const [UserType, setUsertype] = useState("");
   const [error, setError] = useState("");
-  const [Specialization, setSpecialization] = useState("");
+  const [specialityId, setSpecialityId] = useState("");
 
   const [FirstName, setFirstName] = useState("");
   const [LastName, setLastName] = useState("");
   const [PhoneNumber, setPhoneNumber] = useState("");
   const [image, setImage] = useState('');
   const [isLoading, setIsLoading] = useState(false); 
-  const dispatch = useAppDispatch();
-  
+  const dispatch=useAppDispatch()
+
+  const speciality=useAppSelector(state=>state.speciality.speciality)
+  console.log("data",speciality);
+
+
+  useEffect(()=>{
+    dispatch(specialityAsync())
+  },[dispatch])
+
+
+
   const HandleSubmit = async (e) => {
     e.preventDefault();
     try {
@@ -36,7 +48,7 @@ const Signup = () => {
         LastName: LastName,
         PhoneNumber: PhoneNumber,
         imageUrl: image,
-        Speciality: Specialization,
+        specialityId: specialityId,
       };
       const response = await axios.post(
         "http://localhost:4000/api/auth/register",
@@ -44,18 +56,21 @@ const Signup = () => {
       );
       console.log(response.data);
       setError("");
-      window.location.href = "/doctor";
+      window.location.href = "/";
     } catch (err) {
+      console.log('====================================');
+      console.log(err);
+      console.log('====================================');
       setError(err.response.data.error);
       console.log(err.response.data.error);
     }
   };
   const handleImageDrop = async (acceptedFiles) => {
     const formData = new FormData();
-    formData.append("file", acceptedFiles[0]); // Make sure the file is the first item in the acceptedFiles array
+    formData.append("file", acceptedFiles[0]); 
 
     try {
-      setIsLoading(true); // Set isLoading to true when image upload starts
+      setIsLoading(true); 
       const response = await axios.post("http://localhost:4000/api/upload", formData, {
         headers: {
           "Content-Type": "multipart/form-data", // Add this line
@@ -85,28 +100,28 @@ const Signup = () => {
               />
             </div>
             <div>
-            <input
+            <input className={styles.ppt}
               type="text"
               placeholder="Username"
               value={Username}
               onChange={(e) => setUsername(e.target.value)}
               required
             />
-            <input
+            <input className={styles.ppt}
               type="text"
               placeholder="First Name"
               value={FirstName}
               onChange={(e) => setFirstName(e.target.value)}
               required
             />
-            <input
+            <input className={styles.ppt}
               type="text"
               placeholder="Last Name"
               value={LastName}
               onChange={(e) => setLastName(e.target.value)}
               required
             />
-            <input
+            <input className={styles.ppt}
               type="text"
               placeholder="Phone Number"
               value={PhoneNumber}
@@ -114,8 +129,8 @@ const Signup = () => {
               required
             />
           </div>
-          <div>
-            <input
+          <div> 
+            <input className={styles.ppt}
               type="email"
               placeholder="Email"
               value={Email}
@@ -124,7 +139,7 @@ const Signup = () => {
             />
           </div>
           <div>
-            <input
+            <input className={styles.ppt}
               type="password"
               placeholder="Password"
               value={Password}
@@ -133,14 +148,21 @@ const Signup = () => {
             />
 
             <div>
-              {UserType === "Doctor" && (
-                <input
-                  type="text"
-                  placeholder="Specialization"
-                  value={Specialization}
-                  onChange={(e) => setSpecialization(e.target.value)}
-                  required
-                />
+              {UserType === "doctor" && (
+                
+                <select    onChange={(e) => {
+                  console.log(e.target.value);
+                  setSpecialityId(e.target.value);
+                 
+                }}
+                 name="Speciality" id="Speciality" className={styles.filter_dropdown}>
+                {/* <option value="speciality">Speciality</option> */}
+                {speciality.map((e:Speciality,i:number)=>{
+                  return <option value={e.id}  key={i}>
+                    {e.name}
+                    </option>
+                })}
+                </select>
               )}
               <select
                 onChange={(e) => {
@@ -157,10 +179,10 @@ const Signup = () => {
                   border: "1px solid #ccc",
                 }}
               >
-                <option value="Doctor">Doctor</option>
+                <option value="doctor">Doctor</option>
                 <option value="Patient">Patient</option>
               </select>
-              <Dropzone onDrop={handleImageDrop}>
+              {/* <Dropzone onDrop={handleImageDrop}>
                 {({ getRootProps, getInputProps }) => (
                   <section style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '200px', border: '2px dashed #ddd', borderRadius: '5px', backgroundColor: '#f9f9f9', color: '#888', fontSize: '16px', cursor: 'pointer' }}>
                     <div {...getRootProps()}>
@@ -173,7 +195,7 @@ const Signup = () => {
                     </div>
                   </section>
                 )}
-              </Dropzone>
+              </Dropzone> */}
             </div>
           </div>
           </div>
@@ -181,7 +203,7 @@ const Signup = () => {
           <p>
             Already have an account?
              <Link href="/login">Login</Link>
-             {/* <link>login</link> */}
+           
           </p>
           <button type="submit">Sign Up</button>
         </form>
