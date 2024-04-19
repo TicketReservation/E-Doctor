@@ -18,7 +18,7 @@ export default function Home() {
       {/* <Reviews/>
       <DoctorRates/> */}
       {/* <ContactUs/> */}
-      <BookAppointment/>
+      <BookAppointment initialName={""} initialEmail={""} AppointmentDepartment={""} AppointmentTime={undefined}/>
       <Footer/> 
        </div>
  )

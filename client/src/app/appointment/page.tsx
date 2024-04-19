@@ -5,51 +5,52 @@ import 'react-calendar/dist/Calendar.css'
 import ServicesPage from '../service/page';
 import Doctorlist from '../doctorlist/page';
 import axios from "axios"
+import Link from 'next/link';
 
 const add = (body) => {
     axios.post("http://localhost:4000/api/appointment/", body)
         .then((response) => console.log(response.data))
         .catch((err) => console.log(err));
 }
-const availableAppointments = {
-        Cardiology: [
-          { time: new Date(2024, 12, 15, 10), isBooked: false },
-          { time: new Date(2024, 12, 15, 11), isBooked: true },
-          { time: new Date(2024, 12, 15, 12), isBooked: false },
-          // ...
-        ],
-        Dermatology: [
-          { time: new Date(2024, 12, 15, 10), isBooked: false },
-          { time: new Date(2024, 12, 15, 11), isBooked: true },
-          { time: new Date(2024, 12, 15, 12), isBooked: false },
-          // ...
-        ],
-        Oncology: [
-          { time: new Date(2024, 12, 15, 10), isBooked: true },
-          { time: new Date(2024, 12, 15, 11), isBooked: false },
-          { time: new Date(2024, 12, 15, 12), isBooked: true },
-          // ...
-        ],
-        Gynecology: [
-          { time: new Date(2024, 12, 15, 10), isBooked: false },
-          { time: new Date(2024, 12, 15, 11), isBooked: false },
-          { time: new Date(2024, 12, 15, 12), isBooked: true },
-          // ...
-        ],
-        Pediatrics: [
-          { time: new Date(2024, 12, 15, 10), isBooked: true },
-          { time: new Date(2024, 12, 15, 11), isBooked: false },
-          { time: new Date(2024, 12, 15, 12), isBooked: false },
-          // ...
-        ],
-        Psychiatry: [
-          { time: new Date(2024, 12, 15, 10), isBooked: false },
-          { time: new Date(2024, 12, 15, 11), isBooked: true },
-          { time: new Date(2024, 12, 15, 12), isBooked: false },
-          // ...
-        ],
-      };
-  // ...
+// const availableAppointments = {
+//         Cardiology: [
+//           { time: new Date(2024, 12, 15, 10), isBooked: false },
+//           { time: new Date(2024, 12, 15, 11), isBooked: true },
+//           { time: new Date(2024, 12, 15, 12), isBooked: false },
+//           // ...
+//         ],
+//         Dermatology: [
+//           { time: new Date(2024, 12, 15, 10), isBooked: false },
+//           { time: new Date(2024, 12, 15, 11), isBooked: true },
+//           { time: new Date(2024, 12, 15, 12), isBooked: false },
+//           // ...
+//         ],
+//         Oncology: [
+//           { time: new Date(2024, 12, 15, 10), isBooked: true },
+//           { time: new Date(2024, 12, 15, 11), isBooked: false },
+//           { time: new Date(2024, 12, 15, 12), isBooked: true },
+//           // ...
+//         ],
+//         Gynecology: [
+//           { time: new Date(2024, 12, 15, 10), isBooked: false },
+//           { time: new Date(2024, 12, 15, 11), isBooked: false },
+//           { time: new Date(2024, 12, 15, 12), isBooked: true },
+//           // ...
+//         ],
+//         Pediatrics: [
+//           { time: new Date(2024, 12, 15, 10), isBooked: true },
+//           { time: new Date(2024, 12, 15, 11), isBooked: false },
+//           { time: new Date(2024, 12, 15, 12), isBooked: false },
+//           // ...
+//         ],
+//         Psychiatry: [
+//           { time: new Date(2024, 12, 15, 10), isBooked: false },
+//           { time: new Date(2024, 12, 15, 11), isBooked: true },
+//           { time: new Date(2024, 12, 15, 12), isBooked: false },
+//           // ...
+//         ],
+//       };
+//   // ...
 
 
 interface BookAppointmentProps {
@@ -69,6 +70,7 @@ const BookAppointment: React.FC<BookAppointmentProps> = ({
   const [email, setEmail] = useState(initialEmail);
   const [department, setDepartment] = useState<string | undefined>(AppointmentDepartment);
   const [time, setTime] = useState(AppointmentTime);
+  const [date, setDate] = useState(AppointmentTime);
 
   const adddd =()=>{
     add({name:name,
@@ -79,17 +81,17 @@ const BookAppointment: React.FC<BookAppointmentProps> = ({
 }
     
 
-  const handleSelect = (date: Date) => {
-    if (department) {
-      const availableTimes = availableAppointments[department].filter(
-        (appointment) => !appointment.isBooked && appointment.time >= date
-      );
+  // const handleSelect = (date: Date) => {
+  //   if (department) {
+  //     const availableTimes = availableAppointments[department].filter(
+  //       (appointment) => !appointment.isBooked && appointment.time >= date
+  //     );
 
-      if (availableTimes.length > 0) {
-        setTime(availableTimes[0].time);
-      }
-    }
-  };
+  //     if (availableTimes.length > 0) {
+  //       setTime(availableTimes[0].time);
+  //     }
+  //   }
+  // };
 
   return (
     <div>
@@ -141,16 +143,29 @@ const BookAppointment: React.FC<BookAppointmentProps> = ({
             </select>
           </div>
 
-          <div className={styles.formField}><label className={styles.formLabel}>Time *</label>
+          {/* <div className={styles.formField}><label className={styles.formLabel}>Time *</label>
           <Calendar
-            onChange={(date: Date) => setTime(date)} // Update the time state when date is selected
+            onChange={(e) => setTime(e)} // Update the time state when date is selected
             value={time}
           />
+          </div> */}
+          <div className={styles.formField}>
+            <label className={styles.formLabel} htmlFor="email">
+              Date *
+            </label>
+            <input
+              className={styles.input}
+              type="date"
+              id="date"
+              value={date}
+              onChange={(e) => setDate(e)}
+            />
           </div>
-
-          <button type="submit" onClick={()=>adddd()} className={styles.bookAppointmentButton}>
+<Link href={"https://flouci.com/pay/jyqYkFQwRzGxwo14XPYajg"}>
+          <button  onClick={()=>adddd()}  className={styles.bookAppointmentButton}>
             Book Appointment
           </button>
+          </Link>
         </div>
       </form>
       {/* <ServicesPage/>
