@@ -128,20 +128,22 @@ const Admin = () => {
     }, [])
 
     
-    const handleBanUser = (email) => {
-        axios.delete('http://localhost:4000/api/users/delete', 
-              email
-             ).then((response) => {
+    // const handleBanUser = (email) => {
+    //     axios.delete('http://localhost:4000/api/users/delete', 
+    //           email
+    //          ).then((response) => {
 
-            console.log(`Banning user with email: ${email}`);
-        })
-    };
+    //         console.log(`Banning user with email: ${email}`);
+    //     })
+    // };
 
     const handleBanDoctor = (email) => {
-        axios.delete('http://localhost:4000/api/users/delete',   email 
+
+        axios.delete(`http://localhost:4000/api/users/delete/${email}`
 
         ).then((response) => {
-        console.log(`Banning doctor with email: ${email}`);
+
+        console.log(`delete user with email: ${email}`);
     })
     };
 
@@ -173,7 +175,7 @@ const Admin = () => {
                                 <DoctorTableCell>{e.FirstName}</DoctorTableCell>
                                 <DoctorTableCell>{e.Email}</DoctorTableCell>
                                 <ActionCell>
-                                    <BanButton onClick={() => handleBanUser(e.email)}>delete</BanButton>
+                                    <BanButton  onClick={() => handleBanDoctor(e.Email)}>delete</BanButton>
                                 </ActionCell>
                             </DoctorTableRow>
                         )})}
@@ -199,7 +201,8 @@ const Admin = () => {
                                 <DoctorTableCell>{e.specialityId}</DoctorTableCell>
 
                                 <ActionCell>
-                                    <BanButton onClick={() => handleBanUser(e.email)}>delete</BanButton>
+                                    <BanButton onClick={() => handleBanDoctor(e.Email)}>delete</BanButton>
+                                   
                                 </ActionCell>
                             </DoctorTableRow>
                         )})}
