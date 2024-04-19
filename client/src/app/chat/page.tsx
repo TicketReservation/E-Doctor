@@ -5,7 +5,7 @@ import axios from 'axios';
 import styles from "./chat.module.css"
 
 import Footer from '../footer/footer';
-import Navbar from '../navbar/navbar';
+import Navbar from '../navbar/page';
 
 const ENDPOINT = 'http://localhost:3001'; 
 
@@ -33,7 +33,9 @@ function Chat() {
     // socket.on('send_message', receiveMessage);
     
     socket.on('receive_message', (s) => {
-  
+      console.log('====================================');
+      console.log("data",s);
+      console.log('====================================');
       setMessages(prevMessages => [...prevMessages, s]);
     });
 
@@ -77,7 +79,7 @@ function Chat() {
   };
 
   return (
-    <div >
+    <div>
       <Navbar />
       <div  className={styles.ccontainer}>
         <div className={styles.carea}>
@@ -86,13 +88,13 @@ function Chat() {
               <div key={index} className={`message ${message.sender === 'You' ? 'sent' : 'received'}`}>
                 <div className={styles.minfo}>
                   <span className={styles.sender}>{message.sender}</span>
-                  <span  className={styles.timestamp}>{message.timestamp}</span>
+                  <span className="timestamp">{message.timestamp}</span>
                 </div>
                 <p className="content">{message.content}</p>
               </div>
             ))}
           </div>
-          <div  className={styles.rea}>
+          <div className="message-input-area">
             <input type="text" placeholder="Type a message..." value={messageInput} onChange={handleMessageChange} />
             <button onClick={sendMessage}>Send</button>
           </div>
