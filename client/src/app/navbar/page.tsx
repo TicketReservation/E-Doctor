@@ -45,15 +45,14 @@ const Navbar = () => {
         <Link href="/">
           HOME
         </Link>
-        <Link href="/service">
-          Service
-        </Link>
         <Link href="/contact">
           Contact Us
         </Link>
-        <Link href="/bloglist">
-          Blogs
+        <Link href="/service">
+          Service
         </Link>
+
+        
         <Link href="/Pharmacy">
           Pharmacy
         </Link>

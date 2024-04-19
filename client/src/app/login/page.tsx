@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import styles from "./login.module.css"
 import { connect } from 'react-redux';
 import axios from "axios";
-import Navbar from '../navbar/navbar';
+import Navbar from '../navbar/page';
 
 
 const Login = ({ login, loginFailure, error }) => {
