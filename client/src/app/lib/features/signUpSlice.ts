@@ -1,7 +1,7 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit"
 import axios from "axios"
 
-export interface User {
+export interface user {
   userName: string
   email: string
   password: string
@@ -19,7 +19,7 @@ error:""
 }
 
 interface state {
-user:User| {},
+user:user| {},
 loading: boolean
 error:""
 }

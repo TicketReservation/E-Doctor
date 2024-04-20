@@ -3,54 +3,117 @@ const jwt = require('jsonwebtoken');
 const { PrismaClient } = require('@prisma/client');
 const prisma = new PrismaClient();
 
+// exports.register = async (req, res) => {
+//   const { username, userType, email, password, phoneNumber, firstName, lastName, specialityId, imageUrl } = req.body;
+//   try {
+//     if (userType === 'doctor') {
+//       if (!password) {
+//         return res.status(400).json({ error: 'Password is required' });
+//       }
+
+//       const hashedPassword = await bcrypt.hash(password, 10);
+//       const doctor = await prisma.doctor.create({});
+
+//       const user = await prisma.user.create({
+//         data: {
+//           doctorId: doctor.id,
+//           email,
+//           password: hashedPassword,
+//           phoneNumber,
+//           firstName,
+//           lastName,
+//           imageUrl,
+//           userType: "doctor",
+
+//           specialityId:parseInt(specialityId) ,
+
+//           username,
+//         },
+//       });
+
+//       return res.status(201).json(user);
+//     } else if (userType.toLowerCase() === 'patient') {
+//       const hashedPassword = await bcrypt.hash(password, 10);
+
+//       const user = await prisma.user.create({
+//         data: {
+//           email,
+//           password: hashedPassword,
+//           phoneNumber,
+//           firstName,
+//           lastName,
+//           imageUrl,
+//           userType: "patient",
+//           username,
+//         },
+//       });
+
+//       return res.status(201).json(user);
+//     } else {
+
+//       return res.status(400).json({ error: 'Invalid user type' });
+//     }
+//   } catch (error) {
+//     console.error(error);
+//     return res.status(500).json({ error: 'Registration failed' });
+//   }
+// }
+
 exports.register = async (req, res) => {
-  const { Username, UserType, Email, Password, PhoneNumber, FirstName, LastName, specialityId, imageUrl } = req.body;
+  const { username, userType, email, password, phoneNumber, firstName, lastName, specialityId, imageUrl } = req.body;
   try {
-    if (UserType === 'doctor') {
-      if (!Password) {
+    // Check if userType is null or undefined
+    if (!userType) {
+      return res.status(400).json({ error: 'User type is required' });
+    }
+
+    // Convert userType to lowercase to make the comparison case-insensitive
+    const userTypeLower = userType.toLowerCase();
+
+    if (userTypeLower === 'doctor') {
+      if (!password) {
         return res.status(400).json({ error: 'Password is required' });
       }
 
-      const hashedPassword = await bcrypt.hash(Password, 10);
+      const hashedPassword = await bcrypt.hash(password, 10);
       const doctor = await prisma.doctor.create({});
 
       const user = await prisma.user.create({
         data: {
           doctorId: doctor.id,
-          Email,
-          Password: hashedPassword,
-          PhoneNumber,
-          FirstName,
-          LastName,
+          email,
+          password: hashedPassword,
+          phoneNumber,
+          firstName,
+          lastName,
           imageUrl,
-          UserType: "doctor",
+          userType: "doctor",
 
-          specialityId:parseInt(specialityId) ,
-
-          Username,
+          specialityId: parseInt(specialityId),
+          doctor,
+          username,
         },
       });
 
       return res.status(201).json(user);
-    } else if (UserType.toLowerCase() === 'patient') {
-      const hashedPassword = await bcrypt.hash(Password, 10);
+    } else if (userTypeLower === 'patient') {
+      const hashedPassword = await bcrypt.hash(password, 10);
 
       const user = await prisma.user.create({
         data: {
-          Email,
-          Password: hashedPassword,
-          PhoneNumber,
-          FirstName,
-          LastName,
+          email,
+          password: hashedPassword,
+          phoneNumber,
+          firstName,
+          lastName,
           imageUrl,
-          UserType: "patient",
-          Username,
+          userType: "patient",
+          username,
         },
       });
 
       return res.status(201).json(user);
     } else {
-
       return res.status(400).json({ error: 'Invalid user type' });
     }
   } catch (error) {
@@ -62,23 +125,23 @@ exports.register = async (req, res) => {
 exports.login = async (req, res) => {
 
     try {
-        const { Email, Password } = req.body;
-        const user = await prisma.user.findUnique({ where: { email:Email } });
+        const { email, password } = req.body;
+        const user = await prisma.user.findUnique({ where: { email:email } });
 
         if (!user) {
             return res.status(401).json({ error: 'Invalid credentials' });
         }
 
-        if (!Password) {
+        if (!password) {
             return res.status(400).json({ error: 'Password is required' });
         }
 
-        const passwordMatch = await bcrypt.compare(Password, user.Password);
+        const passwordMatch = await bcrypt.compare(password, user.password);
         if (!passwordMatch) {
             return res.status(401).json({ error: 'Invalid credentials' });
         }
 
-        const token = jwt.sign({ userId: user.id,UserType:user.UserType }, 'your-secret-key', { expiresIn: '1h' });
+        const token = jwt.sign({ userId: user.id,userType:user.userType }, 'your-secret-key', { expiresIn: '1h' });
         res.status(200).json({ user, token });
     } catch (error) {
         console.error(error);
@@ -88,7 +151,7 @@ exports.login = async (req, res) => {
 }
 exports.finAllDoc=async(req,res)=>{
   try {
-    const docs=await prisma.user.findMany({where:{UserType:"doctor"},
+    const docs=await prisma.user.findMany({where:{userType:"doctor"},
     include:{
       speciality:true,
       doctor:true
@@ -116,12 +179,12 @@ exports.findDocByNameAndSpeciality = async (req, res) => {
     if (name) {
       query.OR = [
         {
-          FirstName: {
+          firstName: {
             contains: name,
           },
         },
         {
-          LastName: {
+          lastName: {
             contains: name,
           },
         },

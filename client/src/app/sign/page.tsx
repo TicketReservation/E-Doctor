@@ -10,6 +10,9 @@ import {useAppDispatch ,  useAppSelector} from '../lib/hooks';
 import {specialityAsync} from "../lib/features/specialitySlice" 
 import { useEffect } from "react";
 import { Speciality } from "../types/types";
+import Image from 'next/image';
+import signinimg from '../img/signin.jpeg'
+
 
 const Signup = () => {
   const [Username, setUsername] = useState("");
@@ -40,15 +43,18 @@ const Signup = () => {
     e.preventDefault();
     try {
       const body = {
-        UserType: UserType,
-        Username: Username,
-        Email: Email,
-        Password: Password,
-        FirstName: FirstName,
-        LastName: LastName,
-        PhoneNumber: PhoneNumber,
+        userType: UserType,
+        username: Username,
+        email: Email,
+        password: Password,
+        firstName: FirstName,
+        lastName: LastName,
+        phoneNumber: PhoneNumber,
         imageUrl: image,
         specialityId: specialityId,
+        doctor: {
+          specialityId: specialityId,
+        },
       };
       const response = await axios.post(
         "http://localhost:4000/api/auth/register",
@@ -93,11 +99,7 @@ const Signup = () => {
             <h2 style={{ color: "#007E85", marginBottom:'20px',marginLeft:'120px',marginTop:'33px'}}> Sign Up</h2>
             <div>
             <div className="doctor-image">
-              <img
-                src="https://th.bing.com/th/id/OIP.czYUxy7G0x5DDRsqs9xq0QHaHa?w=204&h=204&c=7&r=0&o=5&dpr=1.3&pid=1.7"
-                alt="Doctor"
-                style={{marginBottom:'20px' , borderRadius:'20%',marginLeft:'50px',marginTop:'20px',background:'transparent'}}
-              />
+              <Image src={signinimg} alt="signin"/>
             </div>
             <div>
             <input className={styles.ppt}
@@ -157,11 +159,11 @@ const Signup = () => {
                 }}
                  name="Speciality" id="Speciality" className={styles.filter_dropdown}>
                 {/* <option value="speciality">Speciality</option> */}
-                {speciality.map((e:Speciality,i:number)=>{
+                {/* {speciality.map((e:Speciality,i:number)=>{
                   return <option value={e.id}  key={i}>
                     {e.name}
                     </option>
-                })}
+                })} */}
                 </select>
               )}
               <select

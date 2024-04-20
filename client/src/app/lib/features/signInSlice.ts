@@ -3,10 +3,10 @@ import axios from 'axios'
 
 
 
-export interface User{
+export interface user{
 email:string,
 password:string
-UserType:string
+userType:string
 }
 
 const initialState={
@@ -16,7 +16,7 @@ const initialState={
 }
 
 interface state{
-    user:User,
+    user:user,
     loading:boolean,
     error:string
 }

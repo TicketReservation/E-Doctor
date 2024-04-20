@@ -11,60 +11,43 @@ generator client {
 
 
 
-model User {
-  id          Int      @id @default(autoincrement()) 
-  firstName   String
-  lastName    String
-  username    String   
-  email       String   @unique
-  password    String
-  userType    String
-  speciality  String
-  phoneNumber String
-  imageUrl    String
-
-  // Appointments where this user is the patient
+model user {
+  id              Int        @id @default(autoincrement()) 
+  firstName       String
+  lastName        String
+  username        String     @unique
+  email           String     @unique
+  password        String
+  userType        String
+  phoneNumber     String
+  imageUrl        String
+  doctorId        Int
+  doctor          Doctor     @relation(fields: [doctorId], references: [id])
+  specialityId    Int   
+  speciality      speciality @relation(fields: [specialityId], references: [id])
   patientAppointments Appointment[] @relation("PatientAppointments")
 }
 
 
-
 model Doctor {
-  id          Int      @id @default(autoincrement())
-  firstName   String
-  lastName    String
-  username    String   
-  email       String   @unique
-  password    String
-  phoneNumber String?
-  imageUrl    String   @default("")
-  speciality  String
+  id           Int        @id @default(autoincrement())
+ doctors user[]
 
-  // Appointments made by this doctor
   appointments Appointment[]
 }
 
-
-
-// model appointment {
-//   id                   Int      @id @default(autoincrement())
-//   AppointmentTime      DateTime
-//   // Status                AppointmentStatus @default(Pending)
-
-//   AppointmentDepartment String?
-//   doctor               Int
-// }
 
 model Appointment {
   id                   Int              @id @default(autoincrement())
   appointmentTime      DateTime
   status               AppointmentStatus @default(Pending)
-
   appointmentDepartment String?
 
-  patient              User             @relation("PatientAppointments", fields: [patientID], references: [id])
+  // Define relationship with patient
+  patient              user             @relation("PatientAppointments", fields: [patientID], references: [id])
   patientID            Int
 
+  // Define relationship with doctor
   doctor               Doctor           @relation(fields: [doctorID], references: [id])
   doctorID             Int
 }
@@ -108,12 +91,6 @@ model admin {
 }
 
 
-model Payments {
-  id          Int      @id @default(autoincrement())
-  Amount      Decimal
-  PaymentDate DateTime
-}
-
 
 model Blog {
   id       Int      @id @default(autoincrement())
@@ -141,7 +118,7 @@ model Comment {
 model payments {
   id          Int      @id @default(autoincrement())
   Amount      Decimal
-  PaymentDate DateTime
+  paymentDate DateTime
 }
 
 model product {
@@ -152,4 +129,9 @@ model product {
   imageUrl String?
   Category String
 
+}
+model speciality {
+  id          Int     @id @default(autoincrement())
+  name        String
+  doctors user[]
 }
