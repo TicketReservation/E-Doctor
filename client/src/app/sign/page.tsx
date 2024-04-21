@@ -18,12 +18,13 @@ const Signup = () => {
   const [UserType, setUsertype] = useState("");
   const [error, setError] = useState("");
   const [specialityId, setSpecialityId] = useState("");
-
+  const [file,setFile]=useState(null);
+  const [url,setUrl]=useState("");
   const [FirstName, setFirstName] = useState("");
   const [LastName, setLastName] = useState("");
   const [PhoneNumber, setPhoneNumber] = useState("");
-  const [image, setImage] = useState('');
-  const [isLoading, setIsLoading] = useState(false); 
+  // const [image, setImage] = useState('');
+  // const [isLoading, setIsLoading] = useState(false); 
   const dispatch=useAppDispatch()
 
   const speciality=useAppSelector(state=>state.speciality.speciality)
@@ -34,11 +35,21 @@ const Signup = () => {
     dispatch(specialityAsync())
   },[dispatch])
 
-
+const uploadImage=async()=>{
+  //https://api.cloudinary.com/v1_1/
+  //dockwpvkl
+  const form=new FormData();
+  form.append('file',file);
+  form.append('upload_preset','e-doctor');
+  await axios.post("http://api.cloudinary.com/v1_1/dockwpvkl/upload",form)
+  .then(res=>setUrl(res.data.secure_url))
+  .catch(err=>console.log(err))
+}
 
   const HandleSubmit = async (e) => {
     e.preventDefault();
     try {
+      await uploadImage()
       const body = {
         UserType: UserType,
         Username: Username,
@@ -47,7 +58,7 @@ const Signup = () => {
         FirstName: FirstName,
         LastName: LastName,
         PhoneNumber: PhoneNumber,
-        imageUrl: image,
+        imageUrl: url,
         specialityId: specialityId,
       };
       const response = await axios.post(
@@ -63,26 +74,26 @@ const Signup = () => {
       console.log(err.response.data.error);
     }
   };
-  const handleImageDrop = async (acceptedFiles) => {
-    const formData = new FormData();
-    formData.append("file", acceptedFiles[0]); 
+  // const handleImageDrop = async (acceptedFiles) => {
+  //   const formData = new FormData();
+  //   formData.append("file", acceptedFiles[0]); 
 
-    try {
-      setIsLoading(true); 
-      const response = await axios.post("http://localhost:4000/api/upload", formData, {
-        headers: {
-          "Content-Type": "multipart/form-data", // Add this line
-        },
-      });
-      const imageUrl = response.data.imageUrl;
-      console.log(imageUrl);
-      setImage(imageUrl);
-      setIsLoading(false); 
-    } catch (error) {
-      console.error(error);
-      setIsLoading(false); 
-    }
-  };
+  //   try {
+  //     setIsLoading(true); 
+  //     const response = await axios.post("http://localhost:4000/api/upload", formData, {
+  //       headers: {
+  //         "Content-Type": "multipart/form-data", // Add this line
+  //       },
+  //     });
+  //     const imageUrl = response.data.imageUrl;
+  //     console.log(imageUrl);
+  //     setImage(imageUrl);
+  //     setIsLoading(false); 
+  //   } catch (error) {
+  //     console.error(error);
+  //     setIsLoading(false); 
+  //   }
+  // };
   return (
     <div>
       <Navbar />
@@ -180,6 +191,9 @@ const Signup = () => {
                 <option value="doctor">Doctor</option>
                 <option value="Patient">Patient</option>
               </select>
+              <input type="file" 
+              onChange={e=>setFile(e.target.files[0])}
+              />
               {/* <Dropzone onDrop={handleImageDrop}>
                 {({ getRootProps, getInputProps }) => (
                   <section style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '200px', border: '2px dashed #ddd', borderRadius: '5px', backgroundColor: '#f9f9f9', color: '#888', fontSize: '16px', cursor: 'pointer' }}>
