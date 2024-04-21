@@ -50,6 +50,11 @@
   margin-bottom: 8px;
 }
 
+
+.filter_card{
+  display: flex;
+  flex-wrap: wrap;
+}
 .filter_roundedImage {
   border-radius: 50%;
   border: 3px solid #007E85;

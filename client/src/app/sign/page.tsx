@@ -35,6 +35,20 @@ const Signup = () => {
   },[dispatch])
 
 
+  const uploadImage = async () => {
+    try {
+      const form = new FormData();
+      form.append('file', file);
+      form.append('upload_preset', 'e-doctor');
+      const response = await axios.post("https://api.cloudinary.com/v1_1/dockwpvkl/upload", form);
+      setUrl(response.data.secure_url);
+    } catch (error) {
+      console.error("Error uploading image:", error);
+      throw error; // Rethrow the error to be caught by the caller
+    }
+  };
+  
+
 
   const HandleSubmit = async (e) => {
     e.preventDefault();
