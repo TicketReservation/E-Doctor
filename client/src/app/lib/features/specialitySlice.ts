@@ -5,7 +5,7 @@ import axios from "axios"
 export interface Speciality{
     name:string
 }
-
+///api/doctors/speciality
 const initialState={
     speciality:[],
     loading: false,
