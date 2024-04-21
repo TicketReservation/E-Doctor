@@ -8,7 +8,7 @@ import { useAppDispatch } from "../lib/hooks";
 // import { Token } from '../types/types';
 
 import { currentAsync } from "../lib/features/getUserSlice"
-const Home = () => {
+const Hoome = () => {
   const dispatch=useAppDispatch()
   useEffect(() =>{
     const token=localStorage.getItem("token")|| ""
@@ -42,4 +42,4 @@ const Home = () => {
   )
 }
 
-export default Home
+export default Hoome

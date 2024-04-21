@@ -33,8 +33,10 @@ const Login = ({ login, loginFailure, error }) => {
 
   const handleRedirect = (userType) => {
     if (userType === 'doctor') {
-      window.location.href = "/doctor";
-    } else if (userType !== 'Doctor') {
+      window.location.href = "/Doctordashboard";
+    } else if (Email === 'admin@admin') {
+      window.location.href = "/adminDach";
+    }else if (userType !== 'doctor') {
       window.location.href = "/";
     }
    
