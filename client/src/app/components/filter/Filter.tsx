@@ -81,7 +81,7 @@ const Filter = () => {
             alt={`${e.Username} picture`}src={e.imageUrl}/>
 
             <h4 className={styles.filter_label}>Doctor name</h4>
-            <p className={styles.filter_p}>{e.Username}</p>
+            <p className={styles.filter_p}>{`${e.FirstName} ${e.LastName}`}</p>
             <h4 className={styles.filter_label}>Doctor email</h4>
             <p className={styles.filter_p}>{e.Email}</p>
             <h4 className={styles.filter_label}>Doctor number</h4>
