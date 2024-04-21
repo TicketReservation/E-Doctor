@@ -68,7 +68,7 @@ const Filter = () => {
         </div>
       </div>
       {view === "2ndView" && (
-  <div>
+  <div className={styles.filter_card}>
     {
       nameFilter?.map((e:User,i:number)=>{
         return(

@@ -35,16 +35,19 @@ const Signup = () => {
     dispatch(specialityAsync())
   },[dispatch])
 
-const uploadImage=async()=>{
-  //https://api.cloudinary.com/v1_1/
-  //dockwpvkl
-  const form=new FormData();
-  form.append('file',file);
-  form.append('upload_preset','e-doctor');
-  await axios.post("http://api.cloudinary.com/v1_1/dockwpvkl/upload",form)
-  .then(res=>setUrl(res.data.secure_url))
-  .catch(err=>console.log(err))
-}
+  const uploadImage = async () => {
+    try {
+      const form = new FormData();
+      form.append('file', file);
+      form.append('upload_preset', 'e-doctor');
+      const response = await axios.post("https://api.cloudinary.com/v1_1/dockwpvkl/upload", form);
+      setUrl(response.data.secure_url);
+    } catch (error) {
+      console.error("Error uploading image:", error);
+      throw error; // Rethrow the error to be caught by the caller
+    }
+  };
+  
 
   const HandleSubmit = async (e) => {
     e.preventDefault();
