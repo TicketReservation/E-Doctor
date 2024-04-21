@@ -69,9 +69,7 @@ const uploadImage=async()=>{
       setError("");
       window.location.href = "/";
     } catch (err) {
-      console.log('====================================');
       console.log(err);
-      console.log('====================================');
       setError(err.response.data.error);
       console.log(err.response.data.error);
     }
