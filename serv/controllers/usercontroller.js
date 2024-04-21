@@ -39,25 +39,17 @@ const updateUser = async (req, res) => {
     res.status(500).json({ error: 'Failed to update user' });
   }
 };
+
 const deleteUser = async (req, res) => {
   try {
-    // Extracting the user ID from the request parameters
-    const { Email } = req.params;
-    
-    // Deleting the user from the database using Prisma ORM
-    await prisma.user.delete({ where: { Email:Email } });
-    
-    // Sending a success response if deletion is successful
+    const { id } = req.params;
+    await prisma.user.delete({ where: { id: parseInt(id) } });
     res.status(200).json({ message: 'User deleted successfully' });
   } catch (error) {
-    // Handling any errors that occur during the deletion process
     console.error('Error deleting user:', error);
-    
-    // Sending an error response if deletion fails
     res.status(500).json({ error: 'Failed to delete user' });
   }
 };
-
 
 module.exports = {
   getAllUsers,

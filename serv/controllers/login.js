@@ -1,67 +1,45 @@
+// authController.js
+
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const { PrismaClient } = require('@prisma/client');
 const prisma = new PrismaClient();
 
+
 exports.register = async (req, res) => {
-  const { Username, UserType, Email, Password, PhoneNumber, FirstName, LastName, imageUrl } = req.body;
-  try {
-    if (UserType.toLowerCase() === 'doctor') {
-      if (!Password) {
-        return res.status(400).json({ error: 'Password is required' });
-      }
+    try {
+        const { UserType, Username, Email, Password, PhoneNumber, FirstName, LastName, Speciality, imageUrl } = req.body;
+        if (!Password) {
+            return res.status(400).json({ error: 'Password is required' });
+        }
 
-      const hashedPassword = await bcrypt.hash(Password, 10);
-      const doctor = await prisma.doctor.create({});
-
-      const user = await prisma.user.create({
-        data: {
-          doctorId: doctor.id, // Associate user with the newly created doctor
-          Email,
-          Password: hashedPassword,
-          PhoneNumber,
-          FirstName,
-          LastName,
-          imageUrl,
-          UserType: "doctor",
-          Username
-        },
-      });
-
-      return res.status(201).json(user);
-    } else if (UserType.toLowerCase() === 'patient') {
-      const hashedPassword = await bcrypt.hash(Password, 10);
-
-      const user = await prisma.user.create({
-        data: {
-          Email,
-          Password: hashedPassword,
-          PhoneNumber,
-          FirstName,
-          LastName,
-          imageUrl,
-          UserType: "patient",
-          Username
-        },
-      });
-
-      return res.status(201).json(user);
-    } else {
-      return res.status(400).json({ error: 'Invalid user type' });
+        const hashedPassword = await bcrypt.hash(Password, 10);
+        const user = await prisma.user.create({
+            data: {
+                UserType,
+                Username,
+                Email,
+                Password: hashedPassword,
+                PhoneNumber,
+                FirstName,
+                LastName,
+                Speciality,
+                imageUrl
+            }
+        });
+        res.status(201).json({ user });
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ error: 'Registration failed' });
     }
-  } catch (error) {
-    console.error(error);
-    return res.status(500).json({ error: 'Registration failed' });
-  }
-}
+};
 
 
 exports.login = async (req, res) => {
-
     try {
         const { Email, Password } = req.body;
         const user = await prisma.user.findUnique({ where: { Email:Email } });
-
+        
         if (!user) {
             return res.status(401).json({ error: 'Invalid credentials' });
         }
@@ -81,71 +59,13 @@ exports.login = async (req, res) => {
         console.error(error);
         res.status(500).json({ error: 'Login failed' });
     }
-
-}
-exports.finAllDoc=async(req,res)=>{
-  try {
-    const docs=await prisma.user.findMany({where:{UserType:"doctor"},
-    include:{
-      speciality:true,
-      doctor:true
+};
+exports.getAllUsers = async (req, res) => {
+    try {
+        const users = await prisma.user.findMany();
+        res.status(200).json({ users });
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ error: 'Failed to fetch users' });
     }
-  })
-  res.json(docs)
-  } catch (error) {
-    throw error
-  }
-}
-
-
-exports.findDocByNameAndSpeciality = async (req, res) => {
-  try {
-    const id = parseInt(req.params.id) || 0;
-    const name = req.params.name || "";
-
-    console.log("ID:", id);
-    console.log("Name:", name);
-
-    let query = {};
-    if (id) {
-      query.specialityId = id;
-    }
-    if (name) {
-      query.OR = [
-        {
-          FirstName: {
-            contains: name,
-          },
-        },
-        {
-          LastName: {
-            contains: name,
-          },
-        },
-      ];
-    }
-
-    const docs = await prisma.user.findMany({
-      where: query,
-      include: {
-        speciality: true,
-        doctor: true,
-      },
-    });
-
-    res.send(docs);
-  } catch (error) {
-    throw error;
-  }
-}
-
-exports.getCurrentUser=async(req,res)=>{
-try {
-  const user = req.user
-  console.log("curret",user);
-  res.json(user)
-} catch (error) {
-  
-}
-}
-
+};
