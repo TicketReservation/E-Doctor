@@ -1,7 +1,7 @@
 
 datasource db {
   provider = "mysql"
-  url      = "mysql://root:dhia2002@localhost:3306/doctor"
+  url      = "mysql://root:root@localhost:3306/doctor"
 
 }
 
