@@ -1,7 +1,7 @@
 
 datasource db {
   provider = "mysql"
-  url      = "mysql://root:dhia2002@localhost:3306/doctor"
+  url      = "mysql://root:root@localhost:3306/doctor"
 
 }
 
@@ -41,7 +41,7 @@ model user {
   PhoneNumber String
   imageUrl    String
   doctorId   Int
-   doctor Doctor @relation(fields: [doctorId], references: [id])
+  //  doctor Doctor @relation(fields: [doctorId], references: [id])
   specialityId   Int   
 
   speciality speciality @relation(fields: [specialityId], references: [id])
@@ -62,7 +62,7 @@ model speciality {
 // }
 model Doctor {
   id           Int        @id @default(autoincrement())
- doctors user[]
+//  doctors user[]
 
 }
 

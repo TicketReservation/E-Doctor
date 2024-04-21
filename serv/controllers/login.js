@@ -4,9 +4,9 @@ const { PrismaClient } = require('@prisma/client');
 const prisma = new PrismaClient();
 
 exports.register = async (req, res) => {
-  const { Username, UserType, Email, Password, PhoneNumber, FirstName, LastName, specialityId, imageUrl } = req.body;
+  const { Username, UserType, Email, Password, PhoneNumber, FirstName, LastName, imageUrl } = req.body;
   try {
-    if (UserType === 'doctor') {
+    if (UserType.toLowerCase() === 'doctor') {
       if (!Password) {
         return res.status(400).json({ error: 'Password is required' });
       }
@@ -16,7 +16,7 @@ exports.register = async (req, res) => {
 
       const user = await prisma.user.create({
         data: {
-          doctorId: doctor.id,
+          doctorId: doctor.id, // Associate user with the newly created doctor
           Email,
           Password: hashedPassword,
           PhoneNumber,
@@ -24,10 +24,7 @@ exports.register = async (req, res) => {
           LastName,
           imageUrl,
           UserType: "doctor",
-
-          specialityId:parseInt(specialityId) ,
-
-          Username,
+          Username
         },
       });
 
@@ -44,13 +41,12 @@ exports.register = async (req, res) => {
           LastName,
           imageUrl,
           UserType: "patient",
-          Username,
+          Username
         },
       });
 
       return res.status(201).json(user);
     } else {
-
       return res.status(400).json({ error: 'Invalid user type' });
     }
   } catch (error) {
@@ -58,6 +54,7 @@ exports.register = async (req, res) => {
     return res.status(500).json({ error: 'Registration failed' });
   }
 }
+
 
 exports.login = async (req, res) => {
 
