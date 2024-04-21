@@ -1,13 +1,10 @@
 const express = require('express');
 const router = express.Router();
-
-const { register, login ,finAllDoc,findDocByNameAndSpeciality} = require('../controllers/login');
-
-
+const { register, login,getAllUsers } = require('../controllers/login');
 const verifyToken=require('./../middelware/index')
 router.post('/register', register);
 router.post('/login', login);
-router.get("/allDoc",finAllDoc)
-router.get("/filter/:id(\\d+)?/:name?", findDocByNameAndSpeciality);
-router.get("/currentUser",verifyToken);
+router.get('/all', getAllUsers);
+
+
 module.exports = router;

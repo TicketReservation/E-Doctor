@@ -2,9 +2,9 @@ const { PrismaClient } = require('@prisma/client');
 const prisma = new PrismaClient();
 // Get all reviews with user ID
 const getReviewsByUserId = async (req, res) => {
-    const userId = req.params.userId;
+    const UserId = req.params.userId;
     try {
-        const userReviews = await prisma.ratingsComments.findAll({ where: { userId } });
+        const userReviews = await prisma.findAll({ where: { UserId } });
         res.json(userReviews);
     } catch (error) {
         res.status(500).json({ error: 'Failed to fetch reviews' });
@@ -12,7 +12,7 @@ const getReviewsByUserId = async (req, res) => {
 };
 const getAll = async (req, res) => {
     try {
-        const userReviews = await prisma.ratingsComments.findAll();
+        const userReviews = await prisma.findAll({ });
         res.json(userReviews);
     } catch (error) {
         console.log(error);
@@ -35,9 +35,9 @@ const getReviewsByDoctorId = async (req, res) => {
 
 // Add a new review
 const addReview = async (req, res) => {
-    const response = req.body; // Changed UserId to userId
+    const add = req.body; // Changed UserId to userId
     try {
-        const newReview = await prisma.ratingsComments.create({data:response}); // Changed UserId to userId
+        const newReview = await prisma.ratingsComments.create(add); // Changed UserId to userId
         res.status(201).json(newReview); // Changed to status 201 for successful creation
     } catch (error) {
         console.error(error); // Logging the error to console

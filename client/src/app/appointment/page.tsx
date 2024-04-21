@@ -5,6 +5,7 @@ import Calendar from 'react-calendar';
 import 'react-calendar/dist/Calendar.css'
 import ServicesPage from '../service/page';
 import Doctorlist from '../doctorlist/page';
+import Navbar from '../navbar/page';
 import axios from "axios"
 
 const add = (body) => {
@@ -94,6 +95,7 @@ const BookAppointment: React.FC<BookAppointmentProps> = ({
 
   return (
     <div>
+      <Navbar/>
       <form className={styles.bookAppointmentForm}>
         <div className={styles.bigformdeco}>
           <div className={styles.formField}>
