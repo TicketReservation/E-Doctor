@@ -27,6 +27,7 @@
     "@types/react-stars": "^2.2.4",
     "antd": "^5.16.2",
     "axios": "^1.6.8",
+    "bootstrap": "^5.3.3",
     "calendar": "^0.1.1",
     "cloudinary": "^2.1.0",
     "font-awesome": "^4.7.0",
