@@ -1,0 +1,266 @@
+/* userprofile.module.css */
+
+.doctorprofilecontainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+  border: 2px solid #ccc;
+  border-radius: 8px;
+  width: 900px;
+  margin-left:280px ;
+  margin-bottom: 40px;
+}
+
+.doctorprofilepicture {
+  border-radius: 50%;
+  margin-bottom: 20px;
+}
+
+.doctorprofiledetails {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  max-width: 600px;
+  margin-bottom: 40px;
+}
+
+.doctorprofilename {
+  margin-bottom: 20px;
+}
+
+.doctorprofilename h2 {
+  margin: 0;
+}
+
+.doctorprofileactions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 10px;
+}
+
+.doctorprofileactions button {
+  padding: 10px 20px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.doctorprofileactions input {
+  padding: 10px;
+  font-size: 16px;
+  width: 300px;
+  margin-bottom: 20px;
+}
+
+.doctorprofilecontent {
+  width: 100%;
+  max-width: 800px;
+}
+
+.doctorprofilecard {
+  border: 1px solid #ccc;
+  margin-bottom: 20px;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.doctorprofilecardbody {
+  padding: 20px;
+}
+
+.doctorprofilecardtitle {
+  margin: 0;
+  font-size: 20px;
+}
+
+.doctorprofilecardtext {
+  margin: 10px 0;
+}
+
+.doctorprofilecardtextsmall {
+  font-size: 14px;
+  color: #666;
+}
+
+.doctorprofilemodal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s, visibility 0.3s;
+  z-index: 1000;
+}
+
+.doctorprofilemodal.active {
+  opacity: 1;
+  visibility: visible;
+}
+
+.doctorprofilemodalcontent {
+  background-color: #fff;
+  padding: 40px;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  width: 500px;
+  max-width: 90%;
+}
+
+.doctorprofilemodalheader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.doctorprofilemodalheader button {
+  background-color: transparent;
+  border: none;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.doctorprofilemodalbody {
+  margin-bottom: 20px;
+}
+
+.doctorprofilemodalformgroup {
+  margin-bottom: 20px;
+}
+
+.doctorprofilemodalformgroup label {
+  display: block;
+  margin-bottom: 5px;
+}
+
+.doctorprofilemodalformgroup input {
+  width: 100%;
+  padding: 10px;
+  font-size: 16px;
+ border: 1px solid #ccc;
+  border-radius: 8px;
+}
+
+.doctorprofilemodalfooter {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.doctorprofilemodalfooter button {
+  padding: 10px 20px;
+  font-size: 16px;
+  cursor: pointer;
+}
+.popupcontent {
+  padding: 20px;
+  border-radius: 5px;
+  box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.2);
+  background-color: #ffffff;
+  width: 250px;
+  height: 300px;
+ 
+}
+.popupcontentupdate {
+  padding: 20px;
+  border-radius: 5px;
+  box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.2);
+  background-color: #ffffff;
+  width: 250px;
+  height: 400px;
+ 
+}
+
+.popuptriggerbutton {
+  background-color: #007e85;
+  color: #ffffff;
+  border: none;
+  border-radius: 5px;
+  padding: 10px 20px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.popuptriggerbutton:hover {
+  background-color: #033e41;
+}
+
+.popupinput {
+  margin-left: -10px;
+  margin-bottom: 10px;
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  width: 100%;
+  display: flex;
+  align-items: center;
+}
+
+.popupsubmitbutton {
+  background-color: #007e85;
+  color: #ffffff;
+  border: none;
+  border-radius: 5px;
+  padding: 10px 20px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  
+  margin-right: 50px;
+}
+
+.popupsubmitbutton:hover {
+  background-color: #033e41;
+}
+
+.popuptitle{
+  margin-left: 50px;
+  font-size: large;
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+  color: #007e85;
+}
+
+.userProfile {
+  font-family: Arial, sans-serif;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  padding: 20px;
+  width: 300px;
+}
+
+.userProfile h2 {
+  
+  margin-top: 0;
+  margin-bottom: 5px;
+  font-size: 16px;
+  font-weight: bold;
+  display: inline-block; /* Display h2 elements inline */
+  border-bottom: 2px solid green; /* Add green underline */
+  padding-bottom: 3px; /* Adjust padding for spacing */
+}
+
+.userProfile h3 {
+  margin: 10px;
+  margin-top: 0;
+  margin-bottom: 10px;
+  font-size: 14px;
+  /* display: inline-block; Display h3 elements inline */
+  margin-left: 10px; /* Add some space between h2 and h3 */
+}
+
+.divcenter{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.usertitle{
+  color: #007e85;
+  display: inline-block; /* Display h2 elements inline */
+  border-bottom: 2px solid rgb(0, 0, 0);
+}

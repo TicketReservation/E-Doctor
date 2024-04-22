@@ -1,0 +1,11 @@
+.ppt{
+  display: block;
+  width: calc(100% - 20px); /* Adjusted width to account for padding */
+  padding: 10px;
+  margin: 0 auto 20px auto; /* Centered and adjusted margin */
+  border-radius: 10px;
+  border: 1px solid #ccc;
+  font-size: 1.2rem;
+  line-height: 1.5;
+  box-sizing: border-box;
+}

@@ -11,50 +11,76 @@ generator client {
 
 
 
+
 model user {
 
   id          Int      @id @default(autoincrement()) 
   FirstName   String
   LastName    String
-  Username    String   @unique
+  Username    String   
   Email       String   @unique
   Password    String
   UserType    String
-  Speciality  String
   PhoneNumber String
   imageUrl    String
+  doctorId   Int
+   doctor Doctor @relation(fields: [doctorId], references: [id])
+  specialityId   Int   
+
+  speciality speciality @relation(fields: [specialityId], references: [id])
+  appointment Appointment[]
 }
 
-
-
-model doctor {
-
-  id          Int      @id @default(autoincrement())
-  FirstName   String
-  LastName    String
-  Username    String   @unique
-  Email       String   @unique
-  Password    String
-  PhoneNumber String?
-  imageUrl    String   @default("")
-  Speciality  String
+model speciality {
+  id          Int     @id @default(autoincrement())
+  name        String
+  doctors user[]
 }
+
+model Doctor {
+  id           Int        @id @default(autoincrement())
+ doctors user[]
+
+
+}
+
 
 
 model message {
   id      Int     @id @default(autoincrement())
   content String
 }
-model appointment {
-  id                   Int      @id @default(autoincrement())
-  AppointmentTime      DateTime
-  // Status                AppointmentStatus @default(Pending)
 
-  AppointmentDepartment String?
-  doctor               Int
+
+model Appointment {
+  id        Int      @id @default(autoincrement())
+  AppointmentTime DateTime
+  Status    AppointmentStatus
+  PaymentStatus PaymentStatus
+  Department String?
+  Doctor    Int
+  User      user     @relation(fields: [Doctor], references: [id])
+}
+
+enum AppointmentStatus {
+  Pending
+  Accepted
+  Rejected
+}
+
+enum PaymentStatus {
+  Paid
+  Unpaid
 }
 
 
+model conversation {
+  id    Int     @id @default(autoincrement())
+}
+
+model room {
+  id    Int     @id @default(autoincrement())
+}
 
 model ratingsComments {
 
@@ -121,4 +147,3 @@ model product {
   Category String
 
 }
-

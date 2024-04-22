@@ -24,38 +24,45 @@ const Login = ({ login, loginFailure, error }) => {
       localStorage.setItem("user", JSON.stringify(user)); // Store user object as a string
       login({ user, token });
       handleRedirect(user.UserType);
-      console.log('====================================');
-console.log(user.UserType);
-console.log('====================================');
       console.log(response.data);
     } catch (error) {
       loginFailure(error.response.data.error);
     }
   };
+  
 
   const handleRedirect = (userType) => {
-    if (userType === 'Doctor') {
+    if (userType === 'doctor') {
       window.location.href = "/doctor";
-    } else if (userType === 'Patient') {
+    } else if (userType !== 'Doctor') {
       window.location.href = "/";
     }
-    // Add more redirection logic for other user types if needed
+   
   };
 
   return (
     <div>
       <Navbar/>
-      <div className='frmm'>
+      <div className={styles.frmmm} >
+
         <form onSubmit={HandleSubmit}>
           <h2 style={{ color: '#007e85', marginLeft: '110px' }}>Login</h2>
-          <div className="container">
-            <input style={{ width: '300px' }} type="email" placeholder="Email" value={Email} onChange={(e) => setEmail(e.target.value)} required />
+          <div className={styles.containerrr}>
+          <input  className={styles.innnput} type="email" placeholder="Email"  value={Email}  onChange={(e) => setEmail(e.target.value)} 
+  required 
+/>
+
           </div>
-          <div>
-            <input style={{ width: '300px' }} type="password" placeholder="Password" value={Password} onChange={(e) => setPassword(e.target.value)} required />
+          <div    >
+            <input  className={styles.innnput} 
+
+    type="password" placeholder="Password" value={Password} onChange={(e) => setPassword(e.target.value)} required />
           </div>
-          {error && <p style={{ color: 'red' }}>{error}</p>}
-          <button style={{ width: '300px' }} type="submit">Login</button>
+          {error && <p  className={styles.ppp}>{error}</p>}
+          <button    className={styles.bbutton}  >Login</button>
+
+
+
         </form>
       </div>
     </div>
