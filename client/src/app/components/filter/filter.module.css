@@ -50,6 +50,13 @@
   margin-bottom: 8px;
 }
 
+.filter_roundedImage {
+  border-radius: 50%;
+  border: 3px solid #007E85;
+  margin-left: 15px;
+}
+
+
 .filter_p {
   font-size: 17px;
   font-weight: bold;

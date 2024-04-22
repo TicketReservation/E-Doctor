@@ -9,7 +9,7 @@ import Doctordashboard from "./DoctorDashboard/doctordashboard";
 export default function Home() {
   return ( 
     <div>
-      <Navbar/>
+      {/* <Navbar/> */}
       {/* <Reviews/>
       <DoctorRates/>
       <ContactUs/>

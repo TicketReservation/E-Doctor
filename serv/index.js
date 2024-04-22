@@ -1,7 +1,7 @@
 const express = require("express");
 const cors = require("cors");
 
-require('./Model/index.js');
+// require('./Model/index.js');
 
 const doctorRouter = require('./routes/doctor.router.js');
 const AppointmentRouter = require('./routes/Appointment.router.js');

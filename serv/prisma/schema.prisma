@@ -5,10 +5,10 @@ datasource db {
 
 }
 
+
 generator client {
   provider = "prisma-client-js"
 }
-
 
 
 model user {
@@ -52,6 +52,7 @@ model Appointment {
   doctorID             Int
 }
 
+
 enum AppointmentStatus {
   Pending
   Confirmed
@@ -63,9 +64,12 @@ model message {
   id      Int     @id @default(autoincrement())
   content String
 }
+
+
 model conversation {
   id    Int     @id @default(autoincrement())
 }
+
 
 model room {
   id    Int     @id @default(autoincrement())
@@ -121,6 +125,7 @@ model payments {
   paymentDate DateTime
 }
 
+
 model product {
   id       Int     @id @default(autoincrement())
 
@@ -130,6 +135,8 @@ model product {
   Category String
 
 }
+
+
 model speciality {
   id          Int     @id @default(autoincrement())
   name        String

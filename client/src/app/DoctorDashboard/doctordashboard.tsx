@@ -18,23 +18,46 @@ const Doctordashboard = () => {
   const dispatch = useAppDispatch();
   const appointments = useAppSelector(state => state.appointment.appointment);
   const [loading, setLoading] = useState(true);
+ 
+  useEffect(() => {
+    dispatch(fetchAppointments())
+      .then(() => setLoading(false))
+      .catch(error => {
+        console.error('Error fetching appointments:', error);
+        setLoading(false);
+      });
+  }, [dispatch]);
+console.log(appointments)
 
-//   useEffect(() => {
-//     dispatch(fetchAppointments())
-//       .then(() => setLoading(false))
-//       .catch(error => {
-//         console.error('Error fetching appointments:', error);
-//         setLoading(false);
-//       });
-//   }, [dispatch]);
-// console.log(appointments)
-  
+
+
+
+
+
+
+const [completedCards, setCompletedCards] = useState([]);
+
+  const toggleCompletion = (id) => {
+    if (completedCards.includes(id)) {
+      setCompletedCards(completedCards.filter(cardId => cardId !== id));
+    } else {
+      setCompletedCards([...completedCards, id]);
+    }
+  };
+
+  const hideCard = (id) => {
+    const card = document.getElementById(id);
+    if (card) {
+      card.style.display = 'none';
+    }
+  };
+
+
 useEffect(() => {
   const token = localStorage.getItem("token") || "";
   dispatch(currentAsync({ token }));//////////
   console.log(token)
 }, [dispatch]);
-
 
 
   return (
@@ -45,16 +68,16 @@ useEffect(() => {
       <input className={styles.dashborddrsearch} type="text" placeholder="Search" />
       <FaSearch className={styles.searchIcon} />
     </div>
-      <h1 className={styles.drsalutation}>Good Morning <span className={styles.drname}>Dr.</span> !</h1>
+      {/* <h1 className={styles.drsalutation}>Good Morning <span className={styles.drname}>Dr. {appointments[0]}  !</span> </h1> */}
       
       <div className={styles.drstat}>
-    <h3>Visits for today {}</h3>
+    <h3>Visits for today {appointments.length}</h3>
     <div className={styles.statdoctor}>
         <div className={styles.newpatient}>
-        <h3>  New Patients</h3>
+        <h3>  New Patients {appointments.length}</h3>
         </div>
         <div className={styles.oldpatient}>
-      <h3>  Old Patients</h3>
+      <h3>  Old Patients {appointments.length}</h3>
         </div>
     </div>
     <div className={styles.drpicstat}>
@@ -66,12 +89,32 @@ useEffect(() => {
 </div>
 <div className={styles.doctorrendez}>
 {/* contact work here   */}
-  
+
+
+<div className={styles.cards_appointment}>
+{appointments.map(e => (
+        <div key={e.id} id={`appointment_${e.id}`} className={`${styles.appointment_card} ${completedCards.includes(`appointment_${e.id}`) && styles.completed}`}>
+          <div className={styles.department_circle}>
+            {/* {e.AppointmentDepartment.charAt(0)}  */}
+          </div>
+          <div className={styles.appointment_details}>
+            {/* <p>Time: {e.AppointmentTime}</p> */}
+            {/* <p>Department: {e.AppointmentDepartment}</p> */}
+          </div>
+          <button className={styles.hide_button} onClick={() => hideCard(`appointment_${e.id}`)}>
+            <span className={styles.hide_icon}>❌</span>
+          </button>
+          <button className={`${styles.complete_button} ${completedCards.includes(`appointment_${e.id}`) && styles.green}`} onClick={() => toggleCompletion(`appointment_${e.id}`)}>
+            <span className={styles.complete_icon}>✓</span>
+          </button>
+        </div>
+      ))}
+
+</div>
   
   
   
    </div>
-
 
 
 
